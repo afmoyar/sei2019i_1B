@@ -1,4 +1,4 @@
-package com.example.placesclientapp;
+package com.example.mapapp;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MapActivity.class);
+                Intent i = new Intent(getApplicationContext(), mapActivity.class);
                 startActivity(i);
 
             }
@@ -67,4 +67,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
 }
