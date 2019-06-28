@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MapApp</string>
-    <string name="google_map_api_key">AIzaSyCmOQHE5YjNLpFx-AvdEt1wK-S_iMSQDDM</string>
+    <string name="google_map_api_key">AIzaSyC4K0FDva3bZbBZIsArthCjsnduLCfrUQc</string>
     <string name="google_places_api_key">AIzaSyDh1yALUdgBGnRrCbCpYzBcZyZzssy5PaQ</string>
+    <!--
+        AIzaSyDSBnRF54kHDsjN-ayTYdEDShmM8_rdruk Sergio
+     -->
+    <!--
+        AIzaSyC4K0FDva3bZbBZIsArthCjsnduLCfrUQc JP
+     -->
 </resources>

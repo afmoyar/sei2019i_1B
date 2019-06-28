@@ -1,8 +1,6 @@
-package com.example.mapapp;
+package presentation.Activities;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -12,13 +10,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.util.CrashUtils;
+import com.example.mapapp.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
-public class mapActivity extends AppCompatActivity implements  OnMapReadyCallback {
-    private static final String TAG = "mapActivity";
+public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
+    private static final String TAG = "MapActivity";
 
     private static final String FINE_LOCATION=Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION=Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -39,7 +37,7 @@ public class mapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     {
         Log.d(TAG,"initMap: initializing map");
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(mapActivity.this);
+        mapFragment.getMapAsync(MapActivity.this);
     }
     private void getLocationPermission()
     {

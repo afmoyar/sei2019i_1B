@@ -1,4 +1,4 @@
-package com.example.mapapp;
+package presentation.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.mapapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), mapActivity.class);
+                Intent i = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(i);
 
             }
