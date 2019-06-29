@@ -1,12 +1,16 @@
 <?php
 
-include 'conection.php';
-$id=$_POST['id'];
-$name=$_POST['name'];
-$password=$_POST['password'];
+include 'connection.php';
+$id =$_GET['id'];
 
-$sql="INSERT INTO user VALUES('$id','$name','$password')";
-mysqli_query($conection,$sql) or die (mysqli_error());
-mysqli_close($conection);
+$sql = "SELECT * FROM user WHERE id = '$id'";
+$count = $connection -> query($sql);
+
+while($row=$result -> fetch_array()){
+	 $user[] = array_map('utf8_encode', $row);
+	}
+
+echo json_encode($user);
+$result -> close();
 
 ?>
