@@ -13,10 +13,13 @@ import com.example.mapapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import dataAccess.DataBase.Database;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST =9001;
+    private final Database database = new Database();
 
 
 
@@ -37,12 +40,19 @@ public class MainActivity extends AppCompatActivity {
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Inserts user data into the external database
+                database.insertUser(getApplicationContext(),"id_here","name_here","password_here");
+
+
+                //MapActivity
                 Intent i = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(i);
 
             }
         });
     }
+
     public boolean isServicesOk()
     {
         Log.d(TAG,"isServicesOk: checking google services version");
