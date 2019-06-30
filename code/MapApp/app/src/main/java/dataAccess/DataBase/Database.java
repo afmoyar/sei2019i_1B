@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class Database {
     //ipv4 from the computer with the database and the directory where the php code is located
-    final String URL = "http://192.168.0.8:80/sei2019i_1B/create_user.php";
+    final String URL = "http://192.168.0.5:80/sei2019i_1B/create_user.php";
 
     public Database() {
     }
@@ -41,7 +41,6 @@ public class Database {
             //HashMap with the data to insert into the database
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
-                params.put("id",id);
                 params.put("name",name);
                 params.put("password",password);
                 return params;
