@@ -20,7 +20,7 @@
             android:background="#00FFFFFF"
             android:fontFamily="cursive"
             android:gravity="center"
-            android:text="Sites App"
+            android:text="Map App"
             android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
 
         <ImageView
