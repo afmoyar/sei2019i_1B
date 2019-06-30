@@ -25,7 +25,7 @@ public class Database {
     }
 
     //insert User function
-    public void  insertUser (final Context context, final String id, final String name, final String password){
+    public void  insertUser (final Context context,final String name, final String password){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
         StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL),

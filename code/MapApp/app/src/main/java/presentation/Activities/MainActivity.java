@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //Inserts user data into the external database
-                database.insertUser(getApplicationContext(),"id3_here","señor","bigotes");
+                database.insertUser(getApplicationContext(),"name_here","password_here");
 
 
                 //MapActivity
