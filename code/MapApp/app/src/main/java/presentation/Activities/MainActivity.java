@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Inserts user data into the external database
-                database.insertUser(getApplicationContext(),"name_here","password_here");
+                //Login test
+                database.loginFunction(getApplicationContext(),"id_here","password_here");
+
                 //MapActivity
                 Intent i = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(i);
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Inserts user data into the external database
+                database.insertUser(getApplicationContext(),"name_here","password_here");
+
                 Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(i);
             }
