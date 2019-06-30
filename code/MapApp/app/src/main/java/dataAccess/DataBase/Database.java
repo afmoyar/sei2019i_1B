@@ -25,7 +25,7 @@ public class Database {
     }
 
     //insert User function
-    public void  insertUser (final Context context,final String name, final String password){
+    public void  insertUser (final Context context,final String id,final String name, final String password){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
         StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_create_user),
@@ -46,6 +46,7 @@ public class Database {
             //HashMap with the data to insert into the database
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
+                params.put("id",id);
                 params.put("name",name);
                 params.put("password",password);
                 return params;
