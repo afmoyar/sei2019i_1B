@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MapApp</string>
-    <string name="google_map_api_key">AIzaSyC4K0FDva3bZbBZIsArthCjsnduLCfrUQc</string>
+    <string name="google_map_api_key">AIzaSyCmOQHE5YjNLpFx-AvdEt1wK-S_iMSQDDM</string>
     <string name="google_places_api_key">AIzaSyDh1yALUdgBGnRrCbCpYzBcZyZzssy5PaQ</string>
+    <string name="URL">http://192.168.0.4:80/sei2019i_1B/create_user.php</string>
     <!--
         AIzaSyDSBnRF54kHDsjN-ayTYdEDShmM8_rdruk Sergio
      -->

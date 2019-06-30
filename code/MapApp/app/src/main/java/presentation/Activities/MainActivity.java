@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int ERROR_DIALOG_REQUEST =9001;
     private final Database database = new Database();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //Inserts user data into the external database
-                database.insertUser(getApplicationContext(),"id_here","name_here","password_here");
+                database.insertUser(getApplicationContext(),"id3_here","señor","bigotes");
 
 
                 //MapActivity

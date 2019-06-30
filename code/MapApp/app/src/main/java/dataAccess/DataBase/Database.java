@@ -10,20 +10,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mapapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Database {
     //ipv4 from the computer with the database and the directory where the php code is located
-    final String URL = "http://192.168.0.8:80/sei2019i_1B/create_user.php";
+    //final String URL = "http://192.168.0.4:80/sei2019i_1B/create_user.php";
 
     public Database() {
     }
 
     //insert User function
     public void  insertUser (final Context context, final String id, final String name, final String password){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+
+        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL),
                 new Response.Listener<String>() {
             //message when the connection works
                     @Override
