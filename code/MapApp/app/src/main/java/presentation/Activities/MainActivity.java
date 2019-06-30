@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mapapp.R;
@@ -25,28 +26,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ImageView myimageview = (ImageView) findViewById(R.id.imageView);
+        myimageview.setImageResource(R.drawable.siteslogo);
 
-        if(isServicesOk())
-        {
-            init();
-        }
-
-    }
-    private void init()
-    {
-        Button btnMap=(Button) findViewById(R.id.btnMapp);
-        btnMap.setOnClickListener(new View.OnClickListener() {
+        Button btnLogin=(Button) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //Inserts user data into the external database
                 database.insertUser(getApplicationContext(),"name_here","password_here");
-
-
                 //MapActivity
                 Intent i = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(i);
+            }
+        });
 
+        Button btnSignup=(Button) findViewById(R.id.btnSignup);
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(i);
             }
         });
     }

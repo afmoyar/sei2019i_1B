@@ -6,17 +6,68 @@
     android:layout_height="match_parent"
     tools:context="presentation.Activities.MainActivity">
 
-    <Button
-        android:id="@+id/btnMapp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="-41dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="Sites App"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="204dp"
+            android:layout_height="197dp"
+            android:layout_gravity="center"
+            tools:srcCompat="@drawable/siteslogo" />
+
+        <EditText
+            android:id="@+id/editTuserID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="User ID"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTuserPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="LogIn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="SignUp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
