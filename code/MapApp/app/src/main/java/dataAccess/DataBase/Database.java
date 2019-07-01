@@ -57,44 +57,4 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
-
-    //login User function
-    public void  loginFunction (final Context context,final String id, final String password){
-
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_login),
-                new Response.Listener<String>() {
-                    //message when the connection works
-                    @Override
-                    public void onResponse(String response) {
-                        //login for the user when data is correct
-                        if(response.contains("1")){
-                            Toast.makeText(context, "login was successful", Toast.LENGTH_SHORT).show();
-                        }
-                        //message when login was not successful
-                        else{
-                            Toast.makeText(context, "name or password incorrect", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            //message when the connection doesn't work
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error: failed to connect with the db", Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            //HashMap with the data to insert into the database
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("id",id);
-                params.put("password",password);
-                return params;
-            }
-        };
-
-        //request using the parameters previously written
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
-    }
 }
