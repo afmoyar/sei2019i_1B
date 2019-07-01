@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="userid"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/textView13"
