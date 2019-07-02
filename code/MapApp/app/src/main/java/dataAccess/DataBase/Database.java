@@ -1,6 +1,7 @@
 package dataAccess.DataBase;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -14,6 +15,8 @@ import com.example.mapapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import businessLogic.Controller;
 
 public class Database {
     //ipv4 from the computer with the database and the directory where the php code is located
@@ -48,6 +51,46 @@ public class Database {
                 Map<String,String> params = new HashMap<String,String>();
                 params.put("id",id);
                 params.put("name",name);
+                params.put("password",password);
+                return params;
+            }
+        };
+
+        //request using the parameters previously written
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void  loginFunction (final Context context, final String id, final String password){
+
+        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_login),
+                new Response.Listener<String>() {
+                    //message when the connection works
+                    @Override
+                    public void onResponse(String response) {
+                        //login for the user when data is correct
+                        if(response.contains("1")){
+                            Toast.makeText(context, "login was successful", Toast.LENGTH_SHORT).show();
+                            Controller.changeToMapActivity(context);
+                        }
+                        //message when login was not successful
+                        else{
+                            Toast.makeText(context, "name or password incorrect", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            //message when the connection doesn't work
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error: failed to connect with the db", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            //HashMap with the data to insert into the database
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("id",id);
                 params.put("password",password);
                 return params;
             }

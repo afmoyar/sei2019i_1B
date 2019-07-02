@@ -2,8 +2,8 @@
     <string name="app_name">MapApp</string>
     <string name="google_map_api_key">AIzaSyC4K0FDva3bZbBZIsArthCjsnduLCfrUQc</string>
     <string name="google_places_api_key">AIzaSyC4K0FDva3bZbBZIsArthCjsnduLCfrUQc</string>
-    <string name="URL_create_user">http://192.168.0.5:80/sei2019i_1B/create_user.php</string>
-    <string name="URL_login">http://192.168.0.5:80/sei2019i_1B/login_user.php</string>
+    <string name="URL_create_user">http://192.168.0.19:80/sei2019i_1B/create_user.php</string>
+    <string name="URL_login">http://192.168.0.19:80/sei2019i_1B/login_user.php</string>
     <!--
         AIzaSyDSBnRF54kHDsjN-ayTYdEDShmM8_rdruk Sergio
      -->
