@@ -62,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Button btnAdminSignup=(Button) findViewById(R.id.adminlog);
+        btnAdminSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AdminLoginActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void  loginFunction (final Context context, final String id, final String password){

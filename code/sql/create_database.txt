@@ -1,0 +1,8 @@
+CREATE DATABASE sei2019i_1b;
+
+CREATE TABLE user (
+    id varchar(25) NOT NULL,
+    name varchar(25),
+    password varchar(25),
+    PRIMARY KEY (id)
+);
