@@ -1,4 +1,4 @@
-package businessLogic;
+package businessLogic.Controllers;
 
 import android.content.Context;
 import android.content.Intent;

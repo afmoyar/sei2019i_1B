@@ -1,7 +1,6 @@
 package dataAccess.DataBase;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,7 +15,7 @@ import com.example.mapapp.R;
 import java.util.HashMap;
 import java.util.Map;
 
-import businessLogic.Controller;
+import businessLogic.Controllers.Controller;
 
 public class Database {
     //ipv4 from the computer with the database and the directory where the php code is located

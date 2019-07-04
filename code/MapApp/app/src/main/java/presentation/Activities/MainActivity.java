@@ -15,7 +15,7 @@ import com.example.mapapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import businessLogic.Controller;
+import businessLogic.Controllers.Controller;
 import dataAccess.DataBase.Database;
 
 public class MainActivity extends AppCompatActivity {
