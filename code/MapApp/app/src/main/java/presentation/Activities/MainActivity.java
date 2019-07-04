@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ImageView myimageview = (ImageView) findViewById(R.id.imageView);
         myimageview.setImageResource(R.drawable.siteslogo);
+
+        final TextView user_id = (TextView) findViewById(R.id.editTuserID);
+        final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
+
+
         //botón para forzar apertura del mapa
         Button forceOpenMapBtn=(Button) findViewById(R.id.forceOpenMapBtn);
         forceOpenMapBtn.setOnClickListener(new View.OnClickListener() {
@@ -40,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        final TextView user_id = (TextView) findViewById(R.id.editTuserID);
-        final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
+
 
         Button btnLogin=(Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Login test
                 Controller.login(getApplicationContext(),user_id.getText().toString(),user_password.getText().toString());
+                cleanEntries( user_id, user_password);
             }
         });
 
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(i);
+                cleanEntries( user_id, user_password);
             }
         });
 
@@ -67,10 +73,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AdminLoginActivity.class);
                 startActivity(i);
+                cleanEntries( user_id, user_password);
             }
         });
     }
 
+    public void cleanEntries(TextView user_id,TextView user_password)
+    {
+        user_id.setText("");
+        user_password.setText("");
+        user_id.findFocus();
+    }
     public boolean isServicesOk()
     {
         Log.d(TAG,"isServicesOk: checking google services version");
