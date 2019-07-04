@@ -30,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ImageView myimageview = (ImageView) findViewById(R.id.imageView);
         myimageview.setImageResource(R.drawable.siteslogo);
+        //botón para forzar apertura del mapa
+        Button forceOpenMapBtn=(Button) findViewById(R.id.forceOpenMapBtn);
+        forceOpenMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Controller.changeToMapActivity(getApplicationContext());
+            }
+        });
+
 
         final TextView user_id = (TextView) findViewById(R.id.editTuserID);
         final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
@@ -52,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnAdminSignup=(Button) findViewById(R.id.adminlog);
+        Button btnAdminSignup=(Button) findViewById(R.id.adminlogbtn);
         btnAdminSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
