@@ -10,10 +10,10 @@ Current version 1.0 supports:
 * User Log In
 * Displaying a map of the world
 
-### Contact
+### Contact 
 
-Juan Pablo Betancourt Maldonado - jpbetancourtma
-Juan Pablo Bonilla Gomez        - jupbonillago
-Cristian Camilo Garcia Barrera  - ccgarciab
-Andres Felipe Moya Rodriguez    - afmoyar
-Sergio Alejandro Pineda Vejar   - sapinedave
+* Juan Pablo Betancourt Maldonado - jpbetancourtma
+* Juan Pablo Bonilla Gomez        - jupbonillago
+* Cristian Camilo Garcia Barrera  - ccgarciab
+* Andres Felipe Moya Rodriguez    - afmoyar
+* Sergio Alejandro Pineda Vejar   - sapinedave
