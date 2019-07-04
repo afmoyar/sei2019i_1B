@@ -42,6 +42,7 @@ public class Database {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "error: failed to connect with the db", Toast.LENGTH_SHORT).show();
+                System.out.println(error.getMessage());
             }
         }){
             @Override
@@ -83,6 +84,7 @@ public class Database {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "error: failed to connect with the db", Toast.LENGTH_SHORT).show();
+                System.out.println(error.getMessage());
             }
         }){
             @Override
