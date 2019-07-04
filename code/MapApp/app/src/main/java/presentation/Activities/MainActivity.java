@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mapapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import businessLogic.Controllers.Controller;
 import dataAccess.DataBase.Database;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,16 +31,15 @@ public class MainActivity extends AppCompatActivity {
         ImageView myimageview = (ImageView) findViewById(R.id.imageView);
         myimageview.setImageResource(R.drawable.siteslogo);
 
+        final TextView user_id = (TextView) findViewById(R.id.editTuserID);
+        final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
+
         Button btnLogin=(Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Login test
-                database.loginFunction(getApplicationContext(),"id_here","password_here");
-
-                //MapActivity
-                Intent i = new Intent(getApplicationContext(), MapActivity.class);
-                startActivity(i);
+                Controller.login(getApplicationContext(),user_id.getText().toString(),user_password.getText().toString());
             }
         });
 
@@ -46,11 +47,16 @@ public class MainActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Inserts user data into the external database
-                database.insertUser(getApplicationContext(),"name_here","password_here");
-
                 Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btnAdminSignup=(Button) findViewById(R.id.adminlog);
+        btnAdminSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AdminLoginActivity.class);
                 startActivity(i);
             }
         });

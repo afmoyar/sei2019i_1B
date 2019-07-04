@@ -1,4 +1,4 @@
 package dataAccess.Models;
 
-public class Blank {
+public class User {
 }

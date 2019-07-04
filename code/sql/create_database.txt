@@ -1,0 +1,18 @@
+CREATE DATABASE sei2019i_1b;
+
+CREATE TABLE user (
+    id varchar(25) NOT NULL,
+    name varchar(25),
+    password varchar(25),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE administrator (
+    id varchar(25) NOT NULL,
+    name varchar(25),
+    password varchar(25),
+    country varchar(25),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO administrator VALUES ("Admin", "jose", "1234", "Colombia"); 

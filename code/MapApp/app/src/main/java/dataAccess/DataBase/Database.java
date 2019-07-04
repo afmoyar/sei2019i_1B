@@ -15,6 +15,8 @@ import com.example.mapapp.R;
 import java.util.HashMap;
 import java.util.Map;
 
+import businessLogic.Controllers.Controller;
+
 public class Database {
     //ipv4 from the computer with the database and the directory where the php code is located
 
@@ -25,7 +27,7 @@ public class Database {
     }
 
     //insert User function
-    public void  insertUser (final Context context,final String name, final String password){
+    public void  insertUser (final Context context,final String id,final String name, final String password){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
         StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_create_user),
@@ -46,6 +48,7 @@ public class Database {
             //HashMap with the data to insert into the database
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
+                params.put("id",id);
                 params.put("name",name);
                 params.put("password",password);
                 return params;
@@ -57,8 +60,7 @@ public class Database {
         requestQueue.add(stringRequest);
     }
 
-    //login User function
-    public void  loginFunction (final Context context,final String id, final String password){
+    public void  loginFunction (final Context context, final String id, final String password){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
         StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_login),
@@ -69,6 +71,7 @@ public class Database {
                         //login for the user when data is correct
                         if(response.contains("1")){
                             Toast.makeText(context, "login was successful", Toast.LENGTH_SHORT).show();
+                            Controller.changeToMapActivity(context);
                         }
                         //message when login was not successful
                         else{
