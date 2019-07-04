@@ -20,6 +20,7 @@ public abstract class Controller {
 
     public static void changeToMapActivity(Context context){
         Intent i = new Intent(context, MapActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
 }
