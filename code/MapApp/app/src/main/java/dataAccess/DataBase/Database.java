@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,7 +31,7 @@ public class Database {
     public void  insertUser (final Context context,final String id,final String name, final String password){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_create_user),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user),
                 new Response.Listener<String>() {
                     //message when the connection works
                     @Override
@@ -64,7 +65,7 @@ public class Database {
     public void  loginFunction (final Context context, final String id, final String password){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_login),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_login),
                 new Response.Listener<String>() {
                     //message when the connection works
                     @Override
