@@ -72,7 +72,7 @@ public class Database {
                         //login for the user when data is correct
                         if(response.contains("1")){
                             Toast.makeText(context, "login was successful", Toast.LENGTH_SHORT).show();
-                            Controller.changeToMapActivity(context);
+                            Controller.changeToWelcomeUserActivity(context);
                         }
                         //message when login was not successful
                         else{

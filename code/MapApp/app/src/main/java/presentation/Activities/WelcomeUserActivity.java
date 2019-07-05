@@ -1,6 +1,7 @@
 package presentation.Activities;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,16 +27,19 @@ public class WelcomeUserActivity extends AppCompatActivity {
         TextView textViewUserName=(TextView) findViewById(R.id.textViewUserName);
         TextView textViewCountry=(TextView) findViewById(R.id.textViewCountry);
         Button mapButton=(Button) findViewById(R.id.mapButton);
+        if(isServicesOk())
+        {
+            mapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
+                    Intent i= new Intent(getApplicationContext(),MapActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
 
     }
-
     public boolean isServicesOk()
     {
         Log.d(TAG,"isServicesOk: checking google services version");
