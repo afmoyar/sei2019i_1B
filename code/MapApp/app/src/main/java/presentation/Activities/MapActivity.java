@@ -49,6 +49,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
             if(ContextCompat.checkSelfPermission(this.getApplicationContext(),COURSE_LOCATION)== PackageManager.PERMISSION_GRANTED)
             {
                 mLocationPermissionGranted=true;
+                initMap();
             }
             else
             {
@@ -84,6 +85,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                     Log.d(TAG,"onRequestPermissionsResult: permition granted");
                     mLocationPermissionGranted=true;
                     //initialize map
+                    initMap();
                 }
         }
     }

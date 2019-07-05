@@ -20,8 +20,7 @@ import dataAccess.DataBase.Database;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-    private static final int ERROR_DIALOG_REQUEST =9001;
+
     private final Database database = new Database();
 
     @Override
@@ -34,12 +33,23 @@ public class MainActivity extends AppCompatActivity {
         final TextView user_id = (TextView) findViewById(R.id.editTuserID);
         final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
 
+
+        //botón para forzar apertura del mapa
+        Button forceOpenMapBtn=(Button) findViewById(R.id.forceOpenMapBtn);
+        forceOpenMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Controller.changeToMapActivity(getApplicationContext());
+            }
+        });
+
         Button btnLogin=(Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Login test
                 Controller.login(getApplicationContext(),user_id.getText().toString(),user_password.getText().toString());
+                cleanEntries( user_id, user_password);
             }
         });
 
@@ -49,43 +59,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(i);
+                cleanEntries( user_id, user_password);
             }
         });
 
-        Button btnAdminSignup=(Button) findViewById(R.id.adminlog);
+        Button btnAdminSignup=(Button) findViewById(R.id.adminlogbtn);
         btnAdminSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AdminLoginActivity.class);
                 startActivity(i);
+                cleanEntries( user_id, user_password);
             }
         });
     }
 
-    public boolean isServicesOk()
+    public void cleanEntries(TextView user_id,TextView user_password)
     {
-        Log.d(TAG,"isServicesOk: checking google services version");
-        int available= GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
-        if(available== ConnectionResult.SUCCESS)
-        {
-            //Everything is ok
-            Log.d(TAG,"isServicesOk: Google Play Services is working");
-            return true;
-
-        }
-        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available))
-        {
-            //an error occurred but it can be resolved
-            Log.d(TAG,"isServicesOk: an error occurred but we can fix it");
-            Dialog dialog=GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this,available,ERROR_DIALOG_REQUEST);
-            dialog.show();
-
-        }
-        else
-        {
-            Toast.makeText(this,"You can´t make map request",Toast.LENGTH_LONG).show();
-        }
-        return false;
+        user_id.setText("");
+        user_password.setText("");
+        user_id.findFocus();
     }
+
 
 }
