@@ -11,17 +11,23 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mapapp.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
     private static final String TAG = "MapActivity";
 
-    private static final String FINE_LOCATION=Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String   FINE_LOCATION=Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION=Manifest.permission.ACCESS_COARSE_LOCATION;
     private Boolean mLocationPermissionGranted=false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE=1234;
+    private static final float  DEFAULT_ZOOM=4.3f;
+    //provitional LatLong, later this data will come from data base
+    private static double lat=4.0000000;
+    private static double longitud=-72.0000000;
     private GoogleMap mMap;
 
     @Override
@@ -30,9 +36,15 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         setContentView(R.layout.activity_map);
 
         getLocationPermission();
-
     }
 
+    private void moveCamera(LatLng latLng,float zoom)
+    {
+
+        Log.d(TAG,"moveCamera: moving the camera to lat: "+latLng.latitude+" , long: "+latLng.longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+    }
     private void initMap()
     {
         Log.d(TAG,"initMap: initializing map");
@@ -95,6 +107,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         Toast.makeText(this,"map is ready", Toast.LENGTH_LONG).show();
         Log.d(TAG,"onMapReady: map is ready");
         mMap=googleMap;
+        moveCamera(new LatLng(lat,longitud),DEFAULT_ZOOM);
 
     }
 }
