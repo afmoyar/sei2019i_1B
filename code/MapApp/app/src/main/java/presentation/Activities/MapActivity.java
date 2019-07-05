@@ -145,6 +145,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         {
             moveCamera(new LatLng(lat,longitud),DEFAULT_ZOOM);
             geolocate("Bogota");
+            geolocate("Medellin");
         }
 
     }
