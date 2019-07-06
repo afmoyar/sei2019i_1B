@@ -34,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         final TextView user_id = (TextView) findViewById(R.id.editTuserID);
         final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
 
+        Button forceOpenMapBtn = (Button) findViewById(R.id.forceOpenMapBtn);
+        if(isServicesOk()){
+            forceOpenMapBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserLoginController.changeToMapActivity(getApplicationContext());
+                }
+            });
+        }
+
         Button btnLogin=(Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
