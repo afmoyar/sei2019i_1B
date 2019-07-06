@@ -15,7 +15,7 @@ import com.example.mapapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import businessLogic.Controllers.Controller;
+import businessLogic.Controllers.UserLoginController;
 import dataAccess.DataBase.Database;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,25 +34,12 @@ public class MainActivity extends AppCompatActivity {
         final TextView user_id = (TextView) findViewById(R.id.editTuserID);
         final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
 
-
-        //botón para forzar apertura del mapa
-        Button forceOpenMapBtn=(Button) findViewById(R.id.forceOpenMapBtn);
-        if(isServicesOk())
-        {
-            forceOpenMapBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Controller.changeToMapActivity(getApplicationContext());
-                }
-            });
-        }
-
         Button btnLogin=(Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Login test
-                Controller.login(getApplicationContext(),user_id.getText().toString(),user_password.getText().toString());
+                UserLoginController.login(getApplicationContext(),user_id.getText().toString(),user_password.getText().toString());
                 cleanEntries( user_id, user_password);
             }
         });

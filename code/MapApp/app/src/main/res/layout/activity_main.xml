@@ -99,12 +99,6 @@
                 android:text="Admin Login"
                 android:textColor="#FFFFFF" />
 
-            <Button
-                android:id="@+id/forceOpenMapBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="90sp"
-                android:text="Force map" />
         </LinearLayout>
 
     </LinearLayout>

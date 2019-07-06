@@ -8,7 +8,7 @@ import dataAccess.Repositories.UserRepository;
 import presentation.Activities.MapActivity;
 import presentation.Activities.WelcomeUserActivity;
 
-public abstract class Controller {
+public abstract class UserLoginController {
 
 
     public static void login(Context context, String id, String password){
@@ -19,11 +19,6 @@ public abstract class Controller {
         UserRepository.createUser(context,id,name,password);
     }
 
-    public static void changeToMapActivity(Context context){
-        Intent i = new Intent(context, MapActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
-    }
     public static void changeToWelcomeUserActivity(Context context){
         Intent i = new Intent(context, WelcomeUserActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

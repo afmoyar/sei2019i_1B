@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.mapapp.R;
 
-import businessLogic.Controllers.Controller;
+import businessLogic.Controllers.UserLoginController;
 import dataAccess.DataBase.Database;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controller.insertUser(getApplicationContext(),user_id.getText().toString(),user_name.getText().toString(),user_password.getText().toString());
+                UserLoginController.insertUser(getApplicationContext(),user_id.getText().toString(),user_name.getText().toString(),user_password.getText().toString());
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
             }
