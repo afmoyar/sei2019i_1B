@@ -1,18 +1,49 @@
-CREATE DATABASE sei2019i_1b;
+--DROP DATABASE sei2019i_1b
 
-CREATE TABLE user (
+CREATE DATABASE IF NOT EXISTS sei2019i_1b;
+
+CREATE TABLE IF NOT EXISTS user (
     id varchar(25) NOT NULL,
     name varchar(25),
     password varchar(25),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE administrator (
+CREATE TABLE IF NOT EXISTS administrator (
     id varchar(25) NOT NULL,
     name varchar(25),
     password varchar(25),
-    country varchar(25),
     PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS country(
+    name varchar(25),
+    admin_id varchar(25),
+    PRIMARY KEY (name),
+    FOREIGN KEY fk_admin(admin_id)
+    REFERENCES administrator(id)
+);
+
+CREATE TABLE IF NOT EXISTS place(
+    latitude double NOT NULL,
+    longitude double NOT NULL,
+    name varchar(25),
+    description varchar(255),
+    country_name varchar(25),
+    PRIMARY KEY (latitude, longitude),
+    FOREIGN KEY fk_country(country_name)
+    REFERENCES country(name),
+    INDEX (longitude, latitude)
+);
+
+CREATE TABLE IF NOT EXISTS user_place(
+    user_id varchar(25),
+    place_latitude double,
+    place_longitude double,
+    FOREIGN KEY fk_place (place_latitude, place_longitude)
+    REFERENCES place(latitude, longitude),
+    FOREIGN KEY fk_user(user_id)
+    REFERENCES user(id)
 );
 
 INSERT INTO administrator VALUES ("Admin", "jose", "1234", "Colombia"); 
