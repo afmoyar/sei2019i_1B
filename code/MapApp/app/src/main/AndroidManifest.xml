@@ -18,9 +18,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="presentation.Activities.WelcomeUserActivity"></activity>
+=======
+        android:theme="@style/AppTheme">
+        <activity android:name="presentation.Activities.WelcomeAdminActivity"></activity>
+        <activity android:name="presentation.Activities.WelcomeUserActivity" />
+>>>>>>> LoginGeneralFix
         <activity android:name="presentation.Activities.AdminLoginActivity" />
         <activity android:name="presentation.Activities.SignUpActivity" />
         <activity android:name="presentation.Activities.MapActivity" />

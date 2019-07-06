@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import dataAccess.Repositories.UserRepository;
+import presentation.Activities.MainActivity;
 import presentation.Activities.MapActivity;
 import presentation.Activities.WelcomeUserActivity;
 
-public abstract class Controller {
+public abstract class UserLoginController {
 
 
     public static void login(Context context, String id, String password){
@@ -24,6 +25,7 @@ public abstract class Controller {
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
+
     public static void changeToWelcomeUserActivity(Context context){
         Intent i = new Intent(context, WelcomeUserActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
