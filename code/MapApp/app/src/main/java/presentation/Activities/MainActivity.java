@@ -15,13 +15,14 @@ import com.example.mapapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import businessLogic.Controllers.MapController;
 import businessLogic.Controllers.UserLoginController;
 import dataAccess.DataBase.Database;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "WelcomeUserActivity";
-    private static final int ERROR_DIALOG_REQUEST =9001;
+
     private final Database database = new Database();
 
     @Override
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
 
         Button forceOpenMapBtn = (Button) findViewById(R.id.forceOpenMapBtn);
-        if(isServicesOk()){
+        if(MapController.isServicesOk(this)){
             forceOpenMapBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,31 +82,5 @@ public class MainActivity extends AppCompatActivity {
         user_password.setText("");
         user_id.findFocus();
     }
-    public boolean isServicesOk()
-    {
-        Log.d(TAG,"isServicesOk: checking google services version");
-        int available= GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
-        if(available== ConnectionResult.SUCCESS)
-        {
-            //Everything is ok
-            Log.d(TAG,"isServicesOk: Google Play Services is working");
-            return true;
-
-        }
-        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available))
-        {
-            //an error occurred but it can be resolved
-            Log.d(TAG,"isServicesOk: an error occurred but we can fix it");
-            Dialog dialog=GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this,available,ERROR_DIALOG_REQUEST);
-            dialog.show();
-
-        }
-        else
-        {
-            Toast.makeText(this,"You can´t make map request",Toast.LENGTH_LONG).show();
-        }
-        return false;
-    }
-
 
 }
