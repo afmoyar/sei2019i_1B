@@ -29,12 +29,5 @@ public class WelcomeAdminActivity extends AppCompatActivity {
         final TextView admin_name = (TextView) findViewById(R.id.adminName);
         admin_id.setText(id);
         admin_name.setText(name);
-
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AdminLoginController.login(getApplicationContext(),admin_id.getText().toString(),admin_name.getText().toString());
-            }
-        });
     }
 }
