@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -32,6 +33,10 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     //provitional LatLong, later this data will come from data base
     private static double lat=4.0000000;
     private static double longitud=-72.0000000;
+    //provitional markers for demostration
+    private Marker marker0;
+    private Marker marker1;
+    private ArrayList<Marker> markerArrayList=new ArrayList<>();
     private GoogleMap mMap;
 
     @Override
@@ -53,10 +58,34 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         //Searching for default demostration places and putting markers on them
         Address a1=MapController.geolocate(getApplicationContext(),"Bogota",mMap);
         if(a1!=null)
-            MapController.makeMarker(mMap,new LatLng(a1.getLatitude(),a1.getLongitude()),a1.getAddressLine(0));
+        {
+            marker0=MapController.makeMarker(mMap,new LatLng(a1.getLatitude(),a1.getLongitude()),a1.getAddressLine(0));
+            markerArrayList.add(marker0);
+
+        }
+
         Address a2 =MapController.geolocate(getApplicationContext(),"Medellin",mMap);
         if(a2!=null)
-            MapController.makeMarker(mMap,new LatLng(a2.getLatitude(),a2.getLongitude()),a2.getAddressLine(0));
+        {
+            marker1=MapController.makeMarker(mMap,new LatLng(a2.getLatitude(),a2.getLongitude()),a2.getAddressLine(0));
+            markerArrayList.add(marker1);
+        }
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for(Marker m:markerArrayList)
+                {
+                    if(marker.equals(m))
+                    {
+                        m.showInfoWindow();
+                        Toast.makeText(getApplicationContext(),m.getTitle(),Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                return true;
+            }
+        });
+
         //address can be null if google doesn´t find any place or if the geolocate service is no available
     }
 }
