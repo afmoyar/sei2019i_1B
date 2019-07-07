@@ -16,10 +16,6 @@ public abstract class UserLoginController {
         UserRepository.searchByIdAndPassword(context,id,password);
     }
 
-    public static void insertUser(Context context, String id,String name, String password){
-        UserRepository.createUser(context,id,name,password);
-    }
-
     public static void changeToMapActivity(Context context){
         Intent i = new Intent(context, MapActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
