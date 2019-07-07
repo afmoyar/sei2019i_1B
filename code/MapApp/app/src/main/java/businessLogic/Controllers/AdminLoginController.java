@@ -13,8 +13,10 @@ public abstract class AdminLoginController {
         AdministratorRepository.searchByIdAndPassword(context,id,password);
     }
 
-    public static void changeToWelcomeAdminActivity(Context context){
+    public static void changeToWelcomeAdminActivity(Context context, String id, String name){
         Intent i = new Intent(context, WelcomeAdminActivity.class);
+        i.putExtra("id",id);
+        i.putExtra("name",name);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }

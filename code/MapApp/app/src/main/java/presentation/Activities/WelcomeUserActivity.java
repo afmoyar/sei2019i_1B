@@ -8,11 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.mapapp.R;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+
 
 import businessLogic.Controllers.MapController;
 
@@ -20,14 +17,23 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
     private static final String TAG = "WelcomeUserActivity";
     private static final int ERROR_DIALOG_REQUEST =9001;
+    private String id,name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
 
+        id = getIntent().getStringExtra("id");
+        name = getIntent().getStringExtra("name");
+
         TextView textViewUserId=(TextView) findViewById(R.id.textViewUserId);
         TextView textViewUserName=(TextView) findViewById(R.id.textViewUserName);
         TextView textViewCountry=(TextView) findViewById(R.id.textViewCountry);
+
+        textViewUserId.setText(id);
+        textViewUserName.setText(name);
+
         Button mapButton=(Button) findViewById(R.id.mapButton);
         if(MapController.isServicesOk(this))
         {

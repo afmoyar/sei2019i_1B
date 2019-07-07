@@ -9,7 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/textView9"
@@ -23,6 +25,46 @@
             android:fontFamily="cursive"
             android:gravity="center_horizontal"
             android:text="Welcome Admin"
+            android:textColor="#00BCD4"
             android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginBottom="20sp"
+            android:fontFamily="cursive"
+            android:text="Administrator ID:"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textVadminid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginBottom="20sp"
+            android:fontFamily="cursive"
+            android:textColor="#3F51B5"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginBottom="20sp"
+            android:fontFamily="cursive"
+            android:text="Adminisrtrator Name:"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textVadminname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:fontFamily="cursive"
+            android:textColor="#3F51B5"
+            android:textSize="24sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

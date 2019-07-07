@@ -26,8 +26,10 @@ public abstract class UserLoginController {
         context.startActivity(i);
     }
 
-    public static void changeToWelcomeUserActivity(Context context){
+    public static void changeToWelcomeUserActivity(Context context,String id, String name){
         Intent i = new Intent(context, WelcomeUserActivity.class);
+        i.putExtra("id",id);
+        i.putExtra("name",name);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }

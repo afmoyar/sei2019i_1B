@@ -78,7 +78,7 @@ public class Database {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        UserLoginController.changeToWelcomeUserActivity(context);
+                        UserLoginController.changeToWelcomeUserActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
 
                     } catch (JSONException e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -106,7 +106,7 @@ public class Database {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        AdminLoginController.changeToWelcomeAdminActivity(context);
+                        AdminLoginController.changeToWelcomeAdminActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
 
                     } catch (JSONException e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
