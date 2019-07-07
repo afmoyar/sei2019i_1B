@@ -50,8 +50,13 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         Log.d(TAG,"onMapReady: map is ready");
         mMap=googleMap;
         MapController.moveCamera(mMap,new LatLng(lat,longitud),DEFAULT_ZOOM);
-        MapController.geolocate(getApplicationContext(),"Bogota",mMap);
-        MapController.geolocate(getApplicationContext(),"Medellin",mMap);
-
+        //Searching for default demostration places and putting markers on them
+        Address a1=MapController.geolocate(getApplicationContext(),"Bogota",mMap);
+        if(a1!=null)
+            MapController.makeMarker(mMap,new LatLng(a1.getLatitude(),a1.getLongitude()),a1.getAddressLine(0));
+        Address a2 =MapController.geolocate(getApplicationContext(),"Medellin",mMap);
+        if(a2!=null)
+            MapController.makeMarker(mMap,new LatLng(a2.getLatitude(),a2.getLongitude()),a2.getAddressLine(0));
+        //address can be null if google doesn´t find any place or if the geolocate service is no available
     }
 }

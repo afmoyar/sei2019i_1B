@@ -43,7 +43,7 @@ public abstract class MapController
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
     }
-    public static void geolocate(Context context,String searchString,GoogleMap mMap)
+    public static Address geolocate(Context context,String searchString,GoogleMap mMap)
     {
         Geocoder geocoder= new Geocoder(context);
         List<Address> list=new ArrayList<>();
@@ -54,15 +54,18 @@ public abstract class MapController
         {
             //Toast.makeText(this,"geolocator is not working",Toast.LENGTH_LONG).show();
             Log.e(TAG,"geolocate: IOExeption "+e.getMessage());
+            return null;
         }
         if(list.size()>0)
         {
             Address address= list.get(0);
             Log.d(TAG,"geolocate: found a location"+address.toString());
-            LatLng foundLatLng=new LatLng(address.getLatitude(),address.getLongitude());
-            makeMarker(mMap,foundLatLng,address.getAddressLine(0));
+            return address;
+            //LatLng foundLatLng=new LatLng(address.getLatitude(),address.getLongitude());
+            //makeMarker(mMap,foundLatLng,address.getAddressLine(0));
             //Toast.makeText(this,address.toString(),Toast.LENGTH_LONG).show();
         }
+        return null;
     }
     public static void makeMarker(GoogleMap mMap,LatLng latLng,String title)
     {
@@ -91,5 +94,5 @@ public abstract class MapController
         }
         return mLocationPermissionGranted;
     }
-    
+
 }
