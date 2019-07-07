@@ -2,6 +2,7 @@ package businessLogic.Controllers;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -12,6 +13,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import presentation.Activities.MainActivity;
 import presentation.Activities.MapActivity;
 
 public abstract class MapController
@@ -32,10 +36,35 @@ public abstract class MapController
     private static final String COURSE_LOCATION=Manifest.permission.ACCESS_COARSE_LOCATION;
     private Boolean mLocationPermissionGranted=false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE=1234;
+    private static final int ERROR_DIALOG_REQUEST =9001;
     private static final float  DEFAULT_ZOOM=4.3f;
 
 
+    public static boolean isServicesOk(Activity activity)
+    {
+        Log.d(TAG,"isServicesOk: checking google services version");
+        int available= GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity);
+        if(available== ConnectionResult.SUCCESS)
+        {
+            //Everything is ok
+            Log.d(TAG,"isServicesOk: Google Play Services is working");
+            return true;
 
+        }
+        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available))
+        {
+            //an error occurred but it can be resolved
+            Log.d(TAG,"isServicesOk: an error occurred but we can fix it");
+            Dialog dialog=GoogleApiAvailability.getInstance().getErrorDialog(activity,available,ERROR_DIALOG_REQUEST);
+            dialog.show();
+
+        }
+        else
+        {
+            Toast.makeText(activity,"You can´t make map request",Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
     public static void moveCamera(GoogleMap mMap,LatLng latLng,float zoom)
     {
 

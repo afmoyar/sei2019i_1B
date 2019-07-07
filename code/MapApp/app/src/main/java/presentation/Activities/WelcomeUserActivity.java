@@ -14,6 +14,8 @@ import com.example.mapapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import businessLogic.Controllers.MapController;
+
 public class WelcomeUserActivity extends AppCompatActivity {
 
     private static final String TAG = "WelcomeUserActivity";
@@ -27,7 +29,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
         TextView textViewUserName=(TextView) findViewById(R.id.textViewUserName);
         TextView textViewCountry=(TextView) findViewById(R.id.textViewCountry);
         Button mapButton=(Button) findViewById(R.id.mapButton);
-        if(isServicesOk())
+        if(MapController.isServicesOk(this))
         {
             mapButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -39,30 +41,5 @@ public class WelcomeUserActivity extends AppCompatActivity {
             });
         }
 
-    }
-    public boolean isServicesOk()
-    {
-        Log.d(TAG,"isServicesOk: checking google services version");
-        int available= GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(WelcomeUserActivity.this);
-        if(available== ConnectionResult.SUCCESS)
-        {
-            //Everything is ok
-            Log.d(TAG,"isServicesOk: Google Play Services is working");
-            return true;
-
-        }
-        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available))
-        {
-            //an error occurred but it can be resolved
-            Log.d(TAG,"isServicesOk: an error occurred but we can fix it");
-            Dialog dialog=GoogleApiAvailability.getInstance().getErrorDialog(WelcomeUserActivity.this,available,ERROR_DIALOG_REQUEST);
-            dialog.show();
-
-        }
-        else
-        {
-            Toast.makeText(this,"You can´t make map request",Toast.LENGTH_LONG).show();
-        }
-        return false;
     }
 }
