@@ -19,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -96,10 +97,10 @@ public abstract class MapController
         }
         return null;
     }
-    public static void makeMarker(GoogleMap mMap,LatLng latLng,String title)
+    public static Marker makeMarker(GoogleMap mMap, LatLng latLng, String title)
     {
         MarkerOptions options=new MarkerOptions().position(latLng).title(title);
-        mMap.addMarker(options);
+        return mMap.addMarker(options);
     }
     private boolean getLocationPermission(Context context, Activity activity)
     {
