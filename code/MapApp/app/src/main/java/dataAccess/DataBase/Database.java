@@ -5,6 +5,8 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,41 +22,28 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import businessLogic.Controllers.AdminLoginController;
 import businessLogic.Controllers.UserLoginController;
 
 public class Database {
-    //ipv4 from the computer with the database and the directory where the php code is located
-
-    //final String URL = "http://192.168.0.4:80/sei2019i_1B/create_user.php";
-
 
     public Database() {
     }
 
     //insert User function
-    public void  insertUser (final Context context,final String id,final String name, final String password){
+    public String insertUser (final Context context, final String id, final String name, final String password) throws InterruptedException, ExecutionException, TimeoutException {
 
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user),
-                new Response.Listener<String>() {
-                    //message when the connection works
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(context, "added in the database", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-            //message when the connection doesn't work
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error: failed to connect with the db", Toast.LENGTH_SHORT).show();
-                System.out.println(error.getMessage());
-            }
-        }){
+        RequestFuture<String> future = RequestFuture.newFuture();
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user), future, future)
+        {
             @Override
             //HashMap with the data to insert into the database
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<String,String>();
                 params.put("id",id);
                 params.put("name",name);
@@ -63,9 +52,10 @@ public class Database {
             }
         };
 
-        //request using the parameters previously written
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
     public void  UserloginFunction (final Context context, final String id, final String password){
@@ -123,4 +113,6 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonArrayRequest);
     }
+
+    String mysteriousthing = null;
 }

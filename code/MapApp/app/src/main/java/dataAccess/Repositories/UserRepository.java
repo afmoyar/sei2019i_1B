@@ -2,6 +2,12 @@ package dataAccess.Repositories;
 
 import android.content.Context;
 
+import org.json.JSONObject;
+
+import java.util.ConcurrentModificationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
 import dataAccess.DataBase.Database;
 
 public abstract class UserRepository {
@@ -11,7 +17,20 @@ public abstract class UserRepository {
         database.UserloginFunction(context, id, password);
     }
 
-    public static void createUser(Context context, String id,String name, String password){
-        database.insertUser(context,id,name,password);
+    public static ResponseType createUser(Context context, String id,String name, String password){
+
+        String  stringResponse;
+
+        try {
+
+            stringResponse = database.insertUser(context, id, name, password);
+        }
+        catch (TimeoutException|InterruptedException|ExecutionException e){
+
+            System.out.println(e.getStackTrace());
+            return ResponseType.CONNECT_ERROR;
+        }
+
+        return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
     }
 }
