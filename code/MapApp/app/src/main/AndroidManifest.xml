@@ -25,6 +25,7 @@
         <activity android:name="presentation.Activities.AdminLoginActivity" />
         <activity android:name="presentation.Activities.SignUpActivity" />
         <activity android:name="presentation.Activities.MapActivity" />
+        <activity android:name="presentation.Activities.SeePlacesActivity" />
         <activity android:name="presentation.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

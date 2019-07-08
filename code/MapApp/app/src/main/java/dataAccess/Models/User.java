@@ -1,14 +1,23 @@
 package dataAccess.Models;
 
+import java.util.ArrayList;
+
 public class User {
     String id;
     String name;
     String password;
+    ArrayList<Place> places;
+
 
     public User(String id, String name, String password) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.places = new ArrayList<Place>();
+    }
+
+    public void addPlaces(Place place){
+        places.add(place);
     }
 
     public String getId() {

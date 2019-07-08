@@ -12,6 +12,7 @@ import com.example.mapapp.R;
 
 
 import businessLogic.Controllers.MapController;
+import businessLogic.Controllers.SeePlacesController;
 
 public class WelcomeUserActivity extends AppCompatActivity {
 
@@ -35,14 +36,21 @@ public class WelcomeUserActivity extends AppCompatActivity {
         textViewUserName.setText(name);
 
         Button mapButton=(Button) findViewById(R.id.mapButton);
+        Button placesButton=(Button) findViewById(R.id.placesButton);
         if(MapController.isServicesOk(this))
         {
             mapButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Intent i= new Intent(getApplicationContext(),MapActivity.class);
+                    Intent i = new Intent(getApplicationContext(), MapActivity.class);
                     startActivity(i);
+                }
+            });
+
+            placesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SeePlacesController.getPlacesWithId(getApplicationContext(),id);
                 }
             });
         }
