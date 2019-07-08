@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +13,8 @@ import android.widget.Toast;
 
 import com.example.mapapp.R;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
-
 import businessLogic.Controllers.ControlResult;
-import businessLogic.Controllers.UserLoginController;
 import businessLogic.Controllers.UserSignUpController;
-import dataAccess.DataBase.Database;
 
 public class SignUpActivity extends AppCompatActivity {
 

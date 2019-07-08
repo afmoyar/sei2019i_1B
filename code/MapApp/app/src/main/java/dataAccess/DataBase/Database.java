@@ -3,9 +3,7 @@ package dataAccess.DataBase;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
@@ -34,7 +32,6 @@ public class Database {
     public Database() {
     }
 
-    //insert User function
     public String insertUser (final Context context, final String id, final String name, final String password) throws InterruptedException, ExecutionException, TimeoutException {
 
         RequestFuture<String> future = RequestFuture.newFuture();
@@ -44,7 +41,7 @@ public class Database {
             @Override
             //HashMap with the data to insert into the database
             protected Map<String, String> getParams() {
-                Map<String,String> params = new HashMap<String,String>();
+                Map<String,String> params = new HashMap<>();
                 params.put("id",id);
                 params.put("name",name);
                 params.put("password",password);

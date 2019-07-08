@@ -2,9 +2,6 @@ package dataAccess.Repositories;
 
 import android.content.Context;
 
-import org.json.JSONObject;
-
-import java.util.ConcurrentModificationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
