@@ -69,9 +69,10 @@ public class SignUpActivity extends AppCompatActivity {
         protected void onPostExecute(ControlResult result){
 
             progress.dismiss();
-            Intent i = new Intent(context, SignUpActivity.class);
-            i.putExtra(resultKey, result);
-            startActivity(i);
+            Intent intent = getIntent();
+            intent.putExtra(resultKey, result);
+            finish();
+            startActivity(intent);
         }
 
         private Context context;
