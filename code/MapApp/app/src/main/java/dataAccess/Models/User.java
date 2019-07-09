@@ -43,4 +43,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public ArrayList<Place> getPlaces() { return places; }
+
+    public void setPlaces(ArrayList<Place> places) { this.places = places; }
 }
