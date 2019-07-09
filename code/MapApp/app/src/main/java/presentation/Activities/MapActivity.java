@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -61,10 +62,14 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         mMap=googleMap;
         MapController.moveCamera(mMap,new LatLng(lat,longitud),DEFAULT_ZOOM);
         //putting markers on default demostration places
+        Marker marker;
         for(Place place:seasonPlacesList)
         {
-            markerArrayList.add(MapController.makeMarker(mMap,new LatLng(place.getLatitude(),place.getLongitude()),
-                    place.getName()+", "+place.getCountryName()));
+            marker=MapController.makeMarker(mMap,new LatLng(place.getLatitude(),place.getLongitude()),
+                    place.getName()+", "+place.getCountryName());
+            if(myUser.getPlaces().contains(place))
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            markerArrayList.add(marker);
         }
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -82,6 +87,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                         {
                             myUser.addPlaces(seasonPlacesList.get(i));
                             Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
+                            m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                         }
 
                         break;
