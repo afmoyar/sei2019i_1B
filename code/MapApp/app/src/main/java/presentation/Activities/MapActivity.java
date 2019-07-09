@@ -55,21 +55,13 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         Log.d(TAG,"onMapReady: map is ready");
         mMap=googleMap;
         MapController.moveCamera(mMap,new LatLng(lat,longitud),DEFAULT_ZOOM);
-        //Searching for default demostration places and putting markers on them
-        Address a1=MapController.geolocate(getApplicationContext(),"Bogota",mMap);
-        if(a1!=null)
-        {
-            marker0=MapController.makeMarker(mMap,new LatLng(a1.getLatitude(),a1.getLongitude()),a1.getAddressLine(0));
-            markerArrayList.add(marker0);
+        //putting markers on default demostration places
+        marker0=MapController.makeMarker(mMap,new LatLng(4.71098599,-74.072092),"Bogotá,Colombia");
+        markerArrayList.add(marker0);
 
-        }
+        marker1=MapController.makeMarker(mMap,new LatLng(6.244203,-75.5812119),"Medellín, Colombia");
+        markerArrayList.add(marker1);
 
-        Address a2 =MapController.geolocate(getApplicationContext(),"Medellin",mMap);
-        if(a2!=null)
-        {
-            marker1=MapController.makeMarker(mMap,new LatLng(a2.getLatitude(),a2.getLongitude()),a2.getAddressLine(0));
-            markerArrayList.add(marker1);
-        }
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
