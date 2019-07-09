@@ -14,6 +14,7 @@ import presentation.Activities.WelcomeUserActivity;
 
 public abstract class SeePlacesController {
 
+    //ArrayList llamada en SeePlacesActivity
     public static ArrayList<String> arrayList;
 
     public static void getPlacesWithId(Context context, String id){
