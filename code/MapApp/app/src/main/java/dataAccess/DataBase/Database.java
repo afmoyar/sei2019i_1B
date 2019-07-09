@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
@@ -28,8 +29,7 @@ import java.util.concurrent.TimeoutException;
 import businessLogic.Controllers.AdminLoginController;
 import businessLogic.Controllers.SeePlacesController;
 import businessLogic.Controllers.UserLoginController;
-import dataAccess.Models.Place;
-import dataAccess.Models.User;
+
 
 public class Database {
 
@@ -55,6 +55,18 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public JSONObject queryUser(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
+        final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_login),params, future, future);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonRequest);
 
         return future.get(3000, TimeUnit.MILLISECONDS);
     }

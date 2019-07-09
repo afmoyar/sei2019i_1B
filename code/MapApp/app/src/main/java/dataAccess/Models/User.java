@@ -1,13 +1,14 @@
 package dataAccess.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
+
     String id;
     String name;
     String password;
-    ArrayList<Place> places;
-
+    public ArrayList<Place> places;
 
     public User(String id, String name, String password) {
         this.id = id;

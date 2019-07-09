@@ -2,10 +2,16 @@ package dataAccess.Repositories;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import dataAccess.DataBase.Database;
+import dataAccess.Models.User;
 
 public abstract class UserRepository {
     private static final Database database = new Database();
@@ -29,5 +35,13 @@ public abstract class UserRepository {
         }
 
         return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
+    }
+
+    public static User getUser(final Context context,final String id, final String password) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+
+        Gson gson = new Gson();
+        JSONObject loginResult = database.queryUser(context, id, password);
+
+        return gson.fromJson(loginResult.toString(), User.class);
     }
 }
