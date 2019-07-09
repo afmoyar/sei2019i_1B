@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +26,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import businessLogic.Controllers.AdminLoginController;
+import businessLogic.Controllers.SeePlacesController;
 import businessLogic.Controllers.UserLoginController;
+import dataAccess.Models.Place;
+import dataAccess.Models.User;
 
 public class Database {
 
@@ -65,6 +69,8 @@ public class Database {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
+
+
                         UserLoginController.changeToWelcomeUserActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
 
                     } catch (JSONException e) {
@@ -76,6 +82,45 @@ public class Database {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "name or password incorrect",Toast.LENGTH_SHORT).show();
+            }
+        }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    public void findPlaceWithId(final Context context, final String id){
+
+        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_place_by_id.php?id="+id+"", new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                ArrayList<String> places = new ArrayList<String>();
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        places.add(jsonObject.getString("latitude") + " " + jsonObject.getString("longitude") + " " + jsonObject.getString("name") + " " + jsonObject.getString("description") + " ");
+                    } catch (JSONException e) {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                if(places.isEmpty()){
+                    places.add("nothing to show here");
+                }
+
+                SeePlacesController.changeToSeePlacesActivity(context,places);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error",Toast.LENGTH_SHORT).show();
             }
         }
         );
