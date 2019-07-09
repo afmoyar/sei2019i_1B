@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -26,16 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import businessLogic.Controllers.MapController;
+import dataAccess.Models.Place;
+import dataAccess.Models.User;
 
 public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
     private static final String TAG = "MapActivity";
     private static final float  DEFAULT_ZOOM=4.3f;
-    //provitional LatLong, later this data will come from data base
+    //provitional LatLong for country, later this data will come from data base
     private static double lat=4.0000000;
     private static double longitud=-72.0000000;
-    //provitional markers for demostration
-    private Marker marker0;
-    private Marker marker1;
+    //provisional user,
+    private User myUser=new User("afmoyar","andres","1234");
+    ArrayList<Place> seasonPlacesList=new ArrayList<>();
     private ArrayList<Marker> markerArrayList=new ArrayList<>();
     private GoogleMap mMap;
 
@@ -43,7 +46,11 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
+        //provisional  places for the season
+        Place bgta=new Place(4.71098599,-74.072092,"Bogota","I live here lol","Colombia");
+        Place mdll=new Place(6.244203,-75.5812119,"Medellin","I  dont live here lmao","Colombia");
+        seasonPlacesList.add(bgta);
+        seasonPlacesList.add(mdll);
         Log.d(TAG,"initMap: initializing map");
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapActivity.this);
@@ -51,36 +58,41 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this,"map is ready", Toast.LENGTH_LONG).show();
         Log.d(TAG,"onMapReady: map is ready");
         mMap=googleMap;
         MapController.moveCamera(mMap,new LatLng(lat,longitud),DEFAULT_ZOOM);
-        //Searching for default demostration places and putting markers on them
-        Address a1=MapController.geolocate(getApplicationContext(),"Bogota",mMap);
-        if(a1!=null)
+        //putting markers on default demostration places
+        Marker marker;
+        for(Place place:seasonPlacesList)
         {
-            marker0=MapController.makeMarker(mMap,new LatLng(a1.getLatitude(),a1.getLongitude()),a1.getAddressLine(0));
-            markerArrayList.add(marker0);
-
+            marker=MapController.makeMarker(mMap,new LatLng(place.getLatitude(),place.getLongitude()),
+                    place.getName()+", "+place.getCountryName());
+            if(myUser.getPlaces().contains(place))
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            markerArrayList.add(marker);
         }
 
-        Address a2 =MapController.geolocate(getApplicationContext(),"Medellin",mMap);
-        if(a2!=null)
-        {
-            marker1=MapController.makeMarker(mMap,new LatLng(a2.getLatitude(),a2.getLongitude()),a2.getAddressLine(0));
-            markerArrayList.add(marker1);
-        }
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                int i=0;
                 for(Marker m:markerArrayList)
                 {
                     if(marker.equals(m))
                     {
                         m.showInfoWindow();
-                        Toast.makeText(getApplicationContext(),m.getTitle(),Toast.LENGTH_LONG).show();
-                    }
+                        if(myUser.getPlaces().contains(seasonPlacesList.get(i)))
+                            Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
+                        else
+                        {
+                            myUser.addPlaces(seasonPlacesList.get(i));
+                            Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
+                            m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                        }
 
+                        break;
+                    }
+                    i++;
                 }
                 return true;
             }
