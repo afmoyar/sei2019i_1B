@@ -62,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), AdminLoginActivity.class);
                 startActivity(i);
                 cleanEntries( user_id, user_password);
+
             }
         });
     }
 
     public void cleanEntries(TextView user_id,TextView user_password)
     {
-        user_id.setText("");
         user_password.setText("");
         user_id.findFocus();
     }
