@@ -2,7 +2,6 @@ package presentation.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,11 +17,9 @@ import businessLogic.Controllers.UserSignUpController;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private final String resultKey = "signup result";
-
     class SignUpTask extends AsyncTask<Void, Void, ControlResult>{
 
-        public SignUpTask(Context context, String id, String name, String pass){
+        SignUpTask(Context context, String id, String name, String pass){
 
             this.context = context;
             this.progress = new ProgressDialog(SignUpActivity.this);
@@ -63,10 +60,29 @@ public class SignUpActivity extends AppCompatActivity {
         protected void onPostExecute(ControlResult result){
 
             progress.dismiss();
-            Intent intent = getIntent();
-            intent.putExtra(resultKey, result);
-            finish();
-            startActivity(intent);
+
+            switch (result) {
+
+                case CONNECT_ERROR:
+
+                    Toast.makeText(context, "Error connecting to database", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case INPUT_ERROR:
+
+                    Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case SERVER_ERROR:
+
+                    Toast.makeText(context, "Couldn't create user. Change the id and try again", Toast.LENGTH_LONG).show();
+                    break;
+
+                case SUCCESS:
+
+                    Toast.makeText(context, "User created successfully", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
 
         private Context context;
@@ -89,41 +105,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         final Context context = getApplicationContext();
 
-        Button btnSignup = findViewById(R.id.btnsighupF);
+        Button btnSignUp = findViewById(R.id.btnsighupF);
 
-        Bundle extras = getIntent().getExtras();
-
-        if(extras != null) {
-
-            ControlResult result = (ControlResult) extras.get(resultKey);
-
-            if(result != null) {
-                switch (result) {
-
-                    case CONNECT_ERROR:
-
-                        Toast.makeText(context, "Error connecting to database", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case INPUT_ERROR:
-
-                        Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case SERVER_ERROR:
-
-                        Toast.makeText(context, "Couldn't create user. Change the id and try again", Toast.LENGTH_LONG).show();
-                        break;
-
-                    case SUCCESS:
-
-                        Toast.makeText(context, "User created succesfully", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        }
-
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
