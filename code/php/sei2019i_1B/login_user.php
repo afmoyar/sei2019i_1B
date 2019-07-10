@@ -2,14 +2,54 @@
 
 include 'connection.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
+$request = json_decode(file_get_contents('php://input'), true);
 
-$id=$data['id'];
-$password=$data['password'];
+$id = $request['id'];
+$password = $request['password'];
 
-$places = array(array("latitude" => "123", "longitude" => 456, "name" => "Bogota", "description" => "gran ciudad", "countryName" => "Colombia"));
-$dummy = array("id" => $id, "name" => $password, 'password' => "123abc", "places" => $places);
+$query = "SELECT * FROM user WHERE id = \"$id\" AND password = \"$password\"";
 
-echo json_encode($dummy);
+$result_usr = $connection -> query($query);
+
+if(mysqli_num_rows($result_usr) == 0){
+
+    echo json_encode(array('error' => 0));
+    exit();
+}
+
+$response = array();
+
+$fields = array("id", "name", "password");
+
+$encoded_result = array_map('utf8_encode', $result_usr -> fetch_array());
+
+foreach($fields as $field){
+
+    $response[$field] = $encoded_result[$field];
+}
+
+$query = "SELECT * FROM place INNER JOIN user_place ON place.latitude = user_place.place_latitude AND place.longitude = user_place.place_longitude AND user_place.user_id = \"$id\"";
+
+$result_place = $connection -> query($query);
+
+$fields = array("longitude", "latitude", "name", "description", "country_name");
+
+$response["places"] = array();
+
+while($place_row = $result_place -> fetch_array()){
+
+    $place = array();
+
+    foreach($fields as $field){
+    
+        $place[$field] = utf8_encode($place_row[$field]);
+    }
+    
+    $response["places"][] = $place;
+}
+
+echo json_encode($response);
+$result_usr -> close();
+$result_place -> close()
 
 ?>

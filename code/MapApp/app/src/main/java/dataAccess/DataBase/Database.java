@@ -28,7 +28,6 @@ import java.util.concurrent.TimeoutException;
 
 import businessLogic.Controllers.AdminLoginController;
 import businessLogic.Controllers.SeePlacesController;
-import businessLogic.Controllers.UserLoginController;
 
 
 public class Database {
@@ -69,36 +68,6 @@ public class Database {
         requestQueue.add(jsonRequest);
 
         return future.get(3000, TimeUnit.MILLISECONDS);
-    }
-
-    public void  UserloginFunction (final Context context, final String id, final String password){
-
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_user_by_id_pass.php?id="+id+"&password="+password+"", new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-
-
-                        UserLoginController.changeToWelcomeUserActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
-
-                    } catch (JSONException e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "name or password incorrect",Toast.LENGTH_SHORT).show();
-            }
-        }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonArrayRequest);
     }
 
     public void findPlaceWithId(final Context context, final String id){

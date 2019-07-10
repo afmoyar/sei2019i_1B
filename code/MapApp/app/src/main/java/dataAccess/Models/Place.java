@@ -1,5 +1,7 @@
 package dataAccess.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Place implements Serializable {
@@ -7,6 +9,8 @@ public class Place implements Serializable {
     double longitude;
     String name;
     String description;
+
+    @SerializedName("country_name")
     String countryName;
 
     public Place(double latitude, double longitude, String name, String description, String countryName) {

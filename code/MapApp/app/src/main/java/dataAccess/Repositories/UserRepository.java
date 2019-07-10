@@ -14,11 +14,8 @@ import dataAccess.DataBase.Database;
 import dataAccess.Models.User;
 
 public abstract class UserRepository {
-    private static final Database database = new Database();
 
-    public static void searchByIdAndPassword(final Context context,final String id, final String password){
-        database.UserloginFunction(context, id, password);
-    }
+    private static final Database database = new Database();
 
     public static ResponseType createUser(Context context, String id,String name, String password){
 
@@ -41,6 +38,11 @@ public abstract class UserRepository {
 
         Gson gson = new Gson();
         JSONObject loginResult = database.queryUser(context, id, password);
+
+        if(loginResult.length() == 1){
+
+            throw new JSONException("error");
+        }
 
         return gson.fromJson(loginResult.toString(), User.class);
     }

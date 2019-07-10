@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Pair<User, ControlResult> doInBackground(Void... voids) {
 
-            return UserLoginController.login_(context, id, password);
+            return UserLoginController.logIn(context, id, password);
         }
 
         @Override
@@ -117,9 +117,10 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Login test
-                //UserLoginController.login(getApplicationContext(),user_id.getText().toString(),user_password.getText().toString());
-                LogInTask logIn = new LogInTask(getApplicationContext(),user_id.getText().toString(),user_password.getText().toString());
+
+                LogInTask logIn = new LogInTask(getApplicationContext(),user_id.getText().toString(),
+                                                user_password.getText().toString());
+
                 logIn.execute();
                 cleanEntries( user_id, user_password);
             }
