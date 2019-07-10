@@ -17,8 +17,8 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
     private static final String TAG = "WelcomeUserActivity";
     private static final int ERROR_DIALOG_REQUEST =9001;
-    private String id,name;
 
+    private String id,name;
     private final String userKey = "user";
 
     @Override
