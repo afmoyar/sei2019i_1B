@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,7 +26,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
+import dataAccess.Models.Place;
+import dataAccess.Repositories.PlaceRepository;
 import presentation.Activities.MainActivity;
 import presentation.Activities.MapActivity;
 
@@ -123,6 +128,25 @@ public abstract class MapController
             ActivityCompat.requestPermissions(activity,permissions, LOCATION_PERMISSION_REQUEST_CODE);
         }
         return mLocationPermissionGranted;
+    }
+
+    public static Pair<ArrayList<Place>, ControlResult> getSeasonPlaces(Context context){
+
+        ArrayList<Place> places = null;
+
+        try {
+            places = PlaceRepository.getPlace(context);
+        }
+        catch (InterruptedException| ExecutionException e){
+
+            e.printStackTrace();
+        }
+        catch(TimeoutException te){
+
+            return  new Pair<>(places, ControlResult.CONNECT_ERROR);
+        }
+
+        return  new Pair<>(places, ControlResult.SUCCESS);
     }
 
 }

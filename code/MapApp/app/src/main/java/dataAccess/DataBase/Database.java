@@ -70,6 +70,17 @@ public class Database {
         return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
+    public JSONArray queryCurrentSeasonPlaces(Context context) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<JSONArray> future = RequestFuture.newFuture();
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, BuildConfig.ip + "/test.php", null, future, future);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonArrayRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
     public void findPlaceWithId(final Context context, final String id){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,

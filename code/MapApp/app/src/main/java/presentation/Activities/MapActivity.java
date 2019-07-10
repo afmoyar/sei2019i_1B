@@ -1,15 +1,18 @@
 package presentation.Activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import com.example.mapapp.R;
@@ -24,11 +27,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
+import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.MapController;
-import dataAccess.Models.Place;
 import dataAccess.Models.User;
+import dataAccess.Models.Place;
+
 
 public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
     private static final String TAG = "MapActivity";
@@ -88,6 +96,9 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                             myUser.addPlace(seasonPlacesList.get(i));
                             Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
                             m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                            LatLng pos = m.getPosition();
+
                         }
 
                         break;
