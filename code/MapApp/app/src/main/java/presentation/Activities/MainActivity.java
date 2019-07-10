@@ -35,16 +35,6 @@ public class MainActivity extends AppCompatActivity {
         final TextView user_id = (TextView) findViewById(R.id.editTuserID);
         final TextView user_password = (TextView) findViewById(R.id.editTuserPass);
 
-        Button forceOpenMapBtn = (Button) findViewById(R.id.forceOpenMapBtn);
-        if(MapController.isServicesOk(this)){
-            forceOpenMapBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    UserLoginController.changeToMapActivity(getApplicationContext());
-                }
-            });
-        }
-
         Button btnLogin=(Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), AdminLoginActivity.class);
                 startActivity(i);
                 cleanEntries( user_id, user_password);
+
             }
         });
     }
 
     public void cleanEntries(TextView user_id,TextView user_password)
     {
-        user_id.setText("");
         user_password.setText("");
         user_id.findFocus();
     }

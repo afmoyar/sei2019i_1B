@@ -35,7 +35,13 @@ public class AdminLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AdminLoginController.login(getApplicationContext(),admin_id.getText().toString(),admin_password.getText().toString());
+                cleanEntries(admin_id, admin_password);
             }
         });
+    }
+    public void cleanEntries(TextView user_id,TextView user_password)
+    {
+        user_password.setText("");
+        user_id.findFocus();
     }
 }
