@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
@@ -27,9 +28,7 @@ import java.util.concurrent.TimeoutException;
 
 import businessLogic.Controllers.AdminLoginController;
 import businessLogic.Controllers.SeePlacesController;
-import businessLogic.Controllers.UserLoginController;
-import dataAccess.Models.Place;
-import dataAccess.Models.User;
+
 
 public class Database {
 
@@ -59,34 +58,16 @@ public class Database {
         return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
-    public void  UserloginFunction (final Context context, final String id, final String password){
+    public JSONObject queryUser(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
 
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_user_by_id_pass.php?id="+id+"&password="+password+"", new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
+        final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_login),params, future, future);
 
-
-                        UserLoginController.changeToWelcomeUserActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
-
-                    } catch (JSONException e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "name or password incorrect",Toast.LENGTH_SHORT).show();
-            }
-        }
-        );
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
     public void findPlaceWithId(final Context context, final String id){

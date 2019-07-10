@@ -1,13 +1,20 @@
 package dataAccess.Models;
 
-public class Place {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Place implements Serializable {
     double latitude;
     double longitude;
     String name;
     String description;
+
+    @SerializedName("country_name")
     String countryName;
 
     public Place(double latitude, double longitude, String name, String description, String countryName) {
+
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;

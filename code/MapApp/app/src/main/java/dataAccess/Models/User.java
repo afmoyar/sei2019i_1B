@@ -1,22 +1,23 @@
 package dataAccess.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
-    String id;
-    String name;
-    String password;
-    ArrayList<Place> places;
+public class User implements Serializable {
 
+    private String id;
+    private String name;
+    private String password;
+    public ArrayList<Place> places;
 
     public User(String id, String name, String password) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.places = new ArrayList<Place>();
+        this.places = new ArrayList<>();
     }
 
-    public void addPlaces(Place place){
+    public void addPlace(Place place){
         places.add(place);
     }
 

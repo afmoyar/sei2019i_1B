@@ -85,7 +85,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                             Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
                         else
                         {
-                            myUser.addPlaces(seasonPlacesList.get(i));
+                            myUser.addPlace(seasonPlacesList.get(i));
                             Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
                             m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                         }
