@@ -29,7 +29,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
         id = getIntent().getStringExtra("id");
         name = getIntent().getStringExtra("name");
 
-        TextView textViewUserId = findViewById(R.id.textViewUserId);
+        final TextView textViewUserId = findViewById(R.id.textViewUserId);
         TextView textViewUserName = findViewById(R.id.textViewUserName);
         TextView textViewCountry = findViewById(R.id.textViewCountry);
 
@@ -57,7 +57,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             placesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SeePlacesController.getPlacesWithId(getApplicationContext(),id);
+                    SeePlacesController.getPlacesWithId(getApplicationContext(),textViewUserId.getText().toString());
                 }
             });
         }
