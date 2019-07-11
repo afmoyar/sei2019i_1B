@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS user_place(
     user_id varchar(25),
     place_latitude double,
     place_longitude double,
+    PRIMARY KEY (user_id, latitude, longitude),
     FOREIGN KEY fk_place (place_latitude, place_longitude)
     REFERENCES place(latitude, longitude),
     FOREIGN KEY fk_user(user_id)
