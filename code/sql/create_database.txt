@@ -48,8 +48,19 @@ CREATE TABLE IF NOT EXISTS user_place(
 );
 
 INSERT INTO administrator VALUES ("Admin", "jose", "1234"); 
+INSERT INTO administrator VALUES ("Otro", "Otto", "4321"); 
 INSERT INTO `user` (`id`, `name`, `password`) VALUES ('afmoyar', 'andres', '1234');
+INSERT INTO `user` (`id`, `name`, `password`) VALUES ('ccgarciab', 'cristian', '4321');
 INSERT INTO `country` (`name`, `admin_id`) VALUES ('Colombia', 'Admin');
 INSERT INTO `place` (`latitude`, `longitude`, `name`, `description`, `country_name`) VALUES ('4.71', '-74.07', 'Bogota', 'I live here lol', 'Colombia');
 INSERT INTO `user_place` (`user_id`, `place_latitude`, `place_longitude`) VALUES ('afmoyar', '4.71', '-74.07');
 INSERT INTO `place` (`latitude`, `longitude`, `name`, `description`, `country_name`) VALUES ('6.24', '-75.58', 'Medellin', 'I  dont live here lmao', 'Colombia');
+INSERT INTO `country` VALUES("Francia", NULL);
+INSERT INTO `country` VALUES("China", "Otro");
+INSERT INTO `country` VALUES("Egipto", NULL);
+INSERT INTO place VALUES(48.85, 2.35, "Paris", "Hon Hon Hon", "Francia");
+INSERT INTO place VALUES(43.29, 5.37, "Marsella", "El himno mas bonito", "Francia");
+INSERT INTO place VALUES(22.19, 113.54, "Macao", "La ciudad rica menos conocida", "China");
+INSERT INTO place VALUES(39.90, 116.40, "Bejing", "Mucha gente", "China");
+INSERT INTO place VALUES(30.04, 31.23, "Cairo", "Bazares", "Egipto");
+INSERT INTO place VALUES(30.01, 31.20, "Giza", "Piramides", "Egipto");
