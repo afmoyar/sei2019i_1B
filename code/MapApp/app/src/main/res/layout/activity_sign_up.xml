@@ -16,22 +16,21 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="62dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="30sp"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Create a new User"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="42dp" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
             android:text="Enter you ID:"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#009688"
@@ -41,20 +40,20 @@
             android:id="@+id/editTSignid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
             android:ems="10"
-            android:hint="userid"
+            android:hint="User Id"
             android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textView8"
             style="@android:style/Widget.DeviceDefault.TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
             android:text="Enter your name:"
             android:textColor="#992F53"
             android:textSize="24sp" />
@@ -63,20 +62,19 @@
             android:id="@+id/editTSignname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginBottom="20sp"
             android:ems="10"
-            android:hint="username"
+            android:hint="User name"
             android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textView6"
             style="@android:style/Widget.DeviceDefault.TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
             android:text="Enter your password:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#194A9C"
@@ -86,19 +84,20 @@
             android:id="@+id/editTSignpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
             android:ems="10"
-            android:hint="userpassword"
+            android:hint="User password"
             android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnsighupF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="15sp"
+            android:layout_marginRight="20sp"
             android:text="Create" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

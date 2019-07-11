@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     tools:context="presentation.Activities.MainActivity">
 
-    <Button
-        android:id="@+id/adminlog"
-        style="@android:style/Widget.Material.Button.Toggle"
-        android:layout_width="58dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="436dp"
-        android:background="#108CC6"
-        android:fontFamily="serif"
-        android:foregroundGravity="center"
-        android:gravity="center"
-        android:text="Admin"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/Linear"
         android:layout_width="match_parent"
@@ -29,12 +13,13 @@
         android:background="#FFFFFF"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="16dp">
+        tools:layout_editor_absoluteY="-47dp">
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="424dp"
+            android:layout_width="match_parent"
             android:layout_height="68dp"
+            android:layout_marginBottom="10sp"
             android:background="#00FFFFFF"
             android:fontFamily="cursive"
             android:foregroundGravity="center"
@@ -47,20 +32,27 @@
             android:layout_width="122dp"
             android:layout_height="119dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="10sp"
             tools:srcCompat="@drawable/siteslogo" />
 
         <EditText
             android:id="@+id/editTuserID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
             android:ems="10"
-            android:hint="UserID"
+            android:hint="User ID"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editTuserPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword" />
@@ -70,26 +62,44 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
             android:background="#108CC6"
             android:fontFamily="serif"
             android:hapticFeedbackEnabled="true"
-            android:text="LogIn"
+            android:text="Log In"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
             android:fontFamily="serif"
-            android:text="SignUp"
+            android:text="Sign Up"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#3F51B5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:paddingLeft="10sp">
+
+            <Button
+                android:id="@+id/adminlogbtn"
+                android:layout_width="164dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:background="#108CC6"
+                android:text="Admin Login"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

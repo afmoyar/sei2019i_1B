@@ -1,9 +1,13 @@
 package dataAccess.DataBase;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
+import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -12,43 +16,60 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mapapp.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
-import businessLogic.Controllers.Controller;
+import businessLogic.Controllers.AdminLoginController;
+import businessLogic.Controllers.SeePlacesController;
+
 
 public class Database {
-    //ipv4 from the computer with the database and the directory where the php code is located
-
-    //final String URL = "http://192.168.0.4:80/sei2019i_1B/create_user.php";
-
 
     public Database() {
     }
+    private static final String TAG = "database";
+    public String insertUserPlace (final Context context, final String userId, final String latitude, final String longitude) throws InterruptedException, ExecutionException, TimeoutException {
 
-    //insert User function
-    public void  insertUser (final Context context,final String id,final String name, final String password){
+        RequestFuture<String> future = RequestFuture.newFuture();
+        Log.d(TAG,"insertUserPlace");
 
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_create_user),
-                new Response.Listener<String>() {
-                    //message when the connection works
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(context, "added in the database", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-            //message when the connection doesn't work
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error: failed to connect with the db", Toast.LENGTH_SHORT).show();
-                System.out.println(error.getMessage());
-            }
-        }){
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user_place), future, future)
+        {
             @Override
             //HashMap with the data to insert into the database
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("id",userId);
+                params.put("latitude",latitude);
+                params.put("longitude",longitude);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public String insertUser (final Context context, final String id, final String name, final String password) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user), future, future)
+        {
+            @Override
+            //HashMap with the data to insert into the database
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
                 params.put("id",id);
                 params.put("name",name);
                 params.put("password",password);
@@ -56,49 +77,97 @@ public class Database {
             }
         };
 
-        //request using the parameters previously written
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
-    public void  loginFunction (final Context context, final String id, final String password){
+    public JSONObject queryUser(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
+        final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_login),params, future, future);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public JSONArray queryCurrentSeasonPlaces(Context context) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<JSONArray> future = RequestFuture.newFuture();
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/get_admin_places.php", null, future, future);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonArrayRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public void findPlaceWithId(final Context context, final String id){
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.URL_login),
-                new Response.Listener<String>() {
-                    //message when the connection works
-                    @Override
-                    public void onResponse(String response) {
-                        //login for the user when data is correct
-                        if(response.contains("1")){
-                            Toast.makeText(context, "login was successful", Toast.LENGTH_SHORT).show();
-                            Controller.changeToMapActivity(context);
-                        }
-                        //message when login was not successful
-                        else{
-                            Toast.makeText(context, "name or password incorrect", Toast.LENGTH_SHORT).show();
-                        }
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_place_by_id.php?id="+id+"", new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                ArrayList<String> places = new ArrayList<String>();
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        places.add("[" + jsonObject.getString("latitude") + "," + jsonObject.getString("longitude") + "] " + jsonObject.getString("country_name") + ", " + jsonObject.getString("name") + ": '" + jsonObject.getString("description") + "' ");
+                    } catch (JSONException e) {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }, new Response.ErrorListener() {
-            //message when the connection doesn't work
+                }
+
+                if(places.isEmpty()){
+                    places.add("nothing to show here");
+                }
+
+                SeePlacesController.changeToSeePlacesActivity(context,places);
+
+
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error: failed to connect with the db", Toast.LENGTH_SHORT).show();
-                System.out.println(error.getMessage());
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }){
-            @Override
-            //HashMap with the data to insert into the database
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("id",id);
-                params.put("password",password);
-                return params;
-            }
-        };
-
-        //request using the parameters previously written
+        }
+        );
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    public void  AdminloginFunction (final Context context, final String id, final String password){
+
+        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_admin_by_id_pass.php?id="+id+"&password="+password+"", new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        AdminLoginController.changeToWelcomeAdminActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
+
+                    } catch (JSONException e) {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "name or password incorrect",Toast.LENGTH_SHORT).show();
+            }
+        }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonArrayRequest);
     }
 }
