@@ -1,6 +1,7 @@
 package dataAccess.DataBase;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -33,6 +34,30 @@ import businessLogic.Controllers.SeePlacesController;
 public class Database {
 
     public Database() {
+    }
+    private static final String TAG = "database";
+    public String insertUserPlace (final Context context, final String userId, final String latitude, final String longitude) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+        Log.d(TAG,"insertUserPlace");
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user_place), future, future)
+        {
+            @Override
+            //HashMap with the data to insert into the database
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("id",userId);
+                params.put("latitude",latitude);
+                params.put("longitude",longitude);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
     public String insertUser (final Context context, final String id, final String name, final String password) throws InterruptedException, ExecutionException, TimeoutException {

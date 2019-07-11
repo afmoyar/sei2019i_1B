@@ -39,7 +39,6 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
         if(extras != null) {
 
-            //Toast.makeText(getApplicationContext(),"user found",Toast.LENGTH_SHORT).show();
             user = (User) extras.get(userKey);
             textViewUserId.setText(user.getId());
             textViewUserName.setText(user.getName());
@@ -54,7 +53,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent i = new Intent(getApplicationContext(), MapActivity.class);
                     i.putExtra("user",user);
-                    startActivity(i);
+                    startActivityForResult(i, 1);
                 }
             });
 
@@ -66,5 +65,15 @@ public class WelcomeUserActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+
+            user = (User) data.getExtras().get(userKey);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package dataAccess.Models;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -18,6 +19,15 @@ public class Place implements Serializable {
 
         this.latitude = latitude;
         this.longitude = longitude;
+        this.name = name;
+        this.description = description;
+        this.countryName = countryName;
+    }
+
+    public Place(LatLng location, String name, String description, String countryName) {
+
+        this.latitude = location.latitude;
+        this.longitude = location.longitude;
         this.name = name;
         this.description = description;
         this.countryName = countryName;
