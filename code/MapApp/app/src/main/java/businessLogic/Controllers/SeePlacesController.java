@@ -2,6 +2,7 @@ package businessLogic.Controllers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import presentation.Activities.WelcomeUserActivity;
 
 public abstract class SeePlacesController {
 
+    private static final String TAG = "SeePlacesController";
     //ArrayList llamada en SeePlacesActivity
     public static ArrayList<String> arrayList;
 
@@ -30,6 +32,7 @@ public abstract class SeePlacesController {
         context.startActivity(i);
     }
     public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
+        Log.d(TAG,"insertUserPlace");
 
 
 

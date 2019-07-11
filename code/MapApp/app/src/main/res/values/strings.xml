@@ -3,5 +3,5 @@
     <string name="google_places_api_key">AIzaSyDh1yALUdgBGnRrCbCpYzBcZyZzssy5PaQ</string>
     <string name="URL_create_user">/sei2019i_1B/create_user.php</string>
     <string name="URL_login">/sei2019i_1B/login_user.php</string>
-    <string name="URL_create_user_place">/sei2019i_1B/create-user.php</string>
+    <string name="URL_create_user_place">/sei2019i_1B/create_user-place.php</string>
 </resources>

@@ -38,27 +38,32 @@ import dataAccess.Models.User;
 
 public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
 
-    class SignUpTask extends AsyncTask<Void, Void, ControlResult> {
+    class savePlaceTask extends AsyncTask<Void, Void, ControlResult> {
 
         private Context context;
+        private User user;
+        private Place place;
         private String userId;
         private String latitude;
         private String longitude;
         private ProgressDialog progress;
 
-        SignUpTask(Context context, String userId, String latitude, String longitude) {
+        savePlaceTask(Context context, Place place) {
 
             this.context = context;
             this.progress = new ProgressDialog(MapActivity.this);
-            this.userId = userId;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.user=myUser;
+            this.place=place;
+            this.userId = user.getId();
+            this.latitude = String.valueOf(place.getLatitude());
+            this.longitude = String.valueOf(place.getLongitude());
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progress.setMessage("Querying DB");
+            Log.d(TAG,"onPreExecute: user id: "+userId+", lat: "+latitude+", long: "+longitude);
+            progress.setMessage("saving place");
             progress.setIndeterminate(false);
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setCancelable(false);
@@ -102,6 +107,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 case SUCCESS:
 
                     Toast.makeText(context, "Place saved successfully", Toast.LENGTH_SHORT).show();
+                    user.addPlace(place);
                     break;
             }
         }
@@ -166,9 +172,17 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                             Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
                         else
                         {
-                            myUser.addPlace(seasonPlacesList.get(i));
-                            Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
-                            m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                            Log.d(TAG,"onMapReady:about to execute asynk task");
+                            MapActivity.savePlaceTask savePlace=
+                                    new MapActivity.savePlaceTask(getApplicationContext(),seasonPlacesList.get(i));
+
+                            savePlace.execute();
+                            if(myUser.getPlaces().contains(seasonPlacesList.get(i)))
+                            {
+                                //Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
+                                m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                            }
+
                         }
 
                         break;
