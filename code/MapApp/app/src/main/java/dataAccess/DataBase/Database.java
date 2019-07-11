@@ -73,7 +73,7 @@ public class Database {
     public JSONArray queryCurrentSeasonPlaces(Context context) throws InterruptedException, ExecutionException, TimeoutException {
 
         RequestFuture<JSONArray> future = RequestFuture.newFuture();
-        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, BuildConfig.ip + "/test.php", null, future, future);
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/get_admin_places.php", null, future, future);
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonArrayRequest);
