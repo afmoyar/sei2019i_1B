@@ -74,8 +74,6 @@ public class Database {
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
 
-        RequestFuture<String> future = RequestFuture.newFuture();
-
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_place_by_id.php?id="+id+"", new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -101,7 +99,9 @@ public class Database {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error",Toast.LENGTH_SHORT).show();
+                ArrayList<String> places = new ArrayList<String>();
+                places.add("nothing to show here");
+                SeePlacesController.changeToSeePlacesActivity(context,places);
             }
         }
         );
