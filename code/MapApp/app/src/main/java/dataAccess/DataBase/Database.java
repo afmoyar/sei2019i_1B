@@ -84,7 +84,7 @@ public class Database {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        places.add(jsonObject.getString("latitude") + " " + jsonObject.getString("longitude") + " " + jsonObject.getString("name") + " " + jsonObject.getString("description") + " ");
+                        places.add("[" + jsonObject.getString("latitude") + "," + jsonObject.getString("longitude") + "] " + jsonObject.getString("country_name") + ", " + jsonObject.getString("name") + ": '" + jsonObject.getString("description") + "' ");
                     } catch (JSONException e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
