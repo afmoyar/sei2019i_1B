@@ -48,3 +48,7 @@ CREATE TABLE IF NOT EXISTS user_place(
 );
 
 INSERT INTO administrator VALUES ("Admin", "jose", "1234"); 
+INSERT INTO `user` (`id`, `name`, `password`) VALUES ('afmoyar', 'andres', '1234');
+INSERT INTO `country` (`name`, `admin_id`) VALUES ('Colombia', 'Admin');
+INSERT INTO `place` (`latitude`, `longitude`, `name`, `description`, `country_name`) VALUES ('4.71', '-74.07', 'Bogota', 'I live here lol', 'Colombia');
+INSERT INTO `user_place` (`user_id`, `place_latitude`, `place_longitude`) VALUES ('afmoyar', '4.71', '-74.07');
