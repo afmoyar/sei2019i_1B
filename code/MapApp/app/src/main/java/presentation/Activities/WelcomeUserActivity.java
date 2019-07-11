@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.mapapp.R;
 
 
@@ -17,7 +19,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
     private static final String TAG = "WelcomeUserActivity";
     private static final int ERROR_DIALOG_REQUEST =9001;
-
+    private static User user;
     private String id,name;
     private final String userKey = "user";
 
@@ -37,7 +39,8 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
         if(extras != null) {
 
-            User user = (User) extras.get(userKey);
+            //Toast.makeText(getApplicationContext(),"user found",Toast.LENGTH_SHORT).show();
+            user = (User) extras.get(userKey);
             textViewUserId.setText(user.getId());
             textViewUserName.setText(user.getName());
         }
@@ -50,6 +53,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(getApplicationContext(), MapActivity.class);
+                    i.putExtra("user",user);
                     startActivity(i);
                 }
             });

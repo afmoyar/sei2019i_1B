@@ -3,6 +3,7 @@ package dataAccess.Models;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Place implements Serializable {
     double latitude;
@@ -61,4 +62,14 @@ public class Place implements Serializable {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        Place place=(Place) o;
+        if (this.latitude == place.latitude&&this.longitude== place.longitude) return true;
+        else return false;
+
+    }
+
 }

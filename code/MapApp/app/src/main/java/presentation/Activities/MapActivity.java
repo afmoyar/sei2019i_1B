@@ -37,7 +37,8 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     private static double lat=4.0000000;
     private static double longitud=-72.0000000;
     //provisional user,
-    private User myUser=new User("afmoyar","andres","1234");
+    //private User myUser=new User("afmoyar","andres","1234");
+    private User myUser;
     ArrayList<Place> seasonPlacesList=new ArrayList<>();
     private ArrayList<Marker> markerArrayList=new ArrayList<>();
     private GoogleMap mMap;
@@ -46,9 +47,14 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        if(getIntent().getExtras()!=null)
+        {
+            myUser=(User) getIntent().getExtras().get("user");
+        }
+
         //provisional  places for the season
-        Place bgta=new Place(4.71098599,-74.072092,"Bogota","I live here lol","Colombia");
-        Place mdll=new Place(6.244203,-75.5812119,"Medellin","I  dont live here lmao","Colombia");
+        Place bgta=new Place(4.71,-74.07,"Bogota","I live here lol","Colombia");
+        Place mdll=new Place(6.24,-75.58,"Medellin","I  dont live here lmao","Colombia");
         seasonPlacesList.add(bgta);
         seasonPlacesList.add(mdll);
         Log.d(TAG,"initMap: initializing map");
