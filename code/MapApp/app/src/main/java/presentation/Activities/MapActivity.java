@@ -1,38 +1,28 @@
 package presentation.Activities;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mapapp.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.MapController;
 import businessLogic.Controllers.SeePlacesController;
-import businessLogic.Controllers.UserSignUpController;
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
 
@@ -108,11 +98,13 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
 
                     Toast.makeText(context, "Place saved successfully", Toast.LENGTH_SHORT).show();
                     myUser.addPlace(place);
+                    userPlacesByLocation.put(new LatLng(place.getLatitude(), place.getLongitude()), place);
                     marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                     break;
             }
         }
     }
+    
     private static final String TAG = "MapActivity";
     private static final float  DEFAULT_ZOOM=4.3f;
     //provitional LatLong for country, later this data will come from data base
@@ -124,6 +116,9 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     ArrayList<Place> seasonPlacesList=new ArrayList<>();
     private ArrayList<Marker> markerArrayList=new ArrayList<>();
     private GoogleMap mMap;
+    private HashMap<LatLng, Place> userPlacesByLocation;
+    private HashMap<LatLng, Place> mapPlacesByLocation;
+    private final String userKey = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +137,8 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         Log.d(TAG,"initMap: initializing map");
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapActivity.this);
-
+        userPlacesByLocation = indexPlaces(myUser.places);
+        mapPlacesByLocation  = indexPlaces(seasonPlacesList);
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -163,41 +159,47 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                int i=0;
-                for(Marker m:markerArrayList)
-                {
-                    if(marker.equals(m))
-                    {
-                        m.showInfoWindow();
-                        if(myUser.getPlaces().contains(seasonPlacesList.get(i)))
-                        {
-                            Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
-                            m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                        }
 
-                        else
-                        {
-                            Log.d(TAG,"onMapReady:about to execute asynk task");
-                            MapActivity.savePlaceTask savePlace=
-                                    new MapActivity.savePlaceTask(getApplicationContext(),seasonPlacesList.get(i),m);
+                marker.showInfoWindow();
+                LatLng position = marker.getPosition();
 
-                            savePlace.execute();
-                            if(myUser.getPlaces().contains(seasonPlacesList.get(i)))
-                            {
-                                //Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
+                if(userPlacesByLocation.containsKey(position)){
 
-                            }
-
-                        }
-
-                        break;
-                    }
-                    i++;
+                    Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
+                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                 }
+                else{
+
+                    Log.d(TAG,"onMapReady:about to execute asynk task");
+                    MapActivity.savePlaceTask savePlace = new MapActivity.savePlaceTask(getApplicationContext(),
+                                                                                        mapPlacesByLocation.get(position), marker);
+                    savePlace.execute();
+                }
+
                 return true;
             }
         });
 
-        //address can be null if google doesn´t find any place or if the geolocate service is no available
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        Intent i = new Intent();
+        i.putExtra(userKey ,myUser);
+        setResult(RESULT_OK, i);
+        super.onBackPressed();
+    }
+
+    private HashMap<LatLng, Place> indexPlaces(ArrayList<Place> places){
+
+        HashMap<LatLng, Place> result = new HashMap<>();
+
+        for(Place place : places){
+
+            result.put(new LatLng(place.getLatitude(), place.getLongitude()), place);
+        }
+
+        return result;
     }
 }
