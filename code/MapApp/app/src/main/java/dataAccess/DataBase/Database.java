@@ -99,9 +99,7 @@ public class Database {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                ArrayList<String> places = new ArrayList<String>();
-                places.add("nothing to show here");
-                SeePlacesController.changeToSeePlacesActivity(context,places);
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
         );
