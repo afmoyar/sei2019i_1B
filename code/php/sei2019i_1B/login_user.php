@@ -13,6 +13,7 @@ $result_usr = $connection -> query($query);
 
 if(mysqli_num_rows($result_usr) == 0){
 
+    $result_usr -> close();
     echo json_encode(array('error' => 0));
     exit();
 }
