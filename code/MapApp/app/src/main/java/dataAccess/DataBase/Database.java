@@ -74,8 +74,6 @@ public class Database {
 
         //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
 
-        RequestFuture<String> future = RequestFuture.newFuture();
-
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_place_by_id.php?id="+id+"", new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -84,7 +82,7 @@ public class Database {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        places.add(jsonObject.getString("latitude") + " " + jsonObject.getString("longitude") + " " + jsonObject.getString("name") + " " + jsonObject.getString("description") + " ");
+                        places.add("[" + jsonObject.getString("latitude") + "," + jsonObject.getString("longitude") + "] " + jsonObject.getString("country_name") + ", " + jsonObject.getString("name") + ": '" + jsonObject.getString("description") + "' ");
                     } catch (JSONException e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -101,7 +99,7 @@ public class Database {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
         );
