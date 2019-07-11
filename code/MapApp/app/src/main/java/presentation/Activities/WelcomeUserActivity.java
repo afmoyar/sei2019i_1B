@@ -54,8 +54,6 @@ public class WelcomeUserActivity extends AppCompatActivity {
             }
 
             Intent intent = new Intent(context, MapActivity.class);
-            System.out.println("***************************");
-            System.out.println(resultPair.first == null ? "is null" : "not null");
             intent.putExtra(userKey, user);
             intent.putExtra(placesKey, resultPair.first);
             startActivityForResult(intent, 1);
@@ -92,9 +90,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             mapButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Intent i = new Intent(getApplicationContext(), MapActivity.class);
-                    //i.putExtra("user",user);
-                    //startActivityForResult(i, 1);
+
                     getSeasonPlacesTask seasonPlacesTask = new getSeasonPlacesTask(getApplicationContext());
                     seasonPlacesTask.execute();
                 }

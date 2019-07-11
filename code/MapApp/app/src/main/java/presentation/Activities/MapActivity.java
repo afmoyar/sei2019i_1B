@@ -111,8 +111,6 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     //provitional LatLong for country, later this data will come from data base
     private static double lat=4.0000000;
     private static double longitud=-72.0000000;
-    //provisional user,
-    //private User myUser=new User("afmoyar","andres","1234");
     private User myUser;
     ArrayList<Place> seasonPlacesList=new ArrayList<>();
     private ArrayList<Marker> markerArrayList=new ArrayList<>();
@@ -132,11 +130,6 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
             seasonPlacesList = (ArrayList<Place>) getIntent().getExtras().get(placesKey);
         }
 
-        //provisional  places for the season
-        //Place bgta=new Place(4.71,-74.07,"Bogota","I live here lol","Colombia");
-        //Place mdll=new Place(6.24,-75.58,"Medellin","I  dont live here lmao","Colombia");
-        //seasonPlacesList.add(bgta);
-        //seasonPlacesList.add(mdll);
         Log.d(TAG,"initMap: initializing map");
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapActivity.this);
@@ -145,17 +138,23 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         Log.d(TAG,"onMapReady: map is ready");
         mMap=googleMap;
         MapController.moveCamera(mMap,new LatLng(lat,longitud),DEFAULT_ZOOM);
-        //putting markers on default demostration places
+
+        //putting markers on default demonstration places
         Marker marker;
-        for(Place place:seasonPlacesList)
-        {
+        for(Place place : seasonPlacesList) {
+
             marker=MapController.makeMarker(mMap,new LatLng(place.getLatitude(),place.getLongitude()),
                     place.getName()+", "+place.getCountryName());
-            if(myUser.getPlaces().contains(place))
+
+            if(myUser.getPlaces().contains(place)) {
+
                 marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            }
+
             markerArrayList.add(marker);
         }
 
