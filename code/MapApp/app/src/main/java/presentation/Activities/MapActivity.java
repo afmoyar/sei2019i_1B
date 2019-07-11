@@ -26,6 +26,7 @@ import businessLogic.Controllers.SeePlacesController;
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
 
+
 public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
 
     class savePlaceTask extends AsyncTask<Void, Void, ControlResult> {
