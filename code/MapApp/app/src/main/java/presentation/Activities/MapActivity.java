@@ -41,20 +41,20 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     class savePlaceTask extends AsyncTask<Void, Void, ControlResult> {
 
         private Context context;
-        private User user;
         private Place place;
         private String userId;
         private String latitude;
         private String longitude;
+        private Marker marker;
         private ProgressDialog progress;
 
-        savePlaceTask(Context context, Place place) {
+        savePlaceTask(Context context, Place place,Marker marker) {
 
             this.context = context;
             this.progress = new ProgressDialog(MapActivity.this);
-            this.user=myUser;
             this.place=place;
-            this.userId = user.getId();
+            this.marker=marker;
+            this.userId = myUser.getId();
             this.latitude = String.valueOf(place.getLatitude());
             this.longitude = String.valueOf(place.getLongitude());
         }
@@ -107,7 +107,8 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 case SUCCESS:
 
                     Toast.makeText(context, "Place saved successfully", Toast.LENGTH_SHORT).show();
-                    user.addPlace(place);
+                    myUser.addPlace(place);
+                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                     break;
             }
         }
@@ -169,18 +170,22 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                     {
                         m.showInfoWindow();
                         if(myUser.getPlaces().contains(seasonPlacesList.get(i)))
+                        {
                             Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
+                            m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                        }
+
                         else
                         {
                             Log.d(TAG,"onMapReady:about to execute asynk task");
                             MapActivity.savePlaceTask savePlace=
-                                    new MapActivity.savePlaceTask(getApplicationContext(),seasonPlacesList.get(i));
+                                    new MapActivity.savePlaceTask(getApplicationContext(),seasonPlacesList.get(i),m);
 
                             savePlace.execute();
                             if(myUser.getPlaces().contains(seasonPlacesList.get(i)))
                             {
                                 //Toast.makeText(getApplicationContext(),m.getTitle()+" saved",Toast.LENGTH_LONG).show();
-                                m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
                             }
 
                         }
