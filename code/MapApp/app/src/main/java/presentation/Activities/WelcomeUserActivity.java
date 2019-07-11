@@ -15,7 +15,6 @@ import com.example.mapapp.R;
 
 
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.MapController;
@@ -27,7 +26,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
     private static final String TAG = "WelcomeUserActivity";
     private static final int ERROR_DIALOG_REQUEST =9001;
-    private static User user;
+    private User user;
     private String id,name;
     private final String userKey = "user";
     private final String placesKey = "places";
@@ -55,8 +54,11 @@ public class WelcomeUserActivity extends AppCompatActivity {
             }
 
             Intent intent = new Intent(context, MapActivity.class);
+            System.out.println("***************************");
+            System.out.println(resultPair.first == null ? "is null" : "not null");
+            intent.putExtra(userKey, user);
             intent.putExtra(placesKey, resultPair.first);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
 
         Context context;
@@ -90,9 +92,11 @@ public class WelcomeUserActivity extends AppCompatActivity {
             mapButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(getApplicationContext(), MapActivity.class);
-                    i.putExtra("user",user);
-                    startActivityForResult(i, 1);
+                    //Intent i = new Intent(getApplicationContext(), MapActivity.class);
+                    //i.putExtra("user",user);
+                    //startActivityForResult(i, 1);
+                    getSeasonPlacesTask seasonPlacesTask = new getSeasonPlacesTask(getApplicationContext());
+                    seasonPlacesTask.execute();
                 }
             });
 

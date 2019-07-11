@@ -170,6 +170,4 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonArrayRequest);
     }
-
-    String mysteriousthing = null;
 }

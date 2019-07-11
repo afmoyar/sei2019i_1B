@@ -120,6 +120,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
     private HashMap<LatLng, Place> userPlacesByLocation;
     private HashMap<LatLng, Place> mapPlacesByLocation;
     private final String userKey = "user";
+    private final String placesKey = "places";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,14 +128,15 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         setContentView(R.layout.activity_map);
         if(getIntent().getExtras()!=null)
         {
-            myUser=(User) getIntent().getExtras().get("user");
+            myUser=(User) getIntent().getExtras().get(userKey);
+            seasonPlacesList = (ArrayList<Place>) getIntent().getExtras().get(placesKey);
         }
 
         //provisional  places for the season
-        Place bgta=new Place(4.71,-74.07,"Bogota","I live here lol","Colombia");
-        Place mdll=new Place(6.24,-75.58,"Medellin","I  dont live here lmao","Colombia");
-        seasonPlacesList.add(bgta);
-        seasonPlacesList.add(mdll);
+        //Place bgta=new Place(4.71,-74.07,"Bogota","I live here lol","Colombia");
+        //Place mdll=new Place(6.24,-75.58,"Medellin","I  dont live here lmao","Colombia");
+        //seasonPlacesList.add(bgta);
+        //seasonPlacesList.add(mdll);
         Log.d(TAG,"initMap: initializing map");
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapActivity.this);
