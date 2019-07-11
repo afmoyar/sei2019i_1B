@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import dataAccess.Models.Place;
 import dataAccess.Repositories.AdministratorRepository;
 import dataAccess.Repositories.PlaceRepository;
+import dataAccess.Repositories.UserRepository;
 import presentation.Activities.SeePlacesActivity;
 import presentation.Activities.WelcomeUserActivity;
 
@@ -27,5 +28,31 @@ public abstract class SeePlacesController {
         arrayList = places;
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
+    }
+    public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
+
+
+
+        ControlResult result = null;
+
+        switch (PlaceRepository.createUserPlace(context,userId,latitude,longitude)){
+
+            case SUCCES:
+
+                result = ControlResult.SUCCESS;
+                break;
+
+            case DB_ERROR:
+
+                result = ControlResult.SERVER_ERROR;
+                break;
+
+            case CONNECT_ERROR:
+
+                result = ControlResult.CONNECT_ERROR;
+                break;
+        }
+
+        return result;
     }
 }

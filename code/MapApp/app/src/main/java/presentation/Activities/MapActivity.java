@@ -1,9 +1,12 @@
 package presentation.Activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -26,11 +29,83 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.MapController;
+import businessLogic.Controllers.SeePlacesController;
+import businessLogic.Controllers.UserSignUpController;
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
 
 public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
+
+    class SignUpTask extends AsyncTask<Void, Void, ControlResult> {
+
+        private Context context;
+        private String userId;
+        private String latitude;
+        private String longitude;
+        private ProgressDialog progress;
+
+        SignUpTask(Context context, String userId, String latitude, String longitude) {
+
+            this.context = context;
+            this.progress = new ProgressDialog(MapActivity.this);
+            this.userId = userId;
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress.setMessage("Querying DB");
+            progress.setIndeterminate(false);
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setCancelable(false);
+            progress.show();
+        }
+
+        @Override
+        protected ControlResult doInBackground(Void... voids) {
+            ControlResult result = ControlResult.CONNECT_ERROR;
+
+            try {
+
+                result = SeePlacesController.insertUserPlace(this.context, userId, latitude, longitude);
+
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+            }
+
+            return result;
+
+        }
+
+        @Override
+        protected void onPostExecute(ControlResult result) {
+            progress.dismiss();
+
+            switch (result) {
+
+                case CONNECT_ERROR:
+
+                    Toast.makeText(context, "Error connecting to database", Toast.LENGTH_SHORT).show();
+                    break;
+
+
+                case SERVER_ERROR:
+
+                    Toast.makeText(context, "Couldn't save place. is it already saved?", Toast.LENGTH_LONG).show();
+                    break;
+
+                case SUCCESS:
+
+                    Toast.makeText(context, "Place saved successfully", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
     private static final String TAG = "MapActivity";
     private static final float  DEFAULT_ZOOM=4.3f;
     //provitional LatLong for country, later this data will come from data base
