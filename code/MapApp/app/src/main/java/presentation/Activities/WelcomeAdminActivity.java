@@ -34,9 +34,10 @@ public class WelcomeAdminActivity extends AppCompatActivity {
         admin_id.setText(id);
         admin_name.setText(name);
     }
+    /*
     @Override
     public void onBackPressed(){
-        //super.onBackPressed();
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("are you sure you want to close your account?")
@@ -47,6 +48,7 @@ public class WelcomeAdminActivity extends AppCompatActivity {
 
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -54,12 +56,12 @@ public class WelcomeAdminActivity extends AppCompatActivity {
 
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
 
 
     }
+    */
 }
 
 

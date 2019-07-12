@@ -117,6 +117,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
             user = (User) data.getExtras().get(userKey);
         }
     }
+    /*
     @Override
     public void onBackPressed(){
         //super.onBackPressed();
@@ -143,4 +144,5 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
 
     }
+    */
 }
