@@ -105,6 +105,81 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
             }
         }
     }
+
+    class deletePlaceTask extends AsyncTask<Void, Void, ControlResult> {
+
+        private Context context;
+        private Place place;
+        private String userId;
+        private String latitude;
+        private String longitude;
+        private Marker marker;
+        private ProgressDialog progress;
+
+        deletePlaceTask(Context context, Place place,Marker marker) {
+
+            this.context = context;
+            this.progress = new ProgressDialog(MapActivity.this);
+            this.place=place;
+            this.marker=marker;
+            this.userId = myUser.getId();
+            this.latitude = String.valueOf(place.getLatitude());
+            this.longitude = String.valueOf(place.getLongitude());
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.d(TAG,"onPreExecute: user id: "+userId+", lat: "+latitude+", long: "+longitude);
+            progress.setMessage("deleting place");
+            progress.setIndeterminate(false);
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setCancelable(false);
+            progress.show();
+        }
+
+        @Override
+        protected ControlResult doInBackground(Void... voids) {
+            ControlResult result = ControlResult.CONNECT_ERROR;
+
+            try {
+                result = SeePlacesController.deleteUserPlace(this.context, userId, latitude, longitude);
+
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+            }
+
+            return result;
+
+        }
+
+        @Override
+        protected void onPostExecute(ControlResult result) {
+            progress.dismiss();
+
+            switch (result) {
+
+                case CONNECT_ERROR:
+
+                    Toast.makeText(context, "Error connecting to database", Toast.LENGTH_SHORT).show();
+                    break;
+
+
+                case SERVER_ERROR:
+                    Toast.makeText(context, "Couldn't delete place,try again", Toast.LENGTH_LONG).show();
+                    break;
+
+                case SUCCESS:
+
+                    Toast.makeText(context, "Place deleted ,tap again to undo", Toast.LENGTH_SHORT).show();
+                    myUser.deletePlace(place);
+                    userPlacesByLocation.remove(new LatLng(place.getLatitude(), place.getLongitude()));
+                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    break;
+            }
+        }
+    }
     
     private static final String TAG = "MapActivity";
     private static final float  DEFAULT_ZOOM=4.3f;
@@ -166,9 +241,12 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 LatLng position = marker.getPosition();
 
                 if(userPlacesByLocation.containsKey(position)){
+                    MapActivity.deletePlaceTask deletePlace = new MapActivity.deletePlaceTask(getApplicationContext(),
+                            mapPlacesByLocation.get(position), marker);
+                    deletePlace.execute();
 
-                    Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
-                    marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    //Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
+                    //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                 }
                 else{
 

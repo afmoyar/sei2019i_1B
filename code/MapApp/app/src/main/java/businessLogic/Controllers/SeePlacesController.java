@@ -58,4 +58,31 @@ public abstract class SeePlacesController {
 
         return result;
     }
+    public static ControlResult deleteUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
+        Log.d(TAG,"deleteUserPlace");
+
+
+
+        ControlResult result = null;
+
+        switch (PlaceRepository.deleteUserPlace(context,userId,latitude,longitude)){
+
+            case SUCCES:
+
+                result = ControlResult.SUCCESS;
+                break;
+
+            case DB_ERROR:
+
+                result = ControlResult.SERVER_ERROR;
+                break;
+
+            case CONNECT_ERROR:
+
+                result = ControlResult.CONNECT_ERROR;
+                break;
+        }
+
+        return result;
+    }
 }
