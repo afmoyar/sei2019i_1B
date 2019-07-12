@@ -20,6 +20,9 @@ public class User implements Serializable {
     public void addPlace(Place place){
         places.add(place);
     }
+    public void deletePlace(Place place){
+        places.remove(place);
+    }
 
     public String getId() {
         return id;
