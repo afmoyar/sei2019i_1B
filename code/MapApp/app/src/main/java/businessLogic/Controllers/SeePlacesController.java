@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dataAccess.Models.Place;
 import dataAccess.Repositories.AdministratorRepository;
@@ -19,6 +22,18 @@ public abstract class SeePlacesController {
     private static final String TAG = "SeePlacesController";
     //ArrayList llamada en SeePlacesActivity
     public static ArrayList<String> arrayList;
+
+    public static HashMap<LatLng, Place> indexPlaces(ArrayList<Place> places){
+
+        HashMap<LatLng, Place> result = new HashMap<>();
+
+        for(Place place : places){
+
+            result.put(new LatLng(place.getLatitude(), place.getLongitude()), place);
+        }
+
+        return result;
+    }
 
     public static void getPlacesWithId(Context context, String id){
         PlaceRepository.findPlaceWithId(context,id);
