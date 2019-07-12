@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.Marker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import businessLogic.Controllers.AsyncTaskController;
 import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.MapController;
 import businessLogic.Controllers.SeePlacesController;
@@ -29,23 +30,27 @@ import dataAccess.Models.User;
 
 public class MapActivity extends AppCompatActivity implements  OnMapReadyCallback {
 
-    class savePlaceTask extends AsyncTask<Void, Void, ControlResult> {
+    class SavePlaceTask extends AsyncTask<Void, Void, ControlResult> {
 
         private Context context;
         private Place place;
+        private User user;
         private String userId;
         private String latitude;
         private String longitude;
         private Marker marker;
+        private HashMap<LatLng, Place> userPlacesByLocation;
         private ProgressDialog progress;
 
-        savePlaceTask(Context context, Place place,Marker marker) {
+        SavePlaceTask(Context context, User user, Place place, Marker marker, HashMap<LatLng, Place> userPlacesByLocation) {
 
             this.context = context;
-            this.progress = new ProgressDialog(MapActivity.this);
+            this.progress = new ProgressDialog(context);
+            this.user=user;
             this.place=place;
             this.marker=marker;
-            this.userId = myUser.getId();
+            this.userPlacesByLocation=userPlacesByLocation;
+            this.userId = user.getId();
             this.latitude = String.valueOf(place.getLatitude());
             this.longitude = String.valueOf(place.getLongitude());
         }
@@ -98,7 +103,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 case SUCCESS:
 
                     Toast.makeText(context, "Place saved successfully", Toast.LENGTH_SHORT).show();
-                    myUser.addPlace(place);
+                    user.addPlace(place);
                     userPlacesByLocation.put(new LatLng(place.getLatitude(), place.getLongitude()), place);
                     marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                     break;
@@ -106,7 +111,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         }
     }
 
-    class deletePlaceTask extends AsyncTask<Void, Void, ControlResult> {
+    class DeletePlaceTask extends AsyncTask<Void, Void, ControlResult> {
 
         private Context context;
         private Place place;
@@ -115,14 +120,18 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         private String longitude;
         private Marker marker;
         private ProgressDialog progress;
+        private HashMap<LatLng, Place> userPlacesByLocation;
+        private User user;
 
-        deletePlaceTask(Context context, Place place,Marker marker) {
+        DeletePlaceTask(Context context,User user, Place place,Marker marker,HashMap<LatLng, Place> userPlacesByLocation) {
 
             this.context = context;
-            this.progress = new ProgressDialog(MapActivity.this);
+            this.progress = new ProgressDialog(context);
             this.place=place;
+            this.user=user;
             this.marker=marker;
-            this.userId = myUser.getId();
+            this.userId = user.getId();
+            this.userPlacesByLocation=userPlacesByLocation;
             this.latitude = String.valueOf(place.getLatitude());
             this.longitude = String.valueOf(place.getLongitude());
         }
@@ -173,7 +182,7 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 case SUCCESS:
 
                     Toast.makeText(context, "Place deleted ,tap again to undo", Toast.LENGTH_SHORT).show();
-                    myUser.deletePlace(place);
+                    user.deletePlace(place);
                     userPlacesByLocation.remove(new LatLng(place.getLatitude(), place.getLongitude()));
                     marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     break;
@@ -241,8 +250,11 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 LatLng position = marker.getPosition();
 
                 if(userPlacesByLocation.containsKey(position)){
-                    MapActivity.deletePlaceTask deletePlace = new MapActivity.deletePlaceTask(getApplicationContext(),
-                            mapPlacesByLocation.get(position), marker);
+
+                      //MapActivity.DeletePlaceTask deletePlace = new MapActivity.DeletePlaceTask(MapActivity.this,myUser,
+                        //    mapPlacesByLocation.get(position), marker, userPlacesByLocation);
+                    AsyncTaskController.DeletePlaceTask deletePlace=new AsyncTaskController().new DeletePlaceTask(MapActivity.this,myUser,
+                                mapPlacesByLocation.get(position), marker, userPlacesByLocation);
                     deletePlace.execute();
 
                     //Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
@@ -251,8 +263,10 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 else{
 
                     Log.d(TAG,"onMapReady:about to execute asynk task");
-                    MapActivity.savePlaceTask savePlace = new MapActivity.savePlaceTask(getApplicationContext(),
-                                                                                        mapPlacesByLocation.get(position), marker);
+                    //MapActivity.SavePlaceTask savePlace = new SavePlaceTask(MapActivity. this,myUser,
+                      //      mapPlacesByLocation.get(position), marker,userPlacesByLocation);
+                    AsyncTaskController.SavePlaceTask savePlace=new AsyncTaskController().new SavePlaceTask(MapActivity. this,myUser,
+                            mapPlacesByLocation.get(position), marker,userPlacesByLocation);
                     savePlace.execute();
                 }
 
