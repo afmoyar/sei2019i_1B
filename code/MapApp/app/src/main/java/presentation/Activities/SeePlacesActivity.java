@@ -12,18 +12,24 @@ import com.example.mapapp.R;
 import java.util.ArrayList;
 
 import dataAccess.Models.Place;
-
-import static businessLogic.Controllers.SeePlacesController.arrayList;
+import dataAccess.Models.User;
 
 public class SeePlacesActivity extends AppCompatActivity {
     ListView listView;
+    private User myUser;
+    private ArrayList<String> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
+        myUser=(User) getIntent().getExtras().get("user");
+        ArrayList<Place> places = myUser.getPlaces();
+        arrayList = placestoString(places);
+
         listView = findViewById(R.id.listView);
+
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
@@ -36,5 +42,17 @@ public class SeePlacesActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private ArrayList<String> placestoString(ArrayList<Place> places){
+        ArrayList<String> arrayList = new ArrayList<String>();
+        if(!places.isEmpty()) {
+            for (Place place : places) {
+                arrayList.add("[" + place.getLatitude() + "," + place.getLongitude() + "] " + place.getCountryName() + ", " + place.getName() + ": '" + place.getDescription() + "' ");
+            }
+        }else{
+            arrayList.add("nothing to show here");
+        }
+        return arrayList;
     }
 }
