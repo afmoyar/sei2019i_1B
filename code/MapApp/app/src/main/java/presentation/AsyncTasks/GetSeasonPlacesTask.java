@@ -66,7 +66,7 @@ public class GetSeasonPlacesTask extends AsyncTask<Void, Void, Pair<ArrayList<Pl
         }
         else
         {
-            Toast.makeText(context,"Couldn't connesct to DB. Try again later.",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Couldn't connect to DB. Try again later.",Toast.LENGTH_LONG).show();
             return;
         }
 
