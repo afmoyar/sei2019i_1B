@@ -1,10 +1,8 @@
 package presentation.Activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
@@ -23,6 +21,7 @@ import businessLogic.Controllers.MapController;
 import businessLogic.Controllers.SeePlacesController;
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
+import presentation.AsyncTasks.GetSeasonPlacesTask;
 
 public class WelcomeUserActivity extends AppCompatActivity {
 
@@ -33,36 +32,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
     private final String userKey = "user";
     private final String placesKey = "places";
 
-    class getSeasonPlacesTask extends AsyncTask<Void, Void, Pair<ArrayList<Place>, ControlResult>> {
 
-        getSeasonPlacesTask(Context context) {
-
-            this.context = context;
-        }
-
-        @Override
-        protected Pair<ArrayList<Place>, ControlResult> doInBackground(Void... voids) {
-
-            return MapController.getSeasonPlaces(context);
-        }
-
-        @Override
-        protected void onPostExecute(Pair<ArrayList<Place>, ControlResult> resultPair){
-
-            if(resultPair.second == ControlResult.CONNECT_ERROR){
-
-                Toast.makeText(getApplicationContext(),"Couldn't connesct to DB. Try again later.",Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            Intent intent = new Intent(context, MapActivity.class);
-            intent.putExtra(userKey, user);
-            intent.putExtra(placesKey, resultPair.first);
-            startActivityForResult(intent, 1);
-        }
-
-        Context context;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +63,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    getSeasonPlacesTask seasonPlacesTask = new getSeasonPlacesTask(getApplicationContext());
+                    GetSeasonPlacesTask seasonPlacesTask = new GetSeasonPlacesTask(WelcomeUserActivity.this, getApplicationContext(),user,userKey,placesKey);
                     seasonPlacesTask.execute();
                 }
             });

@@ -132,10 +132,12 @@ public abstract class MapController
 
     public static Pair<ArrayList<Place>, ControlResult> getSeasonPlaces(Context context){
 
+        ControlResult result = ControlResult.CONNECT_ERROR;
         ArrayList<Place> places = null;
 
         try {
             places = PlaceRepository.getPlace(context);
+            result=ControlResult.SUCCESS;
         }
         catch (InterruptedException| ExecutionException e){
 
@@ -146,7 +148,7 @@ public abstract class MapController
             return  new Pair<>(places, ControlResult.CONNECT_ERROR);
         }
 
-        return  new Pair<>(places, ControlResult.SUCCESS);
+        return  new Pair<>(places, result);
     }
 
 }
