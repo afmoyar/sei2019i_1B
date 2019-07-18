@@ -20,7 +20,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -28,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import businessLogic.Controllers.AdminLoginController;
-import businessLogic.Controllers.SeePlacesController;
 
 
 public class Database {
@@ -127,43 +125,6 @@ public class Database {
         requestQueue.add(jsonArrayRequest);
 
         return future.get(3000, TimeUnit.MILLISECONDS);
-    }
-
-    public void findPlaceWithId(final Context context, final String id){
-
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_place_by_id.php?id="+id+"", new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                ArrayList<String> places = new ArrayList<String>();
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-                        places.add("[" + jsonObject.getString("latitude") + "," + jsonObject.getString("longitude") + "] " + jsonObject.getString("country_name") + ", " + jsonObject.getString("name") + ": '" + jsonObject.getString("description") + "' ");
-                    } catch (JSONException e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                if(places.isEmpty()){
-                    places.add("nothing to show here");
-                }
-
-                SeePlacesController.changeToSeePlacesActivity(context,places);
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonArrayRequest);
     }
 
     public void  AdminloginFunction (final Context context, final String id, final String password){

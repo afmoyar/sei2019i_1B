@@ -12,21 +12,28 @@ import com.example.mapapp.R;
 import java.util.ArrayList;
 
 import dataAccess.Models.Place;
-
-import static businessLogic.Controllers.SeePlacesController.arrayList;
+import dataAccess.Models.User;
+import presentation.ListViewAdapter;
 
 public class SeePlacesActivity extends AppCompatActivity {
-    ListView listView;
+    private ListView listView;
+    private User myUser;
+    private String[][] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
+        myUser=(User) getIntent().getExtras().get("user");
+        ArrayList<Place> places = myUser.getPlaces();
+        data = placestoString(places);
+
         listView = findViewById(R.id.listView);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
-        listView.setAdapter(arrayAdapter);
+
+        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        listView.setAdapter(new ListViewAdapter(this,data));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -36,5 +43,25 @@ public class SeePlacesActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private String[][] placestoString(ArrayList<Place> places){
+        String[][] data;
+        Place place;
+        if(!places.isEmpty()) {
+            data = new String[places.size()][3];
+            for (int i = 0;i < places.size(); i++) {
+                place = places.get(i);
+                data[i][0] = place.getName() + ", " + place.getCountryName();
+                data[i][1] = place.getDescription();
+                data[i][2] = "10";
+            }
+        }else{
+             data = new String[1][3];
+            data[0][0] = " ";
+            data[0][1] = "nothing to show here";
+            data[0][0] = "0";
+        }
+        return data;
     }
 }

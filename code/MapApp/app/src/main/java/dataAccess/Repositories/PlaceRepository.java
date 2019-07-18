@@ -22,10 +22,6 @@ public abstract class PlaceRepository {
     private static final Database database = new Database();
     private static final String TAG = "PlaceRepository";
 
-    public static void findPlaceWithId(final Context context, final String id){
-        database.findPlaceWithId(context, id);
-    }
-
     public static ResponseType createUserPlace(Context context, String userId,String latitude, String longitude) {
         Log.d(TAG, "createUserPlace");
 

@@ -20,8 +20,7 @@ import presentation.Activities.WelcomeUserActivity;
 public abstract class SeePlacesController {
 
     private static final String TAG = "SeePlacesController";
-    //ArrayList llamada en SeePlacesActivity
-    public static ArrayList<String> arrayList;
+
 
     public static HashMap<LatLng, Place> indexPlaces(ArrayList<Place> places){
 
@@ -46,6 +45,7 @@ public abstract class SeePlacesController {
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
+
     public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
         Log.d(TAG,"insertUserPlace");
 

@@ -71,7 +71,10 @@ public class WelcomeUserActivity extends AppCompatActivity {
             placesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SeePlacesController.getPlacesWithId(getApplicationContext(),textViewUserId.getText().toString());
+                    Intent i = new Intent(getApplicationContext(), SeePlacesActivity.class);
+                    i.putExtra(userKey, user);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(i);
                 }
             });
         }
