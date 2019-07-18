@@ -33,7 +33,7 @@ public abstract class SeePlacesController {
 
         return result;
     }
-    
+
     public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
         Log.d(TAG,"insertUserPlace");
 
