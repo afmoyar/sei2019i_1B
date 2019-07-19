@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS place(
     longitude double NOT NULL,
     name varchar(25),
     description varchar(255),
-    country_name varchar(25),
+    country_name varchar(25) NOT NULL,
     PRIMARY KEY (latitude, longitude),
     FOREIGN KEY fk_country(country_name)
     REFERENCES country(name),
@@ -64,3 +64,6 @@ INSERT INTO place VALUES(22.19, 113.54, "Macao", "La ciudad rica menos conocida"
 INSERT INTO place VALUES(39.90, 116.40, "Bejing", "Mucha gente", "China");
 INSERT INTO place VALUES(30.04, 31.23, "Cairo", "Bazares", "Egipto");
 INSERT INTO place VALUES(30.01, 31.20, "Giza", "Piramides", "Egipto");
+INSERT INTO `place` (`latitude`, `longitude`, `name`, `description`, `country_name`) VALUES ('3.52', '-76.54', 'Cali', 'Heaven´s sucursal', 'Colombia');
+INSERT INTO `place` (`latitude`, `longitude`, `name`, `description`, `country_name`) VALUES ('7.09', '-73.10', 'Bucaramanga', 'The pretty city', 'Colombia');
+INSERT INTO `place` (`latitude`, `longitude`, `name`, `description`, `country_name`) VALUES ('10.96', '-74.82', 'Barranquilla', 'Selection´s home', 'Colombia');
