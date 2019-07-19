@@ -60,7 +60,7 @@ public class SeePlacesActivity extends AppCompatActivity {
              data = new String[1][3];
             data[0][0] = " ";
             data[0][1] = "nothing to show here";
-            data[0][0] = "0";
+            data[0][2] = "0";
         }
         return data;
     }
