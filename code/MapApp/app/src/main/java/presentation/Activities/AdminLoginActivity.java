@@ -20,8 +20,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import businessLogic.Controllers.AdminLoginController;
+import presentation.AsyncTasks.AdminLogInTask;
 
 public class AdminLoginActivity extends AppCompatActivity {
+
+    private final String resultKey = "adminResult";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +37,18 @@ public class AdminLoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AdminLoginController.login(getApplicationContext(),admin_id.getText().toString(),admin_password.getText().toString());
+
+                AdminLogInTask logIn = new AdminLogInTask(AdminLoginActivity.this, getApplicationContext(),admin_id.getText().toString(),
+                        admin_password.getText().toString(),resultKey);
+
+                logIn.execute();
+
+                //AdminLoginController.login(getApplicationContext(),admin_id.getText().toString(),admin_password.getText().toString());
                 cleanEntries(admin_id, admin_password);
             }
         });
     }
+
     public void cleanEntries(TextView user_id,TextView user_password)
     {
         user_password.setText("");

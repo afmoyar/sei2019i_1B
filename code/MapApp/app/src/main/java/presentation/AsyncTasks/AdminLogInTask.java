@@ -8,13 +8,12 @@ import android.os.AsyncTask;
 import android.util.Pair;
 import android.widget.Toast;
 
+import businessLogic.Controllers.AdminLoginController;
 import businessLogic.Controllers.ControlResult;
-import businessLogic.Controllers.UserLoginController;
-import dataAccess.Models.User;
-import presentation.Activities.MainActivity;
-import presentation.Activities.WelcomeUserActivity;
+import dataAccess.Repositories.AdminLogInResult;
+import presentation.Activities.WelcomeAdminActivity;
 
-public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> {
+public class AdminLogInTask extends AsyncTask<Void, Void, Pair<AdminLogInResult, ControlResult>> {
 
     String id;
     String password;
@@ -23,7 +22,7 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
     String resultKey;
     private ProgressDialog progress;
 
-    public LogInTask(Activity activity,Context context, String id, String password, String resultKey){
+    public AdminLogInTask(Activity activity, Context context, String id, String password, String resultKey){
 
         this.context = context;
         this.id = id;
@@ -31,7 +30,6 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
         this.progress = new ProgressDialog(activity);
         this.resultKey=resultKey;
         this.activity=activity;
-
     }
 
     @Override
@@ -46,19 +44,19 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
     }
 
     @Override
-    protected Pair<User, ControlResult> doInBackground(Void... voids) {
+    protected Pair<AdminLogInResult, ControlResult> doInBackground(Void... voids) {
 
-        return UserLoginController.logIn(context, id, password);
+        return AdminLoginController.logIn(context, id, password);
     }
 
     @Override
-    protected void onPostExecute(Pair<User, ControlResult> result){
+    protected void onPostExecute(Pair<AdminLogInResult, ControlResult> result){
 
         progress.dismiss();
 
         if(result.second == ControlResult.SUCCESS) {
 
-            Intent intent = new Intent(context, WelcomeUserActivity.class);
+            Intent intent = new Intent(context, WelcomeAdminActivity.class);
             intent.putExtra(resultKey, result.first);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(intent);
@@ -68,7 +66,7 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
 
             case INPUT_ERROR:
 
-                Toast.makeText(context, "Wrong formating", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Wrong formatting", Toast.LENGTH_LONG).show();
                 break;
 
             case CONNECT_ERROR:
@@ -78,7 +76,8 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
 
             case SERVER_ERROR:
 
-                Toast.makeText(context, "User or password incorrect. Please try again", Toast.LENGTH_SHORT).show();
+                //System.out.println(result.first == null ? "very null******" : "not null++++++++");
+                Toast.makeText(context, "ID or password incorrect. Please try again", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
