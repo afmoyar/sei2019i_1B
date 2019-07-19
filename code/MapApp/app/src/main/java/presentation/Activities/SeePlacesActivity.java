@@ -1,11 +1,13 @@
 package presentation.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.mapapp.R;
 
@@ -19,6 +21,8 @@ public class SeePlacesActivity extends AppCompatActivity {
     private ListView listView;
     private User myUser;
     private String[][] data;
+    private final String placeKey = "placeName";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +41,15 @@ public class SeePlacesActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //String placeName = parent.getItemAtPosition(position).toString();
+                Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
+                //i.putExtra(placeKey, placeName);
+
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(i);
             }
         });
 

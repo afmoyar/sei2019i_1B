@@ -20,8 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="presentation.Activities.WelcomeUserActivity"></activity>
-        <activity android:name="presentation.Activities.WelcomeAdminActivity"></activity>
+        <activity android:name="presentation.Activities.PlaceDescriptionActivity"></activity>
+        <activity android:name="presentation.Activities.WelcomeUserActivity" />
+        <activity android:name="presentation.Activities.WelcomeAdminActivity" />
         <activity android:name="presentation.Activities.AdminLoginActivity" />
         <activity android:name="presentation.Activities.SignUpActivity" />
         <activity android:name="presentation.Activities.MapActivity" />
