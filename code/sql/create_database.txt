@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS administrator (
     id varchar(25) NOT NULL,
     name varchar(25),
     password varchar(25),
+    limit_date varchar(10),
     PRIMARY KEY (id)
 );
 
@@ -47,8 +48,8 @@ CREATE TABLE IF NOT EXISTS user_place(
     REFERENCES user(id)
 );
 
-INSERT INTO administrator VALUES ("Admin", "jose", "1234"); 
-INSERT INTO administrator VALUES ("Otro", "Otto", "4321"); 
+INSERT INTO administrator VALUES ("Admin", "jose", "1234", NULL); 
+INSERT INTO administrator VALUES ("Otro", "Otto", "4321", NULL); 
 INSERT INTO `user` (`id`, `name`, `password`) VALUES ('afmoyar', 'andres', '1234');
 INSERT INTO `user` (`id`, `name`, `password`) VALUES ('ccgarciab', 'cristian', '4321');
 INSERT INTO `country` (`name`, `admin_id`) VALUES ('Colombia', 'Admin');
