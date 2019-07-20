@@ -50,6 +50,7 @@ public class WelcomeAdminActivity extends AppCompatActivity {
 
             admin_id.setText(admin.getId());
             admin_name.setText(admin.getName());
+            Toast.makeText(WelcomeAdminActivity.this, admin.getCountries().get(0), Toast.LENGTH_SHORT).show();
         }
     }
     /*

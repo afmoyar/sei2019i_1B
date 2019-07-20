@@ -9,7 +9,7 @@ public class Administrator implements Serializable {
     String name;
     String password;
     String limitDate;
-    ArrayList<String> places;
+    ArrayList<String> countries;
 
     public Administrator(String id, String name, String password, String limitDate) {
 
@@ -17,7 +17,7 @@ public class Administrator implements Serializable {
         this.name = name;
         this.password = password;
         this.limitDate = limitDate;
-        this.places = new ArrayList<>();
+        this.countries = new ArrayList<>();
     }
 
     public String getId() {
@@ -52,11 +52,11 @@ public class Administrator implements Serializable {
         this.limitDate = limitDate;
     }
 
-    public ArrayList<String> getPlaces() {
-        return places;
+    public ArrayList<String> getCountries() {
+        return countries;
     }
 
-    public void setPlaces(ArrayList<String> places) {
-        this.places = places;
+    public void setCountries(ArrayList<String> countries) {
+        this.countries = countries;
     }
 }
