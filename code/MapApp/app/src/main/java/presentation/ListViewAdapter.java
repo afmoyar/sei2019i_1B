@@ -49,7 +49,8 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+
+        return data[position][0];
     }
 
     @Override

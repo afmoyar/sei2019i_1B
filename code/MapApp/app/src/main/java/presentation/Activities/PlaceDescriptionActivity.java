@@ -15,14 +15,15 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_description);
 
-        //place = getIntent().getExtras().get("placeName").toString();
-        //Toast.makeText(PlaceDescriptionActivity.this, place, Toast.LENGTH_SHORT).show();
-        //final TextView place_name = findViewById(R.id.placeName);
-        //place_name.setText(place);
-        Toast.makeText(PlaceDescriptionActivity.this, "Hola", Toast.LENGTH_SHORT).show();
+        place = getIntent().getExtras().get("placeName").toString();
+        Toast.makeText(PlaceDescriptionActivity.this, place, Toast.LENGTH_SHORT).show();
+        final TextView place_name = findViewById(R.id.placeName);
+        place_name.setText(place);
+        //Toast.makeText(PlaceDescriptionActivity.this, "Hola", Toast.LENGTH_SHORT).show();
      }
 
 }

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mapapp.R;
 
@@ -30,7 +31,7 @@ public class SeePlacesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_places);
 
         myUser=(User) getIntent().getExtras().get("user");
-        ArrayList<Place> places = myUser.getPlaces();
+        final ArrayList<Place> places = myUser.getPlaces();
         data = placestoString(places);
 
         listView = findViewById(R.id.listView);
@@ -44,10 +45,9 @@ public class SeePlacesActivity extends AppCompatActivity {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //String placeName = parent.getItemAtPosition(position).toString();
+                String placeName = (String) parent.getItemAtPosition(position);
                 Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
-                //i.putExtra(placeKey, placeName);
-
+                i.putExtra(placeKey, placeName);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(i);
             }
