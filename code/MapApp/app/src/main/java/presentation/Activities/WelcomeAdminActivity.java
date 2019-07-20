@@ -53,6 +53,8 @@ public class WelcomeAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SeeCountriesActivity.class);
+                i.putExtra("othercountries",other_countries);
+                i.putExtra("admincountries",admin.getCountries());
                 startActivity(i);
             }
         });

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
-import presentation.ListViewAdapter;
+import presentation.Adapters.ListViewAdapter;
 
 public class SeePlacesActivity extends AppCompatActivity {
     private ListView listView;
