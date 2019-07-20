@@ -35,4 +35,14 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline4"
         app:layout_constraintBottom_toTopOf="@id/guideline6"
         app:layout_constraintStart_toStartOf="@id/guideline5" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select"
+        app:layout_constrainedHeight="false"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
+        app:layout_constraintBottom_toTopOf="@id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
