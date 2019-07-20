@@ -106,14 +106,16 @@ public class Database {
 
     public JSONObject queryUser(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
 
-        RequestFuture<JSONObject> future = RequestFuture.newFuture();
-        JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
-        final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_login),params, future, future);
+        String url = context.getString(R.string.URL_login);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonRequest);
+        return queryByIDandPass(context, id, password, url);
+    }
 
-        return future.get(3000, TimeUnit.MILLISECONDS);
+    public JSONObject queryAdmin(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
+
+        String url = context.getString(R.string.URL_login_admin);
+
+        return queryByIDandPass(context, id, password, url);
     }
 
     public JSONArray queryCurrentSeasonPlaces(Context context) throws InterruptedException, ExecutionException, TimeoutException {
@@ -123,6 +125,21 @@ public class Database {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonArrayRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    private JSONObject queryByIDandPass(final Context context, final String id, final String password, final String url) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
+
+        final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST,
+                                                                BuildConfig.ip + url, params,
+                                                                     future, future);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonRequest);
 
         return future.get(3000, TimeUnit.MILLISECONDS);
     }

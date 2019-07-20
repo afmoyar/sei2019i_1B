@@ -13,11 +13,18 @@ import android.widget.Toast;
 
 import com.example.mapapp.R;
 
+import java.util.ArrayList;
+
 import businessLogic.Controllers.AdminLoginController;
+import dataAccess.Models.Administrator;
+import dataAccess.Repositories.AdminLogInResult;
 
 public class WelcomeAdminActivity extends AppCompatActivity {
 
     private String id,name;
+    private Administrator admin;
+    private ArrayList<String> other_countries;
+    private final String resultKey = "adminResult";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +36,21 @@ public class WelcomeAdminActivity extends AppCompatActivity {
 
         id = getIntent().getStringExtra("id");
         name = getIntent().getStringExtra("name");
+
         final TextView admin_id = (TextView) findViewById(R.id.adminid);
         final TextView admin_name = (TextView) findViewById(R.id.adminName);
-        admin_id.setText(id);
-        admin_name.setText(name);
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null){
+
+            AdminLogInResult result = (AdminLogInResult) extras.get(resultKey);
+            admin = result.admin;
+            other_countries = result.countries;
+
+            admin_id.setText(admin.getId());
+            admin_name.setText(admin.getName());
+        }
     }
     /*
     @Override

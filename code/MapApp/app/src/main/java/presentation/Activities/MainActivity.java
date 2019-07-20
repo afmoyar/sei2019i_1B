@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                LogInTask logIn = new LogInTask(MainActivity.this,getApplicationContext(),user_id.getText().toString(),
+                LogInTask logIn = new LogInTask(MainActivity.this, getApplicationContext(),user_id.getText().toString(),
                                                 user_password.getText().toString(),resultKey);
 
                 logIn.execute();
