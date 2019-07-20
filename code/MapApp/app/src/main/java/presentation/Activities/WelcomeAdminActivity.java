@@ -1,8 +1,10 @@
 package presentation.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,9 @@ public class WelcomeAdminActivity extends AppCompatActivity {
         final TextView admin_id = (TextView) findViewById(R.id.adminid);
         final TextView admin_name = (TextView) findViewById(R.id.adminName);
 
+        final Button countries = (Button) findViewById(R.id.seecountries);
+        final Button date = (Button) findViewById(R.id.changedate);
+
         Bundle extras = getIntent().getExtras();
 
         if(extras != null){
@@ -43,6 +48,22 @@ public class WelcomeAdminActivity extends AppCompatActivity {
             admin_id.setText(admin.getId());
             admin_name.setText(admin.getName());
         }
+
+        countries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SeeCountriesActivity.class);
+                startActivity(i);
+            }
+        });
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AdminEventDateActivity.class);
+                startActivity(i);
+            }
+        });
     }
     /*
     @Override
