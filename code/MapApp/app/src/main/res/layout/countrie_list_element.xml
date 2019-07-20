@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="300sp" />
+        app:layout_constraintGuide_begin="320sp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline6"
@@ -46,14 +46,15 @@
         app:layout_constraintBottom_toTopOf="@id/guideline6"
         app:layout_constraintStart_toStartOf="@id/guideline5" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
+    <TextView
+        android:id="@+id/season"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select"
-        android:textColor="#F3F1F2"
-        app:layout_constrainedHeight="false"
-        app:layout_constraintBottom_toBottomOf="@id/guideline6"
+        android:fontFamily="cursive"
+        android:text="TextView"
+        android:textColor="#FFC107"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/guideline6"
         app:layout_constraintEnd_toEndOf="@id/guideline7" />
+
 </android.support.constraint.ConstraintLayout>

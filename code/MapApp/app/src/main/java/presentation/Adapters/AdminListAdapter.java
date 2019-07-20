@@ -14,23 +14,23 @@ import java.util.ArrayList;
 public class AdminListAdapter extends BaseAdapter {
 
     private  static LayoutInflater inflater = null;
-    ArrayList<String> countries;
+    String[][] data;
 
-    public AdminListAdapter (Context context, ArrayList<String> lol){
+    public AdminListAdapter (Context context, String[][] data){
 
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        countries = lol;
+        this.data = data;
 
     }
 
     @Override
     public int getCount() {
-        return countries.size();
+        return data.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return countries.get(position);
+        return data[position][0];
     }
 
     @Override
@@ -41,9 +41,11 @@ public class AdminListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = inflater.inflate(R.layout.countrie_list_element, null);
-        TextView wasa = view.findViewById(R.id.contryname);
+        TextView country = view.findViewById(R.id.contryname);
+        TextView season = view.findViewById(R.id.season);
 
-        wasa.setText(countries.get(position));
+        country.setText(data[position][0]);
+        season.setText(data[position][1]);
 
         return view;
     }
