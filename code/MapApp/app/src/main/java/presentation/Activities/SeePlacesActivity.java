@@ -46,8 +46,11 @@ public class SeePlacesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String placeName = (String) parent.getItemAtPosition(position);
+                TextView placeDescriptionTV = parent.findViewById(R.id.description);
+                String placeInfo = placeDescriptionTV.toString();
                 Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
                 i.putExtra(placeKey, placeName);
+                i.putExtra("placeDescription", placeInfo);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(i);
             }

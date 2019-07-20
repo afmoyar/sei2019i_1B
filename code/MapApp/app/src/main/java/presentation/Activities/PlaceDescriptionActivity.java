@@ -12,7 +12,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
 
     private String place;
-
+    private String placeDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -20,9 +20,13 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place_description);
 
         place = getIntent().getExtras().get("placeName").toString();
-        Toast.makeText(PlaceDescriptionActivity.this, place, Toast.LENGTH_SHORT).show();
+        placeDescription = getIntent().getExtras().get("placeDescription").toString();
+
+        //Toast.makeText(PlaceDescriptionActivity.this, place, Toast.LENGTH_SHORT).show();
+        Toast.makeText(PlaceDescriptionActivity.this, placeDescription, Toast.LENGTH_SHORT).show();
         final TextView place_name = findViewById(R.id.placeName);
         place_name.setText(place);
+
         //Toast.makeText(PlaceDescriptionActivity.this, "Hola", Toast.LENGTH_SHORT).show();
      }
 
