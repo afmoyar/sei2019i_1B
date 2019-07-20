@@ -41,7 +41,7 @@ public class AdminListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = inflater.inflate(R.layout.countrie_list_element, null);
-        TextView wasa = view.findViewById(R.id.textView15);
+        TextView wasa = view.findViewById(R.id.contryname);
 
         wasa.setText(countries.get(position));
 
