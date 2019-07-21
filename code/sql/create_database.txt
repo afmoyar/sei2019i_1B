@@ -59,6 +59,5 @@ INSERT INTO `country` VALUES("Francia", NULL);
 INSERT INTO `country` VALUES("Egipto", NULL);
 INSERT INTO place VALUES(48.85, 2.35, "Paris", "Hon Hon Hon", "Francia");
 INSERT INTO place VALUES(43.29, 5.37, "Marsella", "El himno mas bonito", "Francia");
-INSERT INTO place VALUES(39.90, 116.40, "Bejing", "Mucha gente", "China");
 INSERT INTO place VALUES(30.04, 31.23, "Cairo", "Bazares", "Egipto");
 INSERT INTO place VALUES(30.01, 31.20, "Giza", "Piramides", "Egipto");
