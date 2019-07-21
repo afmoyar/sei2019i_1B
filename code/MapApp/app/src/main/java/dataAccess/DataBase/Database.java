@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import businessLogic.Controllers.AdminLoginController;
+import dataAccess.AdminUpdatePayload;
 
 
 public class Database {
@@ -170,5 +171,30 @@ public class Database {
         );
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonArrayRequest);
+    }
+
+    public String updateAdminCountries(Context context, final AdminUpdatePayload payload) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+
+        StringRequest request = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user_place), future, future) {
+
+            @Override
+            public byte[] getBody() {
+
+                return payload.toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+
+                return "application/json";
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(request);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
     }
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
+import dataAccess.AdminUpdatePayload;
 import dataAccess.DataBase.Database;
 import dataAccess.Models.Administrator;
 import dataAccess.Models.Place;
@@ -43,5 +44,23 @@ public abstract class AdministratorRepository {
         System.out.println(loginResult.toString());
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         return gson.fromJson(loginResult.toString(), AdminLogInResult.class);
+    }
+
+    public static ResponseType updateAdminCountries(Context context, AdminUpdatePayload payload){
+
+        ResponseType response = ResponseType.CONNECT_ERROR;
+
+        try{
+
+            String stringResponse = database.updateAdminCountries(context, payload);
+            response = stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
+        }
+        catch (TimeoutException e){}
+        catch (InterruptedException | ExecutionException e){
+
+            e.printStackTrace();
+        }
+
+        return  response;
     }
 }
