@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS place(
 
 CREATE TABLE IF NOT EXISTS user_place(
     user_id varchar(25),
+    rating int,
+    comment varchar(200),
     place_latitude double,
     place_longitude double,
     PRIMARY KEY (user_id, place_latitude, place_longitude),

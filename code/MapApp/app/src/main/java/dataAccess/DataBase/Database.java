@@ -57,6 +57,33 @@ public class Database {
 
         return future.get(3000, TimeUnit.MILLISECONDS);
     }
+
+    public String updateUserPlace (final Context context, final String userId, final String comment, final String rating, final String place_latitude, final String place_longitude) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+        Log.d(TAG,"updateUserPlace");
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_update_user_place), future, future)
+        {
+            @Override
+            //HashMap with the data to search the row to update into the database
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("id",userId);
+                params.put("comment",comment);
+                params.put("rating",rating);
+                params.put("place_latitude",place_latitude);
+                params.put("place_longitude",place_longitude);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
     public String deleteUserPlace (final Context context, final String userId, final String latitude, final String longitude) throws InterruptedException, ExecutionException, TimeoutException {
 
         RequestFuture<String> future = RequestFuture.newFuture();

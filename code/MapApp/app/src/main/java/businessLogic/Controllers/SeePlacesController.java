@@ -61,6 +61,35 @@ public abstract class SeePlacesController {
 
         return result;
     }
+
+    public static ControlResult updateUserPlace(Context context, String userId,String comment, String rating, String place_latitude, String place_longitude) throws InterruptedException {
+        Log.d(TAG,"updateUserPlace");
+
+
+
+        ControlResult result = null;
+
+        switch (PlaceRepository.updateUserPlace(context,userId,comment,rating, place_latitude, place_longitude)){
+
+            case SUCCES:
+
+                result = ControlResult.SUCCESS;
+                break;
+
+            case DB_ERROR:
+
+                result = ControlResult.SERVER_ERROR;
+                break;
+
+            case CONNECT_ERROR:
+
+                result = ControlResult.CONNECT_ERROR;
+                break;
+        }
+
+        return result;
+    }
+
     public static ControlResult deleteUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
         Log.d(TAG,"deleteUserPlace");
 

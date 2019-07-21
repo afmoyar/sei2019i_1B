@@ -51,6 +51,8 @@ public class SeePlacesActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
                     i.putExtra(placeKey, placeName);
                     i.putExtra("placeDescription", placeInfo);
+                    i.putExtra("user", myUser);
+                    i.putExtra("place", places.get(position));
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplicationContext().startActivity(i);
                 }else{

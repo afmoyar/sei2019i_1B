@@ -11,6 +11,8 @@ public class Place implements Serializable {
     double longitude;
     String name;
     String description;
+    int rating;
+    String comment;
 
     @SerializedName("country_name")
     String countryName;
@@ -22,6 +24,8 @@ public class Place implements Serializable {
         this.name = name;
         this.description = description;
         this.countryName = countryName;
+        this.comment = null;
+        this.rating = 0;
     }
 
     public Place(LatLng location, String name, String description, String countryName) {
@@ -31,6 +35,24 @@ public class Place implements Serializable {
         this.name = name;
         this.description = description;
         this.countryName = countryName;
+        this.comment = null;
+        this.rating = 0;
+}
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public double getLatitude() {
