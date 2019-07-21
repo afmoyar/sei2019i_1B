@@ -6,8 +6,40 @@
     android:layout_height="match_parent"
     tools:context="presentation.Activities.SeeCountriesActivity">
 
-    <ListView
-        android:id="@+id/countrieslist"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/countrieslist"
+            android:layout_width="match_parent"
+            android:layout_height="685dp"
+            android:layout_marginBottom="268dp">
+
+        </ListView>
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
