@@ -40,15 +40,12 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         Button commentButton = findViewById(R.id.CommentButton);
         commentButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-              
-                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(getApplicationContext(),user,currentPlace,"comentario de prueba", 10);
-                updatePlaceTask.execute();
-              
                 Intent i = new Intent(getApplicationContext(), CommentActivity.class);
+                i.putExtra("Place", currentPlace);
+                i.putExtra("User", user);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(i);
             }
-
         });
     }
 }

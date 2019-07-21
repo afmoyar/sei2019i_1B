@@ -50,7 +50,7 @@ public class SeePlacesActivity extends AppCompatActivity {
                   
                     String placeInfo = data[position][1];
 
-                    TextView placeDescriptionTV = view.findViewById(R.id.description);
+                    //TextView placeDescriptionTV = view.findViewById(R.id.description);
 
                     Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
                     i.putExtra(placeKey, placeName);

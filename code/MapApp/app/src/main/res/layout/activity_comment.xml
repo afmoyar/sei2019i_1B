@@ -43,11 +43,13 @@
             android:layout_height="wrap_content"
             android:text="Type your comment  about this place:" />
 
-        <TextView
+        <EditText
             android:id="@+id/userComment"
             android:layout_width="match_parent"
-            android:layout_height="152dp"
-            android:hint="Your comment goes right here" />
+            android:layout_height="125dp"
+            android:ems="10"
+            android:hint="your comment goes right here"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/saveComment"
