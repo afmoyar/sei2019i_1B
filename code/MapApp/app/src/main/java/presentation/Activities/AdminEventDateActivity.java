@@ -69,6 +69,7 @@ public class AdminEventDateActivity extends AppCompatActivity {
                     admindate.setText(dateFormat.format(addate));
                     String dat = year.getText().toString()+"/"+month.getText().toString()+"/"+day.getText().toString();
                     updateadmin(dat);
+                    WelcomeAdminActivity.admin.setLimitDate(dat);
                 }
             }
         });
