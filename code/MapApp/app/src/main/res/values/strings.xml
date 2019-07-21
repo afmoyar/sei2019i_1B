@@ -4,7 +4,6 @@
     <string name="URL_create_user">/sei2019i_1B/create_user.php</string>
     <string name="URL_login">/sei2019i_1B/login_user.php</string>
     <string name="URL_login_admin">/sei2019i_1B/login_admin.php</string>
-    <string name="URL_update_countries">/sei2019i_1B/update_country_selection.php</string>
     <string name="URL_create_user_place">/sei2019i_1B/create_user-place.php</string>
     <string name="URL_delete_user_place">/sei2019i_1B/delete_user-place.php</string>
 </resources>
