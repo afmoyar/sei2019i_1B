@@ -19,8 +19,8 @@ import dataAccess.Repositories.AdminLogInResult;
 public class WelcomeAdminActivity extends AppCompatActivity {
 
     private String id,name;
-    private Administrator admin;
-    private ArrayList<String> other_countries;
+    public static Administrator admin;
+    public static ArrayList<String> other_countries;
     private final String resultKey = "adminResult";
 
     @Override

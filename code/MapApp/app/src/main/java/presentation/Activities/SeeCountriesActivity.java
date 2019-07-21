@@ -2,8 +2,11 @@ package presentation.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.mapapp.R;
 
@@ -32,13 +35,42 @@ public class SeeCountriesActivity extends AppCompatActivity {
 
 
         listView.setAdapter(new AdminListAdapter(this,data));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                updateView(position);
+            }
+        });
+    }
+
+    private void updateView(int index){
+        View v = listView.getChildAt(index - listView.getFirstVisiblePosition());
+
+        if(v == null)
+            return;
+
+        TextView someText = (TextView) v.findViewById(R.id.season);
+        TextView someText2 = (TextView) v.findViewById(R.id.contryname);
+        if(someText.getText().toString() == "OffSeason"){
+            someText.setText("OnSeason");
+            WelcomeAdminActivity.other_countries.remove(WelcomeAdminActivity.other_countries.indexOf(someText2.getText().toString()));
+            admin_countries.add(someText2.getText().toString());
+            WelcomeAdminActivity.admin.setCountries(admin_countries);
+        }else{
+            someText.setText("OffSeason");
+            admin_countries.remove(admin_countries.indexOf(someText2.getText().toString()));
+            WelcomeAdminActivity.admin.setCountries(admin_countries);
+            WelcomeAdminActivity.other_countries.add(someText2.getText().toString());
+        }
+
     }
 
     private String[][] placestoString(){
         String[][] data;
         int x = 0;
+        int y = 1;
 
-        if(other_countries.size() >0 || admin_countries.size() >0) {
+        if(other_countries.size() > 0 || admin_countries.size() >0) {
 
             data = new String[other_countries.size()+admin_countries.size()][2];
             for (int i = 0;i < other_countries.size(); i++) {
@@ -46,9 +78,12 @@ public class SeeCountriesActivity extends AppCompatActivity {
                 data[i][1] = "OffSeason";
                 x = i;
             }
+            if(other_countries.size() == 0){
+                y = 0;
+            }
             for (int i = 0;i < admin_countries.size(); i++) {
-                data[i+x+1][0] = admin_countries.get(i);
-                data[i+x+1][1] = "OnSeason";
+                data[i+x+y][0] = admin_countries.get(i);
+                data[i+x+y][1] = "OnSeason";
             }
 
         }else{
