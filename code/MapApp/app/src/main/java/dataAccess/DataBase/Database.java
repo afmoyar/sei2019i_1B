@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mapapp.R;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -177,12 +178,19 @@ public class Database {
 
         RequestFuture<String> future = RequestFuture.newFuture();
 
-        StringRequest request = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_create_user_place), future, future) {
+        final Gson gson = new Gson();
+        final String json = gson.toJson(payload);
+
+        StringRequest request = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_country_selection.php", future, future) {
 
             @Override
             public byte[] getBody() {
 
-                return payload.toString().getBytes();
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+                System.out.println("Sent: " + json.toString());
+                System.out.println("---------------------------------------------");
+
+                return json.toString().getBytes();
             }
 
             @Override
@@ -195,6 +203,12 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(request);
 
-        return future.get(3000, TimeUnit.MILLISECONDS);
+        String result = future.get(3000, TimeUnit.MILLISECONDS);
+
+        System.out.println("****************************************");
+        System.out.println("got: " + result);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        return result;
     }
 }

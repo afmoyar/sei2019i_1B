@@ -5,7 +5,7 @@ include 'connection.php';
 $request = json_decode(file_get_contents('php://input'), true);
 
 $id = $request['id'];
-$unselect = $request['unselect'];
+$drop = $request['drop'];
 $select = $request['select'];
 
 if(!empty($select)){
@@ -22,11 +22,11 @@ if(!empty($select)){
     $result = mysqli_query($connection, $query) or die (mysqli_error());
 }
 
-if(!empty($unselect)){
+if(!empty($drop)){
 
-    $condition = "name = \"$unselect[0]\"";
+    $condition = "name = \"$drop[0]\"";
 
-    foreach(array_slice($unselect, 1) as $country){
+    foreach(array_slice($drop, 1) as $country){
 
         $condition .= " OR name = \"$country\"";
     }

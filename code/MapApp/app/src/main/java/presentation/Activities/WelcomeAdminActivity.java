@@ -14,6 +14,7 @@ import com.example.mapapp.R;
 import java.util.ArrayList;
 
 import dataAccess.Models.Administrator;
+import dataAccess.Models.User;
 import dataAccess.Repositories.AdminLogInResult;
 
 public class WelcomeAdminActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class WelcomeAdminActivity extends AppCompatActivity {
     public static Administrator admin;
     public static ArrayList<String> other_countries;
     private final String resultKey = "adminResult";
+    private static AdminLogInResult result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class WelcomeAdminActivity extends AppCompatActivity {
 
         if(extras != null){
 
-            AdminLogInResult result = (AdminLogInResult) extras.get(resultKey);
+            result = (AdminLogInResult) extras.get(resultKey);
             admin = result.admin;
             other_countries = result.countries;
 
@@ -53,9 +55,8 @@ public class WelcomeAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SeeCountriesActivity.class);
-                i.putExtra("othercountries",other_countries);
-                i.putExtra("admincountries",admin.getCountries());
-                startActivity(i);
+                i.putExtra(resultKey, result);
+                startActivityForResult(i, 1);
             }
         });
 
@@ -66,6 +67,17 @@ public class WelcomeAdminActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+
+            result = (AdminLogInResult) data.getExtras().get(resultKey);
+            System.out.println();
+        }
     }
     /*
     @Override
