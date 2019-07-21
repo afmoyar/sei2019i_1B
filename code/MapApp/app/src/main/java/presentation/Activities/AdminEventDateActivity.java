@@ -83,7 +83,6 @@ public class AdminEventDateActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "invalid date", Toast.LENGTH_SHORT).show();
             return false;
         }else{
-            Toast.makeText(getApplicationContext(), "event date changed", Toast.LENGTH_SHORT).show();
             addate = date;
             return true;
         }
