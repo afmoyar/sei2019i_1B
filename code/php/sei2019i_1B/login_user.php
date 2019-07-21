@@ -33,7 +33,7 @@ $query = "SELECT * FROM place INNER JOIN user_place ON place.latitude = user_pla
 
 $result_place = $connection -> query($query);
 
-$fields = array("longitude", "latitude", "name", "description", "country_name");
+$fields = array("longitude", "latitude", "name", "description", "country_name", "comment", "rating");
 
 $response["places"] = array();
 
