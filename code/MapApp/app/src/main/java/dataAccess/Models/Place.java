@@ -28,6 +28,17 @@ public class Place implements Serializable {
         this.rating = 0;
     }
 
+    public Place(double latitude, double longitude, String name, String description, String countryName, String comment, int rating) {
+
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.name = name;
+        this.description = description;
+        this.countryName = countryName;
+        this.comment = comment;
+        this.rating = rating;
+    }
+
     public Place(LatLng location, String name, String description, String countryName) {
 
         this.latitude = location.latitude;
@@ -38,6 +49,17 @@ public class Place implements Serializable {
         this.comment = null;
         this.rating = 0;
 }
+
+    public Place(LatLng location, String name, String description, String countryName, String comment, int rating) {
+
+        this.latitude = location.latitude;
+        this.longitude = location.longitude;
+        this.name = name;
+        this.description = description;
+        this.countryName = countryName;
+        this.comment = comment;
+        this.rating = rating;
+    }
 
     public int getRating() {
         return rating;

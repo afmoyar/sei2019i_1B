@@ -20,6 +20,8 @@ import presentation.AsyncTasks.UpdatePlaceTask;
 public class CommentActivity extends AppCompatActivity {
     private User user;
     private Place currentPlace;
+    private String placeName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,12 +30,21 @@ public class CommentActivity extends AppCompatActivity {
         final TextView userComment = findViewById(R.id.userComment);
         user = (User) getIntent().getExtras().get("User");
         currentPlace = (Place) getIntent().getExtras().get("Place");
+        placeName = getIntent().getExtras().get("placeName").toString();
 
         Button saveButton = findViewById(R.id.saveComment);
         saveButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), 10);
+                currentPlace.setComment(userComment.getText().toString());
                 updatePlaceTask.execute();
+
+                Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
+                i.putExtra("placeName", placeName);
+                i.putExtra("user", user);
+                i.putExtra("place", currentPlace);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(i);
             }
 
         });

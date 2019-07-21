@@ -18,7 +18,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
 
     private String place;
-    private String placeDescription;
     private User user;
     private Place currentPlace;
     @Override
@@ -28,21 +27,30 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place_description);
 
         place = getIntent().getExtras().get("placeName").toString();
-        placeDescription = getIntent().getExtras().get("placeDescription").toString();
         user=(User) getIntent().getExtras().get("user");
         currentPlace=(Place) getIntent().getExtras().get("place");
 
+        Button commentButton = findViewById(R.id.CommentButton);
+
         final TextView place_name = findViewById(R.id.placeName);
         final TextView place_description = findViewById(R.id.placeDescription);
-        place_name.setText(place);
-        place_description.setText(placeDescription);
+        final TextView user_comment = findViewById(R.id.commentId);
 
-        Button commentButton = findViewById(R.id.CommentButton);
+
+        place_name.setText(place);
+        place_description.setText(currentPlace.getDescription());
+
+        if(currentPlace.getComment() != null) {
+            user_comment.setText(currentPlace.getComment());
+            commentButton.setText("EDIT COMMENT");
+        }
+
         commentButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), CommentActivity.class);
                 i.putExtra("Place", currentPlace);
                 i.putExtra("User", user);
+                i.putExtra("placeName", place);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(i);
             }
