@@ -49,7 +49,6 @@ CREATE TABLE IF NOT EXISTS user_place(
 );
 
 INSERT INTO administrator VALUES ("Admin", "jose", "1234", "2017/07/12"); 
-INSERT INTO administrator VALUES ("Otro", "Otto", "4321", NULL); 
 INSERT INTO `user` (`id`, `name`, `password`) VALUES ('afmoyar', 'andres', '1234');
 INSERT INTO `user` (`id`, `name`, `password`) VALUES ('ccgarciab', 'cristian', '4321');
 INSERT INTO `country` (`name`, `admin_id`) VALUES ('Colombia', 'Admin');

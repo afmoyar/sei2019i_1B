@@ -7,6 +7,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.mapapp.BuildConfig;
 import com.example.mapapp.R;
 
 import java.text.DateFormat;
@@ -14,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdminEventDateActivity extends AppCompatActivity {
 
@@ -57,6 +67,8 @@ public class AdminEventDateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(true == verifydate(Integer.parseInt(year.getText().toString()),Integer.parseInt(month.getText().toString())-1,Integer.parseInt(day.getText().toString()))){
                     admindate.setText(dateFormat.format(addate));
+                    String dat = year.getText().toString()+"/"+month.getText().toString()+"/"+day.getText().toString();
+                    updateadmin(dat);
                 }
             }
         });
@@ -73,7 +85,6 @@ public class AdminEventDateActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "event date changed", Toast.LENGTH_SHORT).show();
             addate = date;
-            String dat = Integer.toString(year)+"/"+Integer.toString(month)+"/"+Integer.toString(day);
             return true;
         }
 
@@ -83,5 +94,29 @@ public class AdminEventDateActivity extends AppCompatActivity {
     public String[] split (String date){
         String[] chain = date.split("/",3);
         return chain;
+    }
+
+    public void updateadmin(final String date12){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_admin.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "succesfull update", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "error conecting", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String,String>();
+                parametros.put("limit_date", date12);
+                return parametros;
+
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
     }
 }
