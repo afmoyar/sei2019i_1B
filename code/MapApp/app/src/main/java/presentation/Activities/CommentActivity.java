@@ -21,6 +21,11 @@ public class CommentActivity extends AppCompatActivity {
     private User user;
     private Place currentPlace;
     private String placeName;
+    private final String userKey = "user";
+    private final String currentPlaceKey = "place";
+    private final String placeNameKey = "placeName";
+    private final String placeIndexKey = "placeIndex";
+    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,29 +33,38 @@ public class CommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comment);
 
         final TextView userComment = findViewById(R.id.userComment);
-        user = (User) getIntent().getExtras().get("User");
-        currentPlace = (Place) getIntent().getExtras().get("Place");
-        placeName = getIntent().getExtras().get("placeName").toString();
+        user = (User) getIntent().getExtras().get(userKey);
+        currentPlace = (Place) getIntent().getExtras().get(currentPlaceKey);
+        placeName = getIntent().getExtras().get(placeNameKey).toString();
+        index = getIntent().getIntExtra(placeIndexKey, 0);
 
         Button saveButton = findViewById(R.id.saveComment);
         saveButton.setOnClickListener(new View.OnClickListener(){
+
             public void onClick(View v) {
-                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), 10);
+
+                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), 10, index);
                 currentPlace.setComment(userComment.getText().toString());
                 updatePlaceTask.execute();
 
-                Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
-                i.putExtra("placeName", placeName);
-                i.putExtra("user", user);
-                i.putExtra("place", currentPlace);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(i);
+                onBackPressed();
             }
 
         });
 
 
 
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        Intent i = new Intent();
+        i.putExtra(userKey ,user);
+        i.putExtra(currentPlaceKey, currentPlace);
+        i.putExtra(placeNameKey, placeName);
+        setResult(RESULT_OK, i);
+        super.onBackPressed();
     }
 }
 /*

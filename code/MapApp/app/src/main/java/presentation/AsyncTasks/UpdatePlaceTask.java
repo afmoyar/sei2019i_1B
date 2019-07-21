@@ -27,8 +27,9 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
     private User user;
     private String place_latitude;
     private String place_longitude;
+    private int index;
 
-    public UpdatePlaceTask (Context context,User user, Place place, String comment, int rating) {
+    public UpdatePlaceTask (Context context,User user, Place place, String comment, int rating, int index) {
 
         this.context = context;
         this.progress = new ProgressDialog(context);
@@ -39,6 +40,7 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
         this.rating = String.valueOf(rating);
         this.place_latitude = String.valueOf(place.getLatitude());
         this.place_longitude = String.valueOf(place.getLongitude());
+        this.index = index;
     }
 
     @Override
@@ -91,10 +93,9 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
             case SUCCESS:
 
                 Toast.makeText(context, "Comment and rating added", Toast.LENGTH_SHORT).show();
-                user.deletePlace(place);
                 place.setComment(comment);
                 place.setRating(Integer.parseInt(rating));
-                user.addPlace(place);
+                user.places.set(index, place);
                 break;
         }
     }
