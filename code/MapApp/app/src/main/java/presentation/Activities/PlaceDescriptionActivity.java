@@ -32,25 +32,23 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         user=(User) getIntent().getExtras().get("user");
         currentPlace=(Place) getIntent().getExtras().get("place");
 
-        Button commentButton = findViewById(R.id.CommentButton);
-
-        //Toast.makeText(PlaceDescriptionActivity.this, place, Toast.LENGTH_SHORT).show();
-        Toast.makeText(PlaceDescriptionActivity.this, placeDescription, Toast.LENGTH_SHORT).show();
         final TextView place_name = findViewById(R.id.placeName);
+        final TextView place_description = findViewById(R.id.placeDescription);
         place_name.setText(place);
+        place_description.setText(placeDescription);
 
-        //TEST Update description an rating
-
-        commentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+        Button commentButton = findViewById(R.id.CommentButton);
+        commentButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-
+              
                 UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(getApplicationContext(),user,currentPlace,"comentario de prueba", 10);
                 updatePlaceTask.execute();
+              
+                Intent i = new Intent(getApplicationContext(), CommentActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(i);
             }
+
         });
-
-        //Toast.makeText(PlaceDescriptionActivity.this, "Hola", Toast.LENGTH_SHORT).show();
-     }
-
+    }
 }
