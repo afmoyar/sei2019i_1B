@@ -47,11 +47,16 @@ public class SeePlacesActivity extends AppCompatActivity {
 
                 String placeName = (String) parent.getItemAtPosition(position);
                 if(!placeName.equals(" ")){
+                  
+                    String placeInfo = data[position][1];
+
                     TextView placeDescriptionTV = view.findViewById(R.id.description);
-                    String placeInfo = placeDescriptionTV.getText().toString();
+
                     Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
                     i.putExtra(placeKey, placeName);
                     i.putExtra("placeDescription", placeInfo);
+                    i.putExtra("user", myUser);
+                    i.putExtra("place", places.get(position));
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplicationContext().startActivity(i);
                 }else{
