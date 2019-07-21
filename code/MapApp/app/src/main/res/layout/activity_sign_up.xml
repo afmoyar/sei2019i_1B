@@ -23,7 +23,8 @@
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Create a new User"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/textView12"

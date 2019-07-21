@@ -73,6 +73,7 @@ public class AdminEventDateActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "event date changed", Toast.LENGTH_SHORT).show();
             addate = date;
+            String dat = Integer.toString(year)+"/"+Integer.toString(month)+"/"+Integer.toString(day);
             return true;
         }
 
