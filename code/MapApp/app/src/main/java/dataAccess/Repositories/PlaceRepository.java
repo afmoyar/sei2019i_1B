@@ -12,8 +12,6 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 import dataAccess.DataBase.Database;
 import dataAccess.Models.Place;

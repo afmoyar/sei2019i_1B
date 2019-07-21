@@ -7,19 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mapapp.R;
 
 import java.util.ArrayList;
 
 import dataAccess.Models.Administrator;
-import dataAccess.Models.User;
 import dataAccess.Repositories.AdminLogInResult;
 
 public class WelcomeAdminActivity extends AppCompatActivity {
 
-    private String id,name;
     public static Administrator admin;
     public static ArrayList<String> other_countries;
     private final String resultKey = "adminResult";
@@ -30,14 +27,11 @@ public class WelcomeAdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_admin);
 
-        id = getIntent().getStringExtra("id");
-        name = getIntent().getStringExtra("name");
+        final TextView admin_id =  findViewById(R.id.adminid);
+        final TextView admin_name = findViewById(R.id.adminName);
 
-        final TextView admin_id = (TextView) findViewById(R.id.adminid);
-        final TextView admin_name = (TextView) findViewById(R.id.adminName);
-
-        final Button countries = (Button) findViewById(R.id.seecountries);
-        final Button date = (Button) findViewById(R.id.changedate);
+        final Button countries = findViewById(R.id.seecountries);
+        final Button date = findViewById(R.id.changedate);
 
         Bundle extras = getIntent().getExtras();
 

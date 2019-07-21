@@ -36,7 +36,7 @@ public class SeeCountriesActivity extends AppCompatActivity {
 
     private int numSelectedCountries;
     private int numNotPickedCountries;
-    private int numTotalCoutries;
+    private int numTotalCountries;
 
     String[][] data;
 
@@ -51,10 +51,10 @@ public class SeeCountriesActivity extends AppCompatActivity {
         numSelectedCountries = admin_countries.size();
         numNotPickedCountries = other_countries.size();
 
-        numTotalCoutries = numSelectedCountries + numNotPickedCountries;
+        numTotalCountries = numSelectedCountries + numNotPickedCountries;
 
-        country_status = new ArrayList<>(numTotalCoutries);
-        for (int i = 0; i < numTotalCoutries; i++) {
+        country_status = new ArrayList<>(numTotalCountries);
+        for (int i = 0; i < numTotalCountries; i++) {
 
             country_status.add(false);
         }
@@ -102,21 +102,14 @@ public class SeeCountriesActivity extends AppCompatActivity {
         if (v == null)
             return;
 
-        TextView someText = (TextView) v.findViewById(R.id.season);
-        TextView someText2 = (TextView) v.findViewById(R.id.contryname);
+        TextView someText = v.findViewById(R.id.season);
 
         if (someText.getText().toString() == "OffSeason") {
 
             someText.setText("OnSeason");
-            //WelcomeAdminActivity.other_countries.remove(WelcomeAdminActivity.other_countries.indexOf(someText2.getText().toString()));
-            //admin_countries.add(someText2.getText().toString());
-            //WelcomeAdminActivity.admin.setCountries(admin_countries);
         } else {
 
             someText.setText("OffSeason");
-            //admin_countries.remove(admin_countries.indexOf(someText2.getText().toString()));
-            //WelcomeAdminActivity.admin.setCountries(admin_countries);
-            //WelcomeAdminActivity.other_countries.add(someText2.getText().toString());
         }
 
         country_status.set(index, !country_status.get(index));
@@ -133,16 +126,16 @@ public class SeeCountriesActivity extends AppCompatActivity {
     private String[][] placesToString(){
         String[][] data;
 
-        if(numTotalCoutries > 0) {
+        if(numTotalCountries > 0) {
 
-            data = new String[numTotalCoutries][2];
+            data = new String[numTotalCountries][2];
             for(int i = 0; i < numSelectedCountries; i++){
 
                 data[i][0] = admin_countries.get(i);
                 data[i][1] = "OnSeason";
             }
 
-            for(int i = numSelectedCountries, j = 0; i < numTotalCoutries; i++, j++){
+            for(int i = numSelectedCountries, j = 0; i < numTotalCountries; i++, j++){
 
                 data[i][0] = other_countries.get(j);
                 data[i][1] = "OffSeason";

@@ -2,7 +2,6 @@ package dataAccess.DataBase;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -10,8 +9,6 @@ import com.android.volley.toolbox.RequestFuture;
 import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mapapp.R;
@@ -27,7 +24,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import businessLogic.Controllers.AdminLoginController;
 import dataAccess.AdminUpdatePayload;
 
 
@@ -146,34 +142,6 @@ public class Database {
         return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
-    public void  AdminloginFunction (final Context context, final String id, final String password){
-
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_admin_by_id_pass.php?id="+id+"&password="+password+"", new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-                        AdminLoginController.changeToWelcomeAdminActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
-
-                    } catch (JSONException e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "name or password incorrect",Toast.LENGTH_SHORT).show();
-            }
-        }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonArrayRequest);
-    }
-
     public String updateAdminCountries(Context context, final AdminUpdatePayload payload) throws InterruptedException, ExecutionException, TimeoutException {
 
         RequestFuture<String> future = RequestFuture.newFuture();
@@ -186,11 +154,7 @@ public class Database {
             @Override
             public byte[] getBody() {
 
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
-                System.out.println("Sent: " + json.toString());
-                System.out.println("---------------------------------------------");
-
-                return json.toString().getBytes();
+                return json.getBytes();
             }
 
             @Override
@@ -203,12 +167,6 @@ public class Database {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(request);
 
-        String result = future.get(3000, TimeUnit.MILLISECONDS);
-
-        System.out.println("****************************************");
-        System.out.println("got: " + result);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-        return result;
+        return future.get(3000, TimeUnit.MILLISECONDS);
     }
 }

@@ -6,7 +6,7 @@ import dataAccess.Repositories.UserRepository;
 
 public class UserSignUpController {
 
-    public static ControlResult insertUsr(Context context, String id, String name, String password) throws InterruptedException {
+    public static ControlResult insertUsr(Context context, String id, String name, String password) {
 
         if(id.equals("") || name.equals("") || password.equals("")){
 

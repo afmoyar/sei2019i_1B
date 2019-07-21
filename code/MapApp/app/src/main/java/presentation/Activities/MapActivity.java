@@ -89,10 +89,8 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
 
                       DeletePlaceTask deletePlace = new DeletePlaceTask(MapActivity.this,myUser,
                             mapPlacesByLocation.get(position), marker, userPlacesByLocation);
-                    deletePlace.execute();
 
-                    //Toast.makeText(getApplicationContext(),"already saved",Toast.LENGTH_LONG).show();
-                    //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    deletePlace.execute();
                 }
                 else{
 
@@ -116,6 +114,4 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
         setResult(RESULT_OK, i);
         super.onBackPressed();
     }
-
-
 }

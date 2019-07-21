@@ -1,5 +1,4 @@
 package presentation.Activities;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -22,12 +21,8 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         place = getIntent().getExtras().get("placeName").toString();
         placeDescription = getIntent().getExtras().get("placeDescription").toString();
 
-        //Toast.makeText(PlaceDescriptionActivity.this, place, Toast.LENGTH_SHORT).show();
         Toast.makeText(PlaceDescriptionActivity.this, placeDescription, Toast.LENGTH_SHORT).show();
         final TextView place_name = findViewById(R.id.placeName);
         place_name.setText(place);
-
-        //Toast.makeText(PlaceDescriptionActivity.this, "Hola", Toast.LENGTH_SHORT).show();
      }
-
 }

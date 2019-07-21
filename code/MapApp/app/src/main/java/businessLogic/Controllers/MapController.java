@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -18,7 +17,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -31,8 +29,6 @@ import java.util.concurrent.TimeoutException;
 
 import dataAccess.Models.Place;
 import dataAccess.Repositories.PlaceRepository;
-import presentation.Activities.MainActivity;
-import presentation.Activities.MapActivity;
 
 public abstract class MapController
 {
@@ -87,7 +83,7 @@ public abstract class MapController
             list=geocoder.getFromLocationName(searchString,1);
         }catch(IOException e)
         {
-            //Toast.makeText(this,"geolocator is not working",Toast.LENGTH_LONG).show();
+
             Log.e(TAG,"geolocate: IOExeption "+e.getMessage());
             return null;
         }
@@ -96,9 +92,6 @@ public abstract class MapController
             Address address= list.get(0);
             Log.d(TAG,"geolocate: found a location"+address.toString());
             return address;
-            //LatLng foundLatLng=new LatLng(address.getLatitude(),address.getLongitude());
-            //makeMarker(mMap,foundLatLng,address.getAddressLine(0));
-            //Toast.makeText(this,address.toString(),Toast.LENGTH_LONG).show();
         }
         return null;
     }

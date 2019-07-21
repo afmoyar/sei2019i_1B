@@ -42,18 +42,7 @@ public class SignUpTask extends AsyncTask<Void, Void, ControlResult> {
     @Override
     protected ControlResult doInBackground(Void... voids) {
 
-        ControlResult result = ControlResult.CONNECT_ERROR;
-
-        try {
-
-            result = UserSignUpController.insertUsr(context, id, name, pass);
-
-        } catch (InterruptedException e) {
-
-            e.printStackTrace();
-        }
-
-        return result;
+        return UserSignUpController.insertUsr(context, id, name, pass);
     }
 
     @Override
