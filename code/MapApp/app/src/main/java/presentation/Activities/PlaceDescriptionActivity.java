@@ -24,16 +24,14 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         place = getIntent().getExtras().get("placeName").toString();
         placeDescription = getIntent().getExtras().get("placeDescription").toString();
 
-        //Toast.makeText(PlaceDescriptionActivity.this, place, Toast.LENGTH_SHORT).show();
-        Toast.makeText(PlaceDescriptionActivity.this, placeDescription, Toast.LENGTH_SHORT).show();
         final TextView place_name = findViewById(R.id.placeName);
         final TextView place_description = findViewById(R.id.placeDescription);
         place_name.setText(place);
         place_description.setText(placeDescription);
 
 
-        Button commentButtom = findViewById(R.id.CommentButton);
-        commentButtom.setOnClickListener(new View.OnClickListener(){
+        Button commentButton = findViewById(R.id.CommentButton);
+        commentButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), CommentActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -41,18 +39,5 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             }
 
         });
-
-        //Toast.makeText(PlaceDescriptionActivity.this, "Hola", Toast.LENGTH_SHORT).show();
-    /*
-                mapButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    GetSeasonPlacesTask seasonPlacesTask = new GetSeasonPlacesTask(WelcomeUserActivity.this, getApplicationContext(),user,userKey,placesKey);
-                    seasonPlacesTask.execute();
-                }
-            });
-     */
     }
-
 }
