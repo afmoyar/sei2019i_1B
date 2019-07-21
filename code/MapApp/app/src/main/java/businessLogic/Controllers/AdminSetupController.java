@@ -16,14 +16,14 @@ public class AdminSetupController {
         ArrayList<String> select = new ArrayList<>();
         ArrayList<String> drop = new ArrayList<>();
 
-        int divide = admin.getPlaces().size();
+        int divide = admin.getCountries().size();
         int end = status.size();
 
         for(int i = 0; i < divide; i++){
 
             if(status.get(i)){
 
-                drop.add(admin.getPlaces().get(i));
+                drop.add(admin.getCountries().get(i));
             }
         }
 
