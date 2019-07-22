@@ -75,6 +75,26 @@ public class WelcomeAdminActivity extends AppCompatActivity {
         }
     }
     /*
+            final TextView place_name = findViewById(R.id.placeName);
+        final TextView place_description = findViewById(R.id.placeDescription);
+        place_name.setText(place);
+        place_description.setText(placeDescription);
+
+        Button commentButton = findViewById(R.id.CommentButton);
+        commentButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(getApplicationContext(),user,currentPlace,"comentario de prueba", 10);
+                updatePlaceTask.execute();
+
+                Intent i = new Intent(getApplicationContext(), CommentActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(i);
+            }
+
+        });
+     */
+    /*
     @Override
     public void onBackPressed(){
 

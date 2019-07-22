@@ -36,6 +36,24 @@ public abstract class PlaceRepository {
 
         return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
     }
+
+    public static ResponseType updateUserPlace(Context context, String userId,String comment, String rating, String place_latitude, String place_longitude) {
+        Log.d(TAG, "updateUserPlace");
+
+        String stringResponse;
+
+        try {
+
+            stringResponse = database.updateUserPlace(context, userId, comment, rating, place_latitude, place_longitude);
+        } catch (TimeoutException | InterruptedException | ExecutionException e) {
+
+            System.out.println(e.getStackTrace());
+            return ResponseType.CONNECT_ERROR;
+        }
+
+        return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
+    }
+
     public static ResponseType deleteUserPlace(Context context, String userId,String latitude, String longitude) {
         Log.d(TAG, "deleteUserPlace");
 
