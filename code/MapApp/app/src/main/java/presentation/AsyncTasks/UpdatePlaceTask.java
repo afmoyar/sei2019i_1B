@@ -53,7 +53,7 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
         progress.setCancelable(false);
 
         // AQUÍ NO FUNCIONA
-        //progress.show();
+        progress.show();
     }
 
     @Override
@@ -76,7 +76,7 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
     protected void onPostExecute(ControlResult result) {
 
         //AQUÍ TAMPOCO FUNCIONA
-        //progress.dismiss();
+        progress.dismiss();
 
         switch (result) {
 
