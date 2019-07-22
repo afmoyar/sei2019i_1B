@@ -93,7 +93,7 @@ public class SeePlacesActivity extends AppCompatActivity {
                 place = places.get(i);
                 data[i][0] = place.getName() + ", " + place.getCountryName();
                 data[i][1] = place.getDescription();
-                data[i][2] = "10";
+                data[i][2] = String.valueOf(place.getRating());
             }
         }else{
              data = new String[1][3];

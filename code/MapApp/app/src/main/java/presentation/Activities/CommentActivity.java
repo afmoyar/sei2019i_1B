@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +39,17 @@ public class CommentActivity extends AppCompatActivity {
         placeName = getIntent().getExtras().get(placeNameKey).toString();
         index = getIntent().getIntExtra(placeIndexKey, 0);
 
+        final RatingBar ratingBar = findViewById(R.id.ratingBar2);
+
         Button saveButton = findViewById(R.id.saveComment);
         saveButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v) {
 
-                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), 10, index);
+                int rating = Math.round(ratingBar.getRating()*2);
+
+                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), rating, index);
+                currentPlace.setRating(rating);
                 currentPlace.setComment(userComment.getText().toString());
                 updatePlaceTask.execute();
 

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         index = getIntent().getIntExtra(placeIndexKey, -1);
 
         Button commentButton = findViewById(R.id.CommentButton);
+        RatingBar ratingBar = findViewById(R.id.userRatingBar);
 
         final TextView place_name = findViewById(R.id.placeName);
         final TextView place_description = findViewById(R.id.placeDescription);
@@ -48,6 +50,9 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
         place_name.setText(place);
         place_description.setText(currentPlace.getDescription());
+
+        //rating Bar
+        ratingBar.setProgress(currentPlace.getRating());
 
         if(currentPlace.getComment() != null) {
             user_comment.setText(currentPlace.getComment());

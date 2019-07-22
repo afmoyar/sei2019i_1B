@@ -35,7 +35,8 @@ public class ListViewAdapter extends BaseAdapter {
 
        title.setText(data[position][0]);
        description.setText(data[position][1]);
-       rate_number.setText(data[position][2]);
+       float rating = (Integer.valueOf(data[position][2]))/2;
+       rate_number.setText(Float.toString(rating));
 
        ratingBar.setProgress(Integer.valueOf(data[position][2]));
 
