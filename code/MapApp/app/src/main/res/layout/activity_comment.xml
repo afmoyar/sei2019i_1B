@@ -4,100 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#165C8D"
     tools:context="presentation.Activities.CommentActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="339dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#162055"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/commentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="30sp"
+            android:fontFamily="cursive"
             android:text="Comment Section"
-            android:textAlignment="center" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="295dp"
-        android:layout_height="514dp"
-        android:layout_marginTop="48dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            android:textAlignment="center"
+            android:textColor="#FFEB3B"
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/CommentIntro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Type your comment  about this place:" />
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="Give the rating "
+            android:textColor="#ECE4E7"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="that the place deserve"
+            android:textColor="#F6F2F2"
+            android:textSize="24sp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            android:layout_width="233dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:numStars="5"
+            android:stepSize="0.5" />
 
         <EditText
             android:id="@+id/userComment"
             android:layout_width="match_parent"
             android:layout_height="125dp"
+            android:layout_marginBottom="20sp"
             android:ems="10"
-            android:hint="your comment goes right here"
-            android:inputType="textPersonName" />
+            android:fontFamily="cursive"
+            android:hint="                Please give us your opinion of the place"
+            android:inputType="textPersonName"
+            android:textColor="#F1ECED"
+            android:textColorHint="#94BDD2" />
 
         <Button
             android:id="@+id/saveComment"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save" />
+            android:layout_marginStart="165sp"
+            android:background="#B8617F"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="save"
+            android:textColor="#EEE9EF"
+            android:textSize="24sp" />
     </LinearLayout>
 
-    <RatingBar
-        android:id="@+id/ratingBar2"
-        android:layout_width="233dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:numStars="5"
-        android:stepSize="0.5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="383dp" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="How was it?"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="53dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
 </android.support.constraint.ConstraintLayout>
