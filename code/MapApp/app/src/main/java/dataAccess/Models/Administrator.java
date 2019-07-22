@@ -1,5 +1,7 @@
 package dataAccess.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -8,7 +10,7 @@ public class Administrator implements Serializable {
     String id;
     String name;
     String password;
-    String limitDate;
+    @SerializedName("limit_date") String limitDate;
     ArrayList<String> countries;
 
     public Administrator(String id, String name, String password, String limitDate) {
