@@ -177,7 +177,7 @@ public class Database {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_admin.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(context1, "succesfull update", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context1, "successfull update", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
