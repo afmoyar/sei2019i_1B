@@ -44,8 +44,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
         final TextView textViewUserId = findViewById(R.id.textViewUserId);
         TextView textViewUserName = findViewById(R.id.textViewUserName);
-        TextView textViewCountry = findViewById(R.id.textViewCountry);
-
+        Button goToSeasonInfoBtn = findViewById(R.id.goToSeasonInfoBtn);
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
@@ -57,26 +56,33 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
         Button mapButton = findViewById(R.id.mapButton);
         Button placesButton = findViewById(R.id.placesButton);
-        if(MapController.isServicesOk(this))
-        {
+        if(MapController.isServicesOk(this)) {
             mapButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    GetSeasonPlacesTask seasonPlacesTask = new GetSeasonPlacesTask(WelcomeUserActivity.this, getApplicationContext(),user,userKey,placesKey);
+                    GetSeasonPlacesTask seasonPlacesTask = new GetSeasonPlacesTask(WelcomeUserActivity.this, getApplicationContext(), user, userKey, placesKey);
                     seasonPlacesTask.execute();
                 }
             });
-
-            placesButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(getApplicationContext(), SeePlacesActivity.class);
-                    i.putExtra(userKey, user);
-                    startActivityForResult(i, 2);
-                }
-            });
         }
+        placesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SeePlacesActivity.class);
+                i.putExtra(userKey, user);
+                startActivityForResult(i, 2);
+            }
+        });
+
+        goToSeasonInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 Intent i=new Intent(getApplicationContext(),SeasonInfoForUser.class);
+                 startActivity(i);
+
+            }
+        });
 
     }
 
