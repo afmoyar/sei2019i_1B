@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#162055"
     tools:context="presentation.Activities.PlaceDescriptionActivity">
 
     <LinearLayout
@@ -22,8 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="cursive"
+            android:shadowColor="#3F51B5"
             android:text="Place Name"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#00BCD4"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,25 +45,41 @@
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Place Description:" />
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="Place Description:"
+            android:textColor="#E91E63"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/placeDescription"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:hint="Place description goes here" />
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:hint="Place description goes here"
+            android:textColor="#D2D2DE"
+            android:textColorHint="#FF5722"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/commentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your opinion:" />
+            android:layout_marginBottom="10sp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="Your opinion:"
+            android:textColor="#E91E63"
+            android:textSize="24sp" />
 
         <RatingBar
             android:id="@+id/userRatingBar"
             style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10sp"
             android:isIndicator="true"
             android:numStars="5" />
 
@@ -66,13 +87,21 @@
             android:id="@+id/commentId"
             android:layout_width="match_parent"
             android:layout_height="127dp"
-            android:hint="User comment goes here" />
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:hint="User comment goes here"
+            android:textColor="#E9E3E3"
+            android:textColorHint="#FF5722"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/CommentButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add comment" />
+            android:background="#CDDC39"
+            android:fontFamily="cursive"
+            android:text="Add comment"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
