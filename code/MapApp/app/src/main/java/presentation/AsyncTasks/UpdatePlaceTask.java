@@ -29,10 +29,10 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
     private String place_longitude;
     private int index;
 
-    public UpdatePlaceTask (Context context,User user, Place place, String comment, int rating, int index) {
+    public UpdatePlaceTask (Context context,User user, Place place, String comment, int rating, int index, ProgressDialog progress) {
 
         this.context = context;
-        this.progress = new ProgressDialog(context);
+        this.progress = progress;
         this.place=place;
         this.user=user;
         this.userId = user.getId();
@@ -75,8 +75,9 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
     @Override
     protected void onPostExecute(ControlResult result) {
 
-        //AQUÍ TAMPOCO FUNCIONA
-        progress.dismiss();
+        if ((progress != null) && progress.isShowing()) {
+            progress.dismiss();
+        }
 
         switch (result) {
 

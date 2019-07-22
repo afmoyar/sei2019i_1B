@@ -1,5 +1,6 @@
 package presentation.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class CommentActivity extends AppCompatActivity {
     private final String placeNameKey = "placeName";
     private final String placeIndexKey = "placeIndex";
     private int index;
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,11 @@ public class CommentActivity extends AppCompatActivity {
         placeName = getIntent().getExtras().get(placeNameKey).toString();
         index = getIntent().getIntExtra(placeIndexKey, 0);
 
+        if(progress == null){
+
+            progress = new ProgressDialog(CommentActivity.this);
+        }
+
         final RatingBar ratingBar = findViewById(R.id.ratingBar2);
 
         Button saveButton = findViewById(R.id.saveComment);
@@ -49,7 +56,7 @@ public class CommentActivity extends AppCompatActivity {
                 int rating = Math.round(ratingBar.getRating()*2);
                 currentPlace.setRating(rating);
                 currentPlace.setComment(userComment.getText().toString());
-                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), rating, index);
+                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), rating, index, progress);
                 updatePlaceTask.execute();
 
                 onBackPressed();
@@ -59,6 +66,15 @@ public class CommentActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if ((progress != null) && progress.isShowing())
+            progress.dismiss();
+        progress = null;
     }
 
     @Override
