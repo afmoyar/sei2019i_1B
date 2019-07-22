@@ -25,19 +25,24 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import businessLogic.Controllers.DateController;
+
 public class AdminEventDateActivity extends AppCompatActivity {
 
     private String limitdate;
     private Date addate;
     private Date today;
+    DateController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_event_date);
 
+        controller = new DateController();
+
         limitdate = getIntent().getStringExtra("date");
-        String[] chain = split(limitdate);
+        String[] chain = controller.split(limitdate);
 
         Calendar todayCalendar = new GregorianCalendar(Integer.parseInt(chain[0]), Integer.parseInt(chain[1])-1, Integer.parseInt(chain[2]));
         final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -65,12 +70,19 @@ public class AdminEventDateActivity extends AppCompatActivity {
         setdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true == verifydate(Integer.parseInt(year.getText().toString()),Integer.parseInt(month.getText().toString())-1,Integer.parseInt(day.getText().toString()))){
-                    admindate.setText(dateFormat.format(addate));
+                if(year.getText().toString().equals("") == false && month.getText().toString().equals("") == false && day.getText().toString().equals("") == false){
                     String dat = year.getText().toString()+"/"+month.getText().toString()+"/"+day.getText().toString();
-                    updateadmin(dat);
-                    WelcomeAdminActivity.admin.setLimitDate(dat);
+                    if(true == verifydate(Integer.parseInt(year.getText().toString()),Integer.parseInt(month.getText().toString())-1,Integer.parseInt(day.getText().toString()))){
+                        if(controller.verify(getApplicationContext(),dat) == true){
+                            admindate.setText(dateFormat.format(addate));
+                            controller.updatedate(getApplicationContext(),dat);
+                            WelcomeAdminActivity.admin.setLimitDate(dat);
+                        }
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Fill all blank spaces", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -87,36 +99,6 @@ public class AdminEventDateActivity extends AppCompatActivity {
             addate = date;
             return true;
         }
-
-
     }
 
-    public String[] split (String date){
-        String[] chain = date.split("/",3);
-        return chain;
-    }
-
-    public void updateadmin(final String date12){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_admin.php", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "succesfull update", Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "error conecting", Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parametros = new HashMap<String,String>();
-                parametros.put("limit_date", date12);
-                return parametros;
-
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-    }
 }
