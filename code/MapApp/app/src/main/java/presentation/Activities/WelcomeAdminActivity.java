@@ -63,6 +63,7 @@ public class WelcomeAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AdminEventDateActivity.class);
+                i.putExtra("date",admin.getLimitDate());
                 startActivity(i);
             }
         });

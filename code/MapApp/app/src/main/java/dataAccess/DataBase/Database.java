@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
@@ -196,5 +197,29 @@ public class Database {
         requestQueue.add(request);
 
         return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public void updateadmin(final Context context1,final String date12){
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_admin.php", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(context1, "successfull update", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context1, "error conecting", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("limit_date", date12);
+                    return parametros;
+
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(context1);
+            requestQueue.add(stringRequest);
     }
 }
