@@ -47,10 +47,9 @@ public class CommentActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 int rating = Math.round(ratingBar.getRating()*2);
-
-                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), rating, index);
                 currentPlace.setRating(rating);
                 currentPlace.setComment(userComment.getText().toString());
+                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(CommentActivity.this,user,currentPlace,userComment.getText().toString(), rating, index);
                 updatePlaceTask.execute();
 
                 onBackPressed();
@@ -64,7 +63,6 @@ public class CommentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-
         Intent i = new Intent();
         i.putExtra(userKey ,user);
         i.putExtra(currentPlaceKey, currentPlace);

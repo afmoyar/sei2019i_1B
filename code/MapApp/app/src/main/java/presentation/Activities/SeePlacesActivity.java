@@ -81,10 +81,33 @@ public class SeePlacesActivity extends AppCompatActivity {
         if(requestCode == 1){
 
             myUser = (User) data.getExtras().get(userKey);
+            final ArrayList<Place> places = myUser.getPlaces();
+            String [][] placesMatrix = SeePlacesActivity.placestoString(places);
+            listView.setAdapter(new ListViewAdapter(getApplicationContext(),placesMatrix));
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    String placeName = (String) parent.getItemAtPosition(position);
+                    if(!placeName.equals(" ")){
+
+                        Intent i = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
+                        i.putExtra(placeKey, placeName);
+                        i.putExtra(userKey, myUser);
+                        i.putExtra(currentPlaceKey, places.get(position));
+                        i.putExtra(placeIndexKey, position);
+                        startActivityForResult(i, 1);
+                    }else{
+                        Toast.makeText(SeePlacesActivity.this, "No place to show description", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
         }
     }
 
-    private String[][] placestoString(ArrayList<Place> places){
+    private static String[][] placestoString(ArrayList<Place> places){
         String[][] data;
         Place place;
         if(!places.isEmpty()) {

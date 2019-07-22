@@ -25,6 +25,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
     private final String currentPlaceKey = "place";
     private final String placeNameKey = "placeName";
     private final String placeIndexKey = "placeIndex";
+    private RatingBar ratingBar;
     private TextView user_comment;
     private int index;
 
@@ -41,7 +42,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         index = getIntent().getIntExtra(placeIndexKey, -1);
 
         Button commentButton = findViewById(R.id.CommentButton);
-        RatingBar ratingBar = findViewById(R.id.userRatingBar);
+
 
         final TextView place_name = findViewById(R.id.placeName);
         final TextView place_description = findViewById(R.id.placeDescription);
@@ -52,7 +53,9 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         place_description.setText(currentPlace.getDescription());
 
         //rating Bar
+        ratingBar= findViewById(R.id.userRatingBar);
         ratingBar.setProgress(currentPlace.getRating());
+        Toast.makeText(getApplicationContext(),""+currentPlace.getRating(),Toast.LENGTH_LONG).show();
 
         if(currentPlace.getComment() != null) {
             user_comment.setText(currentPlace.getComment());
@@ -76,11 +79,14 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
         super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(getApplicationContext(), "Comment and rating added", Toast.LENGTH_SHORT).show();
         if(requestCode == 1){
 
             user = (User) data.getExtras().get(userKey);
             currentPlace = (Place) data.getExtras().get(currentPlaceKey);
             place = data.getStringExtra(placeNameKey);
+            //ratingBar= findViewById(R.id.userRatingBar);
+            ratingBar.setProgress(currentPlace.getRating());
 
             if(currentPlace.getComment() != null) {
                 user_comment.setText(currentPlace.getComment());
