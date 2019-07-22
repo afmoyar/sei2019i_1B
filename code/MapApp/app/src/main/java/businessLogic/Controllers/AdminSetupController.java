@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import dataAccess.AdminUpdatePayload;
 import dataAccess.Models.Administrator;
+import dataAccess.Repositories.AdminLogInResult;
 import dataAccess.Repositories.AdministratorRepository;
 import dataAccess.Repositories.ResponseType;
 
@@ -27,11 +28,11 @@ public class AdminSetupController {
             }
         }
 
-        for(int i = divide; i < end; i++){
+        for(int i = divide, j = 0; i < end; i++, j++){
 
             if(status.get(i)){
 
-                select.add(countries.get(i));
+                select.add(countries.get(j));
             }
         }
 
@@ -39,4 +40,49 @@ public class AdminSetupController {
 
         return AdministratorRepository.updateAdminCountries(context, payload);
     }
+
+    public static AdminLogInResult computeNewCountryDistribution(Administrator admin, ArrayList<String> otherCountries, ArrayList<Boolean> status){
+
+        int divide = admin.getCountries().size();
+        int total = status.size();
+
+        ArrayList<String> newAdminCountries = new ArrayList<>();
+        ArrayList<String> newOtherCountries = new ArrayList<>();
+
+        for(int i = 0; i < divide; i++){
+
+            String country = admin.getCountries().get(i);
+
+            if(status.get(i)){
+
+                newOtherCountries.add(country);
+            }
+            else {
+
+                newAdminCountries.add(country);
+            }
+        }
+
+        for(int i = divide, j = 0; i < total; i++, j++){
+
+            String country = otherCountries.get(j);
+
+            if(status.get(i)){
+
+                newAdminCountries.add(country);
+            }
+            else {
+
+                newOtherCountries.add(country);
+            }
+        }
+
+        AdminLogInResult result = new AdminLogInResult();
+        Administrator newAdmin = new Administrator(admin, newAdminCountries);
+        result.admin = newAdmin;
+        result.countries = newOtherCountries;
+
+        return result;
+    }
+
 }

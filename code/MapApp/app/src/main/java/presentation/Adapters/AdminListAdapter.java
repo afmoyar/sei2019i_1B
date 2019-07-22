@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.mapapp.R;
 
-import java.util.ArrayList;
 
 public class AdminListAdapter extends BaseAdapter {
 

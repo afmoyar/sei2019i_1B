@@ -1,7 +1,6 @@
 package businessLogic.Controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -10,11 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dataAccess.Models.Place;
-import dataAccess.Repositories.AdministratorRepository;
 import dataAccess.Repositories.PlaceRepository;
-import dataAccess.Repositories.UserRepository;
-import presentation.Activities.SeePlacesActivity;
-import presentation.Activities.WelcomeUserActivity;
 
 
 public abstract class SeePlacesController {
@@ -34,7 +29,7 @@ public abstract class SeePlacesController {
         return result;
     }
 
-    public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
+    public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) {
         Log.d(TAG,"insertUserPlace");
 
 

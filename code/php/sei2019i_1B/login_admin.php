@@ -46,6 +46,8 @@ $query = "SELECT name FROM country WHERE admin_id != \"$id\" OR admin_id IS NULL
 
 $result_count_unsel = $connection -> query($query);
 
+$response["countries"] = array();
+
 while($country_row = $result_count_unsel -> fetch_array()){
     
     $response["countries"][] = utf8_encode($country_row["name"]);

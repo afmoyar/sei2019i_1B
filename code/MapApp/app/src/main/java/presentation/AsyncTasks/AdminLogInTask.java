@@ -76,7 +76,6 @@ public class AdminLogInTask extends AsyncTask<Void, Void, Pair<AdminLogInResult,
 
             case SERVER_ERROR:
 
-                //System.out.println(result.first == null ? "very null******" : "not null++++++++");
                 Toast.makeText(context, "ID or password incorrect. Please try again", Toast.LENGTH_SHORT).show();
                 break;
         }

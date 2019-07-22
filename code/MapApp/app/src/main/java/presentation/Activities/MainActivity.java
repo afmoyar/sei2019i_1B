@@ -1,26 +1,15 @@
 package presentation.Activities;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mapapp.R;
 
-import businessLogic.Controllers.ControlResult;
-import businessLogic.Controllers.MapController;
-import businessLogic.Controllers.UserLoginController;
-import dataAccess.Models.User;
 import presentation.AsyncTasks.LogInTask;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView user_password = findViewById(R.id.editTuserPass);
 
 
-        Button btnLogin=(Button) findViewById(R.id.btnLogin);
+        Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

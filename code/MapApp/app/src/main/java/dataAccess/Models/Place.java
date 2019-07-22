@@ -4,7 +4,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Place implements Serializable {
     double latitude;

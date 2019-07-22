@@ -22,6 +22,15 @@ public class Administrator implements Serializable {
         this.countries = new ArrayList<>();
     }
 
+    public Administrator(Administrator other, ArrayList<String> otherCountries){
+
+        this.id = other.id;
+        this.name = other.name;
+        this.password = other.password;
+        this.limitDate = other.limitDate;
+        this.countries = otherCountries;
+    }
+
     public String getId() {
         return id;
     }

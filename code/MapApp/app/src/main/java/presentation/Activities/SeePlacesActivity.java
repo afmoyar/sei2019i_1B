@@ -35,8 +35,6 @@ public class SeePlacesActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
 
-
-        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(new ListViewAdapter(this,data));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

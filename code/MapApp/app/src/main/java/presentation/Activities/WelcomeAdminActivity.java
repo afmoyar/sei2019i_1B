@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mapapp.R;
 
@@ -18,30 +17,27 @@ import dataAccess.Repositories.AdminLogInResult;
 
 public class WelcomeAdminActivity extends AppCompatActivity {
 
-    private String id,name;
     public static Administrator admin;
     public static ArrayList<String> other_countries;
     private final String resultKey = "adminResult";
+    private static AdminLogInResult result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_admin);
 
-        id = getIntent().getStringExtra("id");
-        name = getIntent().getStringExtra("name");
+        final TextView admin_id =  findViewById(R.id.adminid);
+        final TextView admin_name = findViewById(R.id.adminName);
 
-        final TextView admin_id = (TextView) findViewById(R.id.adminid);
-        final TextView admin_name = (TextView) findViewById(R.id.adminName);
-
-        final Button countries = (Button) findViewById(R.id.seecountries);
-        final Button date = (Button) findViewById(R.id.changedate);
+        final Button countries = findViewById(R.id.seecountries);
+        final Button date = findViewById(R.id.changedate);
 
         Bundle extras = getIntent().getExtras();
 
         if(extras != null){
 
-            AdminLogInResult result = (AdminLogInResult) extras.get(resultKey);
+            result = (AdminLogInResult) extras.get(resultKey);
             admin = result.admin;
             other_countries = result.countries;
 
@@ -53,9 +49,8 @@ public class WelcomeAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SeeCountriesActivity.class);
-                i.putExtra("othercountries",other_countries);
-                i.putExtra("admincountries",admin.getCountries());
-                startActivity(i);
+                i.putExtra(resultKey, result);
+                startActivityForResult(i, 1);
             }
         });
 
@@ -67,6 +62,17 @@ public class WelcomeAdminActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+
+            result = (AdminLogInResult) data.getExtras().get(resultKey);
+            System.out.println();
+        }
     }
     /*
     @Override

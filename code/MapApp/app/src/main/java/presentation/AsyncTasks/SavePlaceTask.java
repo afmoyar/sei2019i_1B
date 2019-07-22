@@ -54,19 +54,8 @@ public class SavePlaceTask extends AsyncTask<Void, Void, ControlResult> {
 
     @Override
     protected ControlResult doInBackground(Void... voids) {
-        ControlResult result = ControlResult.CONNECT_ERROR;
 
-        try {
-
-            result = SeePlacesController.insertUserPlace(this.context, userId, latitude, longitude);
-
-        } catch (InterruptedException e) {
-
-            e.printStackTrace();
-        }
-
-        return result;
-
+        return SeePlacesController.insertUserPlace(this.context, userId, latitude, longitude);
     }
 
     @Override

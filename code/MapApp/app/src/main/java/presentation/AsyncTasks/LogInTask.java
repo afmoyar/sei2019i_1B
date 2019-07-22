@@ -11,7 +11,6 @@ import android.widget.Toast;
 import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.UserLoginController;
 import dataAccess.Models.User;
-import presentation.Activities.MainActivity;
 import presentation.Activities.WelcomeUserActivity;
 
 public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> {
