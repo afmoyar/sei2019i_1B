@@ -55,7 +55,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         //rating Bar
         ratingBar= findViewById(R.id.userRatingBar);
         ratingBar.setProgress(currentPlace.getRating());
-        Toast.makeText(getApplicationContext(),""+currentPlace.getRating(),Toast.LENGTH_LONG).show();
 
         if(currentPlace.getComment() != null) {
             user_comment.setText(currentPlace.getComment());
