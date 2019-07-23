@@ -46,8 +46,10 @@ public class WelcomeAdminActivity extends AppCompatActivity {
         }
 
         countries.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(getApplicationContext(), SeeCountriesActivity.class);
                 i.putExtra(resultKey, result);
                 startActivityForResult(i, 1);
@@ -55,8 +57,10 @@ public class WelcomeAdminActivity extends AppCompatActivity {
         });
 
         date.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(getApplicationContext(), AdminEventDateActivity.class);
                 i.putExtra("date",admin.getLimitDate());
                 startActivity(i);
@@ -74,54 +78,6 @@ public class WelcomeAdminActivity extends AppCompatActivity {
             System.out.println();
         }
     }
-    /*
-            final TextView place_name = findViewById(R.id.placeName);
-        final TextView place_description = findViewById(R.id.placeDescription);
-        place_name.setText(place);
-        place_description.setText(placeDescription);
-
-        Button commentButton = findViewById(R.id.CommentButton);
-        commentButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-
-                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(getApplicationContext(),user,currentPlace,"comentario de prueba", 10);
-                updatePlaceTask.execute();
-
-                Intent i = new Intent(getApplicationContext(), CommentActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(i);
-            }
-
-        });
-     */
-    /*
-    @Override
-    public void onBackPressed(){
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("are you sure you want to close your account?")
-                .setTitle("Log out");
-
-        builder.setPositiveButton("Log out", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-
-    }
-    */
 }
 
 

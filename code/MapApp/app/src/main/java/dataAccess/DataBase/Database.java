@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -138,14 +137,14 @@ public class Database {
 
         String url = context.getString(R.string.URL_login);
 
-        return queryByIDandPass(context, id, password, url);
+        return queryByIdAndPass(context, id, password, url);
     }
 
     public JSONObject queryAdmin(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
 
         String url = context.getString(R.string.URL_login_admin);
 
-        return queryByIDandPass(context, id, password, url);
+        return queryByIdAndPass(context, id, password, url);
     }
 
     public JSONArray queryCurrentSeasonPlaces(Context context) throws InterruptedException, ExecutionException, TimeoutException {
@@ -159,7 +158,7 @@ public class Database {
         return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
-    private JSONObject queryByIDandPass(final Context context, final String id, final String password, final String url) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
+    private JSONObject queryByIdAndPass(final Context context, final String id, final String password, final String url) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
 
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
@@ -202,24 +201,26 @@ public class Database {
         return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
-    public void updateadmin(final Context context1,final String date12){
+    public void updateAdmin(final Context context1, final String date12){
             StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_admin.php", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(context1, "successfull update", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(context1, "successful update", Toast.LENGTH_SHORT).show();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context1, "error conecting", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(context1, "error connecting", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> parametros = new HashMap<String, String>();
-                    parametros.put("limit_date", date12);
-                    return parametros;
+                protected Map<String, String> getParams() {
 
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("limit_date", date12);
+                    return parameters;
                 }
             };
             RequestQueue requestQueue = Volley.newRequestQueue(context1);

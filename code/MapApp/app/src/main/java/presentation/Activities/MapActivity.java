@@ -103,7 +103,6 @@ public class MapActivity extends AppCompatActivity implements  OnMapReadyCallbac
                 return true;
             }
         });
-
     }
 
     @Override

@@ -37,8 +37,8 @@ public class GetSeasonPlacesTask extends AsyncTask<Void, Void, Pair<ArrayList<Pl
     }
     @Override
     protected void onPreExecute() {
+
         super.onPreExecute();
-        //Log.d(TAG,"onPreExecute: user id: "+userId+", lat: "+latitude+", long: "+longitude);
         progress.setMessage("getting season places");
         progress.setIndeterminate(false);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);

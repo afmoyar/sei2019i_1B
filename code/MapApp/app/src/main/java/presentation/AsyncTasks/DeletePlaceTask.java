@@ -43,8 +43,8 @@ public class DeletePlaceTask extends AsyncTask<Void, Void, ControlResult>{
 
         @Override
         protected void onPreExecute() {
+
             super.onPreExecute();
-            //Log.d(TAG,"onPreExecute: user id: "+userId+", lat: "+latitude+", long: "+longitude);
             progress.setMessage("deleting place");
             progress.setIndeterminate(false);
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -54,18 +54,8 @@ public class DeletePlaceTask extends AsyncTask<Void, Void, ControlResult>{
 
         @Override
         protected ControlResult doInBackground(Void... voids) {
-            ControlResult result = ControlResult.CONNECT_ERROR;
 
-            try {
-                result = SeePlacesController.deleteUserPlace(this.context, userId, latitude, longitude);
-
-            } catch (InterruptedException e) {
-
-                e.printStackTrace();
-            }
-
-            return result;
-
+            return SeePlacesController.deleteUserPlace(this.context, userId, latitude, longitude);
         }
 
         @Override

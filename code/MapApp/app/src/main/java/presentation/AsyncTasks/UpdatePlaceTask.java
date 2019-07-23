@@ -5,20 +5,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.Marker;
-
 import businessLogic.ControlResult;
 import businessLogic.Controllers.SeePlacesController;
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
 
 public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
+
     private Context context;
     private Place place;
     private String userId;
     private String comment;
     private String rating;
-    private Marker marker;
     private ProgressDialog progress;
     private User user;
     private String place_latitude;
@@ -41,31 +39,21 @@ public class UpdatePlaceTask extends AsyncTask<Void, Void, ControlResult> {
 
     @Override
     protected void onPreExecute() {
+
         super.onPreExecute();
-        //Log.d(TAG,"onPreExecute: user id: "+userId+", lat: "+latitude+", long: "+longitude);
+
         progress.setMessage("updating place");
         progress.setIndeterminate(false);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setCancelable(false);
 
-        // AQUÍ NO FUNCIONA
         progress.show();
     }
 
     @Override
     protected ControlResult doInBackground(Void... voids) {
-        ControlResult result = ControlResult.CONNECT_ERROR;
 
-        try {
-            result = SeePlacesController.updateUserPlace(this.context, userId, comment, rating, place_latitude, place_longitude);
-
-        } catch (InterruptedException e) {
-
-            e.printStackTrace();
-        }
-
-        return result;
-
+        return SeePlacesController.updateUserPlace(this.context, userId, comment, rating, place_latitude, place_longitude);
     }
 
     @Override

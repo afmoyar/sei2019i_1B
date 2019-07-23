@@ -13,8 +13,8 @@ public class DateController {
 
     }
 
-    public void updatedate(Context context, String date){
-        database.updateadmin(context,date);
+    public void updateDate(Context context, String date){
+        database.updateAdmin(context,date);
     }
 
     public String[] split (String date){

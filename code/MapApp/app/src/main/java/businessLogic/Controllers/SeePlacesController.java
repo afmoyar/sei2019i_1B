@@ -58,7 +58,7 @@ public abstract class SeePlacesController {
         return result;
     }
 
-    public static ControlResult updateUserPlace(Context context, String userId,String comment, String rating, String place_latitude, String place_longitude) throws InterruptedException {
+    public static ControlResult updateUserPlace(Context context, String userId,String comment, String rating, String place_latitude, String place_longitude) {
         Log.d(TAG,"updateUserPlace");
 
 
@@ -86,7 +86,7 @@ public abstract class SeePlacesController {
         return result;
     }
 
-    public static ControlResult deleteUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
+    public static ControlResult deleteUserPlace(Context context, String userId,String latitude, String longitude) {
         Log.d(TAG,"deleteUserPlace");
 
 

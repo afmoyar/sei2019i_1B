@@ -7,14 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.mapapp.BuildConfig;
 import com.example.mapapp.R;
 
 import java.text.DateFormat;
@@ -22,8 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import businessLogic.Controllers.DateController;
 
@@ -50,15 +40,14 @@ public class AdminEventDateActivity extends AppCompatActivity {
         addate = todayCalendar.getTime();
         today = new Date();
 
-        final TextView currentdate = findViewById(R.id.currentdate);
-        final TextView admindate = findViewById(R.id.admindate);
+        final TextView currentDate = findViewById(R.id.currentdate);
+        final TextView adminDate = findViewById(R.id.admindate);
 
-        currentdate.setText(dateFormat.format(today));
-        admindate.setText(dateFormat.format(addate));
+        currentDate.setText(dateFormat.format(today));
+        adminDate.setText(dateFormat.format(addate));
 
-        int x = addate.compareTo(today);
+        if(addate.compareTo(today) < 0){
 
-        if(x == -1){
             Toast.makeText(getApplicationContext(), "the event has expired", Toast.LENGTH_SHORT).show();
         }
 
@@ -66,39 +55,49 @@ public class AdminEventDateActivity extends AppCompatActivity {
         final TextView month = findViewById(R.id.month);
         final TextView day = findViewById(R.id.day);
 
-        final Button setdate = (Button) findViewById(R.id.setdate);
-        setdate.setOnClickListener(new View.OnClickListener() {
+        final Button setDate = findViewById(R.id.setdate);
+        setDate.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if(year.getText().toString().equals("") == false && month.getText().toString().equals("") == false && day.getText().toString().equals("") == false){
+
+                if(!year.getText().toString().equals("") &&
+                        !month.getText().toString().equals("") &&
+                        !day.getText().toString().equals("")){
+
                     String dat = year.getText().toString()+"/"+month.getText().toString()+"/"+day.getText().toString();
-                    if(true == verifydate(Integer.parseInt(year.getText().toString()),Integer.parseInt(month.getText().toString())-1,Integer.parseInt(day.getText().toString()))){
-                        if(controller.verify(getApplicationContext(),dat) == true){
-                            admindate.setText(dateFormat.format(addate));
-                            controller.updatedate(getApplicationContext(),dat);
+
+                    if(verifyDate(Integer.parseInt(year.getText().toString()),Integer.parseInt(month.getText().toString())-1,Integer.parseInt(day.getText().toString()))){
+
+                        if(controller.verify(getApplicationContext(),dat)){
+
+                            adminDate.setText(dateFormat.format(addate));
+                            controller.updateDate(getApplicationContext(),dat);
                             WelcomeAdminActivity.admin.setLimitDate(dat);
                         }
                     }
-                }else{
+                }
+                else{
+
                     Toast.makeText(getApplicationContext(), "Fill all blank spaces", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
     }
 
-    public Boolean verifydate(int year, int month, int day){
+    public Boolean verifyDate(int year, int month, int day){
+
         Calendar Calendar = new GregorianCalendar(year, month, day);
         Date date = Calendar.getTime();
-        int x = date.compareTo(today);
-        if(x == -1){
+
+        if(date.compareTo(today) < 0){
+
             Toast.makeText(getApplicationContext(), "invalid date", Toast.LENGTH_SHORT).show();
             return false;
         }else{
+
             addate = date;
             return true;
         }
     }
-
 }

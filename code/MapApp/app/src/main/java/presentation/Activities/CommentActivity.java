@@ -6,14 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mapapp.R;
-
-import org.w3c.dom.Text;
 
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
@@ -87,23 +83,3 @@ public class CommentActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 }
-/*
-        final TextView place_name = findViewById(R.id.placeName);
-        final TextView place_description = findViewById(R.id.placeDescription);
-        place_name.setText(place);
-        place_description.setText(placeDescription);
-
-        Button commentButton = findViewById(R.id.CommentButton);
-        commentButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-
-                UpdatePlaceTask updatePlaceTask = new UpdatePlaceTask(getApplicationContext(),user,currentPlace,"comentario de prueba", 10);
-                updatePlaceTask.execute();
-
-                Intent i = new Intent(getApplicationContext(), CommentActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(i);
-            }
-
-        });
- */

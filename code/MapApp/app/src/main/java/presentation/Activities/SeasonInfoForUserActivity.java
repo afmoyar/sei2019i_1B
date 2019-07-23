@@ -8,10 +8,7 @@ import android.widget.TextView;
 import com.example.mapapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import dataAccess.Models.Place;
-import presentation.Adapters.AdminListAdapter;
 import presentation.Adapters.SeasonCountriesAdapter;
 
 public class SeasonInfoForUserActivity extends AppCompatActivity {
@@ -28,8 +25,8 @@ public class SeasonInfoForUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_season_info_for_user);
 
-        DateTextView = (TextView) findViewById(R.id.DateTextView);
-        seasonCountriesListView = (ListView) findViewById(R.id.seasonCountriesListView);
+        DateTextView = findViewById(R.id.DateTextView);
+        seasonCountriesListView = findViewById(R.id.seasonCountriesListView);
 
         Bundle extras = getIntent().getExtras();
 

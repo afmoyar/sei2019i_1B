@@ -19,7 +19,6 @@ public class AdminListAdapter extends BaseAdapter {
 
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
-
     }
 
     @Override

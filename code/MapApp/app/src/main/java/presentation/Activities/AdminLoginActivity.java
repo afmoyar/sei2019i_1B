@@ -20,9 +20,10 @@ public class AdminLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_login);
         final TextView admin_id = findViewById(R.id.editTadminuser);
         final TextView admin_password = findViewById(R.id.editTdminpass);
-        final TextView admin = (TextView) findViewById(R.id.test);
+
         Button btnLogin = findViewById(R.id.btnadminlogg);
         btnLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 

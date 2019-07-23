@@ -28,7 +28,7 @@ public abstract class UserRepository {
         }
         catch (TimeoutException|InterruptedException|ExecutionException e){
 
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
             return ResponseType.CONNECT_ERROR;
         }
 

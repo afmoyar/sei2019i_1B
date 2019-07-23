@@ -31,7 +31,7 @@ public abstract class PlaceRepository {
             stringResponse = database.insertUserPlace(context, userId, latitude, longitude);
         } catch (TimeoutException | InterruptedException | ExecutionException e) {
 
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
             return ResponseType.CONNECT_ERROR;
         }
 
@@ -48,7 +48,7 @@ public abstract class PlaceRepository {
             stringResponse = database.updateUserPlace(context, userId, comment, rating, place_latitude, place_longitude);
         } catch (TimeoutException | InterruptedException | ExecutionException e) {
 
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
             return ResponseType.CONNECT_ERROR;
         }
 
@@ -65,7 +65,7 @@ public abstract class PlaceRepository {
             stringResponse = database.deleteUserPlace(context, userId, latitude, longitude);
         } catch (TimeoutException | InterruptedException | ExecutionException e) {
 
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
             return ResponseType.CONNECT_ERROR;
         }
 

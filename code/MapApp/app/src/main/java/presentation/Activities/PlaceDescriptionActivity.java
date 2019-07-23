@@ -6,13 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mapapp.R;
 
 import dataAccess.Models.Place;
 import dataAccess.Models.User;
-import presentation.AsyncTasks.UpdatePlaceTask;
 
 
 public class PlaceDescriptionActivity extends AppCompatActivity {
@@ -60,7 +58,9 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         }
 
         commentButton.setOnClickListener(new View.OnClickListener(){
+
             public void onClick(View v) {
+
                 Intent i = new Intent(getApplicationContext(), CommentActivity.class);
                 i.putExtra(currentPlaceKey, currentPlace);
                 i.putExtra(userKey, user);

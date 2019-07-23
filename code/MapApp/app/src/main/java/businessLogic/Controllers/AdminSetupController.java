@@ -78,8 +78,7 @@ public class AdminSetupController {
         }
 
         AdminLogInResult result = new AdminLogInResult();
-        Administrator newAdmin = new Administrator(admin, newAdminCountries);
-        result.admin = newAdmin;
+        result.admin = new Administrator(admin, newAdminCountries);
         result.countries = newOtherCountries;
 
         return result;

@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView myimageview = findViewById(R.id.imageView);
-        myimageview.setImageResource(R.drawable.siteslogo);
+        ImageView myImageView = findViewById(R.id.imageView);
+        myImageView.setImageResource(R.drawable.siteslogo);
 
         final TextView user_id = findViewById(R.id.editTuserID);
         final TextView user_password = findViewById(R.id.editTuserPass);
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnSignup = findViewById(R.id.btnSignup);
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        Button btnSignUp = findViewById(R.id.btnSignup);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnAdminSignup = findViewById(R.id.adminlogbtn);
-        btnAdminSignup.setOnClickListener(new View.OnClickListener() {
+        Button btnAdminSignUp = findViewById(R.id.adminlogbtn);
+        btnAdminSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -69,28 +69,4 @@ public class MainActivity extends AppCompatActivity {
         user_password.setText("");
         user_id.findFocus();
     }
-    /*
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to exit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        moveTaskToBack(true);
-                        finish();
-
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
-
-    }
-    */
-
 }
