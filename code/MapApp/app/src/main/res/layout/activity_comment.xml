@@ -63,10 +63,11 @@
             android:layout_marginBottom="20sp"
             android:ems="10"
             android:fontFamily="cursive"
-            android:hint="                Please give us your opinion of the place"
+            android:hint="     Please give us your opinion of the place"
             android:inputType="textPersonName"
             android:textColor="#F1ECED"
-            android:textColorHint="#2A9DF8" />
+            android:textColorHint="#2A9DF8"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/saveComment"
