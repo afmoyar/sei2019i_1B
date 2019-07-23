@@ -131,7 +131,7 @@
             android:background="#E91E63"
             android:fontFamily="cursive"
             android:text="Set"
-            android:textColor="#FFEB3B"
+            android:textColor="#F5F5F0"
             android:textSize="30sp" />
 
     </LinearLayout>

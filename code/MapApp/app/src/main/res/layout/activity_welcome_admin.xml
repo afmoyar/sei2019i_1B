@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#162055"
     tools:context="presentation.Activities.WelcomeAdminActivity">
 
     <LinearLayout
@@ -25,8 +26,8 @@
             android:fontFamily="cursive"
             android:gravity="center_horizontal"
             android:text="Welcome Admin"
-            android:textColor="#00BCD4"
-            android:textSize="30sp" />
+            android:textColor="#52C5D5"
+            android:textSize="36sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +44,8 @@
                 android:fontFamily="cursive"
                 android:text="Admin Id:"
                 android:textAlignment="center"
-                android:textSize="24sp" />
+                android:textColor="#FFEB3B"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/adminid"
@@ -51,8 +53,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="#3F51B5"
-                android:textSize="24sp" />
+                android:textColor="#FF9800"
+                android:textSize="30sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,7 +72,8 @@
                 android:fontFamily="cursive"
                 android:text="Admin Name:"
                 android:textAlignment="center"
-                android:textSize="24sp" />
+                android:textColor="#FFEB3B"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/adminName"
@@ -79,8 +82,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="#3F51B5"
-                android:textSize="24sp" />
+                android:textColor="#FF9800"
+                android:textSize="30sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,9 +99,10 @@
                 android:layout_marginEnd="40sp"
                 android:layout_weight="1"
                 android:background="#2196F3"
+                android:fontFamily="cursive"
                 android:text="Event Date"
                 android:textColor="#F9F8FA"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/seecountries"
@@ -108,8 +112,10 @@
                 android:layout_marginEnd="60sp"
                 android:layout_weight="1"
                 android:background="#3F51B5"
+                android:fontFamily="cursive"
                 android:text="Countries"
-                android:textColor="#FCFBFC" />
+                android:textColor="#FCFBFC"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>

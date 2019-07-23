@@ -24,7 +24,7 @@
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Administrator"
-            android:textColor="#FF9800"
+            android:textColor="#FFEB3B"
             android:textSize="36sp" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Login"
-            android:textColor="#FF9800"
+            android:textColor="#FFEB3B"
             android:textSize="36sp" />
 
         <EditText
@@ -51,7 +51,7 @@
             android:hint="Admin user"
             android:inputType="textPersonName"
             android:textColor="#F3EFEF"
-            android:textColorHint="#8BC34A" />
+            android:textColorHint="#00BCD4" />
 
         <EditText
             android:id="@+id/editTdminpass"
@@ -65,7 +65,7 @@
             android:hint="Admin password"
             android:inputType="textPersonName"
             android:textColor="#F6F2F7"
-            android:textColorHint="#8BC34A" />
+            android:textColorHint="#00BCD4" />
 
         <Button
             android:id="@+id/btnadminlogg"
@@ -76,7 +76,7 @@
             android:background="#E91E63"
             android:fontFamily="cursive"
             android:text="Login"
-            android:textColor="#FFEB3B"
+            android:textColor="#FCFBF7"
             android:textSize="24sp" />
 
         <TextView

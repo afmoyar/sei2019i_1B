@@ -48,7 +48,7 @@
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Place Description:"
-            android:textColor="#E91E63"
+            android:textColor="#FFC107"
             android:textSize="24sp" />
 
         <TextView
@@ -98,9 +98,10 @@
             android:id="@+id/CommentButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#CDDC39"
+            android:background="#E91E63"
             android:fontFamily="cursive"
             android:text="Add comment"
+            android:textColor="#F8F2F3"
             android:textSize="24sp" />
 
     </LinearLayout>
