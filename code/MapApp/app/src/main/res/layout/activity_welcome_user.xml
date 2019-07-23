@@ -82,14 +82,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30sp"
-                android:text="Week's country:"
+                android:text="Season info"
                 android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/textView11"
+            <Button
+                android:id="@+id/goToSeasonInfoBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp" />
+                android:text="Go to info"
+                android:textColor="#3F51B5" />
+
         </TableRow>
 
     </TableLayout>
@@ -110,15 +112,23 @@
 
         <Button
             android:id="@+id/mapButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="106dp"
+            android:layout_height="match_parent"
             android:layout_marginRight="80sp"
-            android:text="Go to map" />
+            android:background="#108CC6"
+            android:fontFamily="serif"
+            android:hapticFeedbackEnabled="true"
+            android:text="Go to map"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/placesButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Check your places" />
+            android:layout_height="match_parent"
+            android:fontFamily="serif"
+            android:text="Check your places"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#3F51B5" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
