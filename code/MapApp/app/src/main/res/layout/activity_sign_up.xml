@@ -35,7 +35,7 @@
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
             android:fontFamily="cursive"
-            android:text="Enter you ID:"
+            android:text="Enter your ID:"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#8BC34A"
             android:textSize="30sp" />
