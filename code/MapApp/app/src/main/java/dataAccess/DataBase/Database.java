@@ -35,6 +35,7 @@ public class Database {
 
     public Database() {
     }
+
     private static final String TAG = "database";
     public String insertUserPlace (final Context context, final String userId, final String latitude, final String longitude) throws InterruptedException, ExecutionException, TimeoutException {
 

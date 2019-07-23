@@ -34,7 +34,7 @@ public abstract class UserRepository {
         return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
     }
 
-    public static User getUser(final Context context,final String id, final String password) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+    public static UserLogInResult getUser(final Context context,final String id, final String password) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
 
         Gson gson = new Gson();
         JSONObject loginResult = database.queryUser(context, id, password);
@@ -44,6 +44,6 @@ public abstract class UserRepository {
             throw new JSONException("error");
         }
 
-        return gson.fromJson(loginResult.toString(), User.class);
+        return gson.fromJson(loginResult.toString(), UserLogInResult.class);
     }
 }
