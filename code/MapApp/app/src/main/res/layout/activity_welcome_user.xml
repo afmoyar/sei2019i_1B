@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30sp"
+                android:layout_marginBottom="40sp"
                 android:fontFamily="cursive"
                 android:text="User name:"
                 android:textColor="#FFEB3B"
@@ -89,15 +90,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30sp"
+                android:fontFamily="cursive"
                 android:text="Season info"
-                android:textSize="24sp" />
+                android:textColor="#F44336"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/goToSeasonInfoBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#B87212"
+                android:fontFamily="cursive"
                 android:text="Go to info"
-                android:textColor="#3F51B5" />
+                android:textColor="#FCF8F9"
+                android:textSize="18sp" />
 
         </TableRow>
 
@@ -123,19 +129,22 @@
             android:layout_height="match_parent"
             android:layout_marginRight="80sp"
             android:background="#108CC6"
-            android:fontFamily="serif"
+            android:fontFamily="cursive"
             android:hapticFeedbackEnabled="true"
             android:text="Go to map"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/placesButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="serif"
+            android:background="#3F51B5"
+            android:fontFamily="cursive"
             android:text="Check your places"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#3F51B5" />
+            android:textColor="#F7F2F4"
+            android:textSize="24sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
