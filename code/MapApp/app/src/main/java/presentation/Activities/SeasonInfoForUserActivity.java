@@ -44,13 +44,10 @@ public class SeasonInfoForUserActivity extends AppCompatActivity {
             limitDate = new String();
         }
 
-        //dummy test list
-        ArrayList<String> dummyCountries=new ArrayList<>();
-        dummyCountries.add("This is just a test");
-        dummyCountries.add("Colombia");
-        dummyCountries.add("Francia");
         String data[][] = countriesToString(seasonCountries);
         seasonCountriesListView.setAdapter(new SeasonCountriesAdapter(this, data));
+
+        DateTextView.setText(limitDate);
     }
 
 
