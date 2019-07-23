@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#162055"
     tools:context="presentation.Activities.AdminLoginActivity">
 
     <LinearLayout
@@ -23,7 +24,8 @@
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Administrator"
-            android:textSize="24sp" />
+            android:textColor="#FF9800"
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/textView7"
@@ -31,11 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
             android:layout_marginEnd="20sp"
-            android:layout_marginBottom="20sp"
+            android:layout_marginBottom="40sp"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Login"
-            android:textSize="24sp" />
+            android:textColor="#FF9800"
+            android:textSize="36sp" />
 
         <EditText
             android:id="@+id/editTadminuser"
@@ -46,7 +49,9 @@
             android:layout_marginBottom="20sp"
             android:ems="10"
             android:hint="Admin user"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#F3EFEF"
+            android:textColorHint="#8BC34A" />
 
         <EditText
             android:id="@+id/editTdminpass"
@@ -54,11 +59,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
             android:layout_marginEnd="20sp"
-            android:layout_marginBottom="20sp"
+            android:layout_marginBottom="40sp"
             android:ems="10"
             android:hapticFeedbackEnabled="true"
             android:hint="Admin password"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#F6F2F7"
+            android:textColorHint="#8BC34A" />
 
         <Button
             android:id="@+id/btnadminlogg"
@@ -66,7 +73,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="120sp"
             android:layout_marginEnd="120sp"
-            android:text="Login" />
+            android:background="#E91E63"
+            android:fontFamily="cursive"
+            android:text="Login"
+            android:textColor="#FFEB3B"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/test"
