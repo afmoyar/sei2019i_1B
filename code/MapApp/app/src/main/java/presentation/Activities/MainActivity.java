@@ -14,9 +14,7 @@ import presentation.AsyncTasks.LogInTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String resultKey = "user";
-
-
+    private final String resultKey = "result";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

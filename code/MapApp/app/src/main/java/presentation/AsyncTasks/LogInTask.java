@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.UserLoginController;
-import dataAccess.Models.User;
+import dataAccess.Repositories.UserLogInResult;
 import presentation.Activities.WelcomeUserActivity;
 
-public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> {
+public class LogInTask extends AsyncTask<Void, Void, Pair<UserLogInResult, ControlResult>> {
 
     String id;
     String password;
@@ -28,8 +28,8 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
         this.id = id;
         this.password = password;
         this.progress = new ProgressDialog(activity);
-        this.resultKey=resultKey;
-        this.activity=activity;
+        this.resultKey = resultKey;
+        this.activity = activity;
 
     }
 
@@ -45,13 +45,13 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
     }
 
     @Override
-    protected Pair<User, ControlResult> doInBackground(Void... voids) {
+    protected Pair<UserLogInResult, ControlResult> doInBackground(Void... voids) {
 
         return UserLoginController.logIn(context, id, password);
     }
 
     @Override
-    protected void onPostExecute(Pair<User, ControlResult> result){
+    protected void onPostExecute(Pair<UserLogInResult, ControlResult> result){
 
         progress.dismiss();
 
@@ -67,7 +67,7 @@ public class LogInTask extends AsyncTask<Void, Void, Pair<User, ControlResult>> 
 
             case INPUT_ERROR:
 
-                Toast.makeText(context, "Wrong formating", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Wrong formatting", Toast.LENGTH_LONG).show();
                 break;
 
             case CONNECT_ERROR:

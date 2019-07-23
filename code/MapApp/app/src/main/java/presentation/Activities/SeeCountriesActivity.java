@@ -59,7 +59,7 @@ public class SeeCountriesActivity extends AppCompatActivity {
             country_status.add(false);
         }
 
-        listView = findViewById(R.id.countrieslist);
+        listView = findViewById(R.id.seasonCountriesListView);
 
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {

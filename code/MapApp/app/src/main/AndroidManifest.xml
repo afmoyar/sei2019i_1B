@@ -20,10 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name="presentation.Activities.AdminEventDateActivity"></activity>
+        <activity android:name="presentation.Activities.SeasonInfoForUserActivity"></activity>
+        <activity android:name="presentation.Activities.AdminEventDateActivity" />
         <activity android:name="presentation.Activities.SeeCountriesActivity" />
-        <activity android:name="presentation.Activities.CommentActivity"></activity>
+        <activity android:name="presentation.Activities.CommentActivity" />
         <activity android:name="presentation.Activities.PlaceDescriptionActivity" />
         <activity android:name="presentation.Activities.WelcomeUserActivity" />
         <activity android:name="presentation.Activities.WelcomeAdminActivity" />
