@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import businessLogic.Controllers.MapController;
 import dataAccess.Models.User;
+import dataAccess.Repositories.UserLogInResult;
 import presentation.AsyncTasks.GetSeasonPlacesTask;
 
 public class WelcomeUserActivity extends AppCompatActivity {
@@ -22,8 +23,11 @@ public class WelcomeUserActivity extends AppCompatActivity {
     private static final int ERROR_DIALOG_REQUEST =9001;
     private User user;
     private ArrayList<String> seasonCountries;
+    private String limitDate;
+    private final String resultKey = "result";
     private final String userKey = "user";
     private final String placesKey = "places";
+    private final String limitDateKey = "limitDate";
     private final String seasonCountriesKey = "seasonCountries";
 
     @Override
@@ -39,7 +43,10 @@ public class WelcomeUserActivity extends AppCompatActivity {
 
         if(extras != null) {
 
-            user = (User) extras.get(userKey);
+            UserLogInResult result = (UserLogInResult) extras.get(resultKey);
+            user = result.user;
+            seasonCountries = result.seasonCountries == null ? new ArrayList<String>() : result.seasonCountries;
+            limitDate = result.limitDate;
             textViewUserId.setText(user.getId());
             textViewUserName.setText(user.getName());
         }
@@ -48,6 +55,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
         Button placesButton = findViewById(R.id.placesButton);
         if(MapController.isServicesOk(this)) {
             mapButton.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
 
@@ -57,8 +65,10 @@ public class WelcomeUserActivity extends AppCompatActivity {
             });
         }
         placesButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(getApplicationContext(), SeePlacesActivity.class);
                 i.putExtra(userKey, user);
                 startActivityForResult(i, 2);
@@ -66,11 +76,14 @@ public class WelcomeUserActivity extends AppCompatActivity {
         });
 
         goToSeasonInfoBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                 Intent i=new Intent(getApplicationContext(), SeasonInfoForUserActivity.class);
-                 startActivity(i);
 
+                 Intent i=new Intent(getApplicationContext(), SeasonInfoForUserActivity.class);
+                 i.putExtra(limitDateKey, limitDate);
+                 i.putExtra(seasonCountriesKey, seasonCountries);
+                 startActivity(i);
             }
         });
 
