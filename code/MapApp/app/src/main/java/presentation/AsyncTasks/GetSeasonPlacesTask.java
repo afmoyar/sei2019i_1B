@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import businessLogic.Controllers.ControlResult;
+import businessLogic.ControlResult;
 import businessLogic.Controllers.MapController;
 import dataAccess.Models.Place;
 import dataAccess.Models.User;

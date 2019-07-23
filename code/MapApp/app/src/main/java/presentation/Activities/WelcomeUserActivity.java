@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import businessLogic.Controllers.MapController;
 import dataAccess.Models.User;
-import dataAccess.Repositories.UserLogInResult;
+import dataAccess.SignalWrappers.UserLogInResult;
 import presentation.AsyncTasks.GetSeasonPlacesTask;
 
 public class WelcomeUserActivity extends AppCompatActivity {

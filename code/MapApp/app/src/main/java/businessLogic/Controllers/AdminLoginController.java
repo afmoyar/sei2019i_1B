@@ -8,7 +8,8 @@ import org.json.JSONException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-import dataAccess.Repositories.AdminLogInResult;
+import businessLogic.ControlResult;
+import dataAccess.SignalWrappers.AdminLogInResult;
 import dataAccess.Repositories.AdministratorRepository;
 
 

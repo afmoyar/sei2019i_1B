@@ -1,4 +1,4 @@
-package dataAccess.Repositories;
+package dataAccess;
 
 public enum ResponseType {
 

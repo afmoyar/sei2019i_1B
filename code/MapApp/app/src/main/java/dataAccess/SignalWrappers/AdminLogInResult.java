@@ -1,4 +1,4 @@
-package dataAccess.Repositories;
+package dataAccess.SignalWrappers;
 
 import java.io.Serializable;
 import java.util.ArrayList;

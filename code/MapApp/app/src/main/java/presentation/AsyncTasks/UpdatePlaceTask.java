@@ -5,13 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
-import java.util.HashMap;
-
-import businessLogic.Controllers.ControlResult;
+import businessLogic.ControlResult;
 import businessLogic.Controllers.SeePlacesController;
 import dataAccess.Models.Place;
 import dataAccess.Models.User;

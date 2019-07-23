@@ -15,12 +15,13 @@ import java.util.ArrayList;
 
 import dataAccess.DataBase.Database;
 import dataAccess.Models.Place;
+import dataAccess.ResponseType;
 
 public abstract class PlaceRepository {
     private static final Database database = new Database();
     private static final String TAG = "PlaceRepository";
 
-    public static ResponseType createUserPlace(Context context, String userId,String latitude, String longitude) {
+    public static ResponseType createUserPlace(Context context, String userId, String latitude, String longitude) {
         Log.d(TAG, "createUserPlace");
 
         String stringResponse;

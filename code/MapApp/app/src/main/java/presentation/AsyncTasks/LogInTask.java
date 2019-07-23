@@ -8,9 +8,9 @@ import android.os.AsyncTask;
 import android.util.Pair;
 import android.widget.Toast;
 
-import businessLogic.Controllers.ControlResult;
+import businessLogic.ControlResult;
 import businessLogic.Controllers.UserLoginController;
-import dataAccess.Repositories.UserLogInResult;
+import dataAccess.SignalWrappers.UserLogInResult;
 import presentation.Activities.WelcomeUserActivity;
 
 public class LogInTask extends AsyncTask<Void, Void, Pair<UserLogInResult, ControlResult>> {

@@ -10,7 +10,9 @@ import org.json.JSONObject;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-import dataAccess.AdminUpdatePayload;
+import dataAccess.ResponseType;
+import dataAccess.SignalWrappers.AdminLogInResult;
+import dataAccess.SignalWrappers.AdminUpdatePayload;
 import dataAccess.DataBase.Database;
 
 
@@ -18,7 +20,7 @@ public abstract class AdministratorRepository {
 
     private static final Database database = new Database();
 
-    public static AdminLogInResult getAdminAndCountries(final Context context,final String id, final String password) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+    public static AdminLogInResult getAdminAndCountries(final Context context, final String id, final String password) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
 
         Gson gson = new Gson();
         JSONObject loginResult = database.queryAdmin(context, id, password);

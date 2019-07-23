@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 import businessLogic.Controllers.AdminSetupController;
 import dataAccess.Models.Administrator;
-import dataAccess.Repositories.AdminLogInResult;
-import dataAccess.Repositories.ResponseType;
+import dataAccess.SignalWrappers.AdminLogInResult;
+import dataAccess.ResponseType;
 import presentation.Adapters.AdminListAdapter;
 
 public class SeeCountriesActivity extends AppCompatActivity {

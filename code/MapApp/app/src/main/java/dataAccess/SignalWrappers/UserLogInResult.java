@@ -1,4 +1,4 @@
-package dataAccess.Repositories;
+package dataAccess.SignalWrappers;
 
 import com.google.gson.annotations.SerializedName;
 

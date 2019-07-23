@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import businessLogic.ControlResult;
 import dataAccess.Models.Place;
 import dataAccess.Repositories.PlaceRepository;
 
@@ -29,7 +30,7 @@ public abstract class SeePlacesController {
         return result;
     }
 
-    public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) {
+    public static ControlResult insertUserPlace(Context context, String userId, String latitude, String longitude) {
         Log.d(TAG,"insertUserPlace");
 
 

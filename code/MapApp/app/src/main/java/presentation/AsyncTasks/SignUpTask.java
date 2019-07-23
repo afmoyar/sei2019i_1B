@@ -6,7 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import businessLogic.Controllers.ControlResult;
+import businessLogic.ControlResult;
 import businessLogic.Controllers.UserSignUpController;
 
 public class SignUpTask extends AsyncTask<Void, Void, ControlResult> {

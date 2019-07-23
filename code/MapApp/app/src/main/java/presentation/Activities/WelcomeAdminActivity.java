@@ -13,7 +13,7 @@ import com.example.mapapp.R;
 import java.util.ArrayList;
 
 import dataAccess.Models.Administrator;
-import dataAccess.Repositories.AdminLogInResult;
+import dataAccess.SignalWrappers.AdminLogInResult;
 
 public class WelcomeAdminActivity extends AppCompatActivity {
 

@@ -9,8 +9,8 @@ import android.util.Pair;
 import android.widget.Toast;
 
 import businessLogic.Controllers.AdminLoginController;
-import businessLogic.Controllers.ControlResult;
-import dataAccess.Repositories.AdminLogInResult;
+import businessLogic.ControlResult;
+import dataAccess.SignalWrappers.AdminLogInResult;
 import presentation.Activities.WelcomeAdminActivity;
 
 public class AdminLogInTask extends AsyncTask<Void, Void, Pair<AdminLogInResult, ControlResult>> {

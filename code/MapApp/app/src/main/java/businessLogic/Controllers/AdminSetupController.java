@@ -4,11 +4,11 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import dataAccess.AdminUpdatePayload;
+import dataAccess.SignalWrappers.AdminUpdatePayload;
 import dataAccess.Models.Administrator;
-import dataAccess.Repositories.AdminLogInResult;
+import dataAccess.SignalWrappers.AdminLogInResult;
 import dataAccess.Repositories.AdministratorRepository;
-import dataAccess.Repositories.ResponseType;
+import dataAccess.ResponseType;
 
 public class AdminSetupController {
 
