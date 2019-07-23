@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30sp"
                 android:fontFamily="cursive"
-                android:text="Season info"
+                android:text="Season info:"
                 android:textColor="#F44336"
                 android:textSize="30sp" />
 
