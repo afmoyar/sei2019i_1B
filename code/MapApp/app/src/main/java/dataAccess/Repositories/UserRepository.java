@@ -11,13 +11,14 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import dataAccess.DataBase.Database;
-import dataAccess.Models.User;
+import dataAccess.ResponseType;
+import dataAccess.SignalWrappers.UserLogInResult;
 
 public abstract class UserRepository {
 
     private static final Database database = new Database();
 
-    public static ResponseType createUser(Context context, String id,String name, String password){
+    public static ResponseType createUser(Context context, String id, String name, String password){
 
         String  stringResponse;
 
@@ -27,14 +28,14 @@ public abstract class UserRepository {
         }
         catch (TimeoutException|InterruptedException|ExecutionException e){
 
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
             return ResponseType.CONNECT_ERROR;
         }
 
         return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
     }
 
-    public static User getUser(final Context context,final String id, final String password) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+    public static UserLogInResult getUser(final Context context, final String id, final String password) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
 
         Gson gson = new Gson();
         JSONObject loginResult = database.queryUser(context, id, password);
@@ -44,6 +45,6 @@ public abstract class UserRepository {
             throw new JSONException("error");
         }
 
-        return gson.fromJson(loginResult.toString(), User.class);
+        return gson.fromJson(loginResult.toString(), UserLogInResult.class);
     }
 }

@@ -1,37 +1,36 @@
 package businessLogic.Controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
-import java.util.ArrayList;
+import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import businessLogic.ControlResult;
 import dataAccess.Models.Place;
-import dataAccess.Repositories.AdministratorRepository;
 import dataAccess.Repositories.PlaceRepository;
-import dataAccess.Repositories.UserRepository;
-import presentation.Activities.SeePlacesActivity;
-import presentation.Activities.WelcomeUserActivity;
 
 
 public abstract class SeePlacesController {
 
     private static final String TAG = "SeePlacesController";
-    //ArrayList llamada en SeePlacesActivity
-    public static ArrayList<String> arrayList;
 
-    public static void getPlacesWithId(Context context, String id){
-        PlaceRepository.findPlaceWithId(context,id);
+
+    public static HashMap<LatLng, Place> indexPlaces(ArrayList<Place> places){
+
+        HashMap<LatLng, Place> result = new HashMap<>();
+
+        for(Place place : places){
+
+            result.put(new LatLng(place.getLatitude(), place.getLongitude()), place);
+        }
+
+        return result;
     }
 
-    public static void changeToSeePlacesActivity(Context context, ArrayList<String> places) {
-
-        Intent i = new Intent(context, SeePlacesActivity.class);
-        arrayList = places;
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
-    }
-    public static ControlResult insertUserPlace(Context context, String userId,String latitude, String longitude) throws InterruptedException {
+    public static ControlResult insertUserPlace(Context context, String userId, String latitude, String longitude) {
         Log.d(TAG,"insertUserPlace");
 
 
@@ -39,6 +38,62 @@ public abstract class SeePlacesController {
         ControlResult result = null;
 
         switch (PlaceRepository.createUserPlace(context,userId,latitude,longitude)){
+
+            case SUCCES:
+
+                result = ControlResult.SUCCESS;
+                break;
+
+            case DB_ERROR:
+
+                result = ControlResult.SERVER_ERROR;
+                break;
+
+            case CONNECT_ERROR:
+
+                result = ControlResult.CONNECT_ERROR;
+                break;
+        }
+
+        return result;
+    }
+
+    public static ControlResult updateUserPlace(Context context, String userId,String comment, String rating, String place_latitude, String place_longitude) {
+        Log.d(TAG,"updateUserPlace");
+
+
+
+        ControlResult result = null;
+
+        switch (PlaceRepository.updateUserPlace(context,userId,comment,rating, place_latitude, place_longitude)){
+
+            case SUCCES:
+
+                result = ControlResult.SUCCESS;
+                break;
+
+            case DB_ERROR:
+
+                result = ControlResult.SERVER_ERROR;
+                break;
+
+            case CONNECT_ERROR:
+
+                result = ControlResult.CONNECT_ERROR;
+                break;
+        }
+
+        return result;
+    }
+
+    public static ControlResult deleteUserPlace(Context context, String userId,String latitude, String longitude) {
+        Log.d(TAG,"deleteUserPlace");
+
+
+
+        ControlResult result = null;
+
+        switch (PlaceRepository.deleteUserPlace(context,userId,latitude,longitude)){
 
             case SUCCES:
 

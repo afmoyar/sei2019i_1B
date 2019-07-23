@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#162055"
     tools:context="presentation.Activities.WelcomeUserActivity">
 
     <TextView
@@ -14,8 +15,8 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="cursive"
         android:text="Welcome to mapApp!"
-        android:textColor="#00BCD4"
-        android:textSize="30sp"
+        android:textColor="#58C1D3"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,54 +43,68 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="30sp"
+                android:fontFamily="cursive"
                 android:text="User ID:"
-                android:textSize="24sp" />
+                android:textColor="#FFEB3B"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textViewUserId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#3F51B5"
-                android:textSize="24sp" />
+                android:fontFamily="sans-serif"
+                android:textColor="#FF9800"
+                android:textSize="30sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30sp"
+                android:layout_marginBottom="40sp"
+                android:fontFamily="cursive"
                 android:text="User name:"
-                android:textSize="24sp" />
+                android:textColor="#FFEB3B"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textViewUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#3F51B5"
-                android:textSize="24sp" />
+                android:fontFamily="sans-serif"
+                android:textColor="#FF9800"
+                android:textSize="30sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textViewCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30sp"
-                android:text="Week's country:"
-                android:textSize="24sp" />
+                android:fontFamily="cursive"
+                android:text="Season info:"
+                android:textColor="#F44336"
+                android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/textView11"
+            <Button
+                android:id="@+id/goToSeasonInfoBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp" />
+                android:background="#B87212"
+                android:fontFamily="cursive"
+                android:text="Go to info"
+                android:textColor="#FCF8F9"
+                android:textSize="18sp" />
+
         </TableRow>
 
     </TableLayout>
@@ -110,15 +125,26 @@
 
         <Button
             android:id="@+id/mapButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="106dp"
+            android:layout_height="match_parent"
             android:layout_marginRight="80sp"
-            android:text="Go to map" />
+            android:background="#108CC6"
+            android:fontFamily="cursive"
+            android:hapticFeedbackEnabled="true"
+            android:text="Go to map"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/placesButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Check your places" />
+            android:layout_height="match_parent"
+            android:background="#3F51B5"
+            android:fontFamily="cursive"
+            android:text="Check your places"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#F7F2F4"
+            android:textSize="24sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

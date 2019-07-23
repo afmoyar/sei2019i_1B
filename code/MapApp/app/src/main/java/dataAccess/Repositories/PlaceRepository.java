@@ -12,21 +12,16 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 import dataAccess.DataBase.Database;
 import dataAccess.Models.Place;
+import dataAccess.ResponseType;
 
 public abstract class PlaceRepository {
     private static final Database database = new Database();
     private static final String TAG = "PlaceRepository";
 
-    public static void findPlaceWithId(final Context context, final String id){
-        database.findPlaceWithId(context, id);
-    }
-
-    public static ResponseType createUserPlace(Context context, String userId,String latitude, String longitude) {
+    public static ResponseType createUserPlace(Context context, String userId, String latitude, String longitude) {
         Log.d(TAG, "createUserPlace");
 
         String stringResponse;
@@ -36,7 +31,41 @@ public abstract class PlaceRepository {
             stringResponse = database.insertUserPlace(context, userId, latitude, longitude);
         } catch (TimeoutException | InterruptedException | ExecutionException e) {
 
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
+            return ResponseType.CONNECT_ERROR;
+        }
+
+        return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
+    }
+
+    public static ResponseType updateUserPlace(Context context, String userId,String comment, String rating, String place_latitude, String place_longitude) {
+        Log.d(TAG, "updateUserPlace");
+
+        String stringResponse;
+
+        try {
+
+            stringResponse = database.updateUserPlace(context, userId, comment, rating, place_latitude, place_longitude);
+        } catch (TimeoutException | InterruptedException | ExecutionException e) {
+
+            e.printStackTrace();
+            return ResponseType.CONNECT_ERROR;
+        }
+
+        return stringResponse.equals("") ? ResponseType.SUCCES : ResponseType.DB_ERROR;
+    }
+
+    public static ResponseType deleteUserPlace(Context context, String userId,String latitude, String longitude) {
+        Log.d(TAG, "deleteUserPlace");
+
+        String stringResponse;
+
+        try {
+
+            stringResponse = database.deleteUserPlace(context, userId, latitude, longitude);
+        } catch (TimeoutException | InterruptedException | ExecutionException e) {
+
+            e.printStackTrace();
             return ResponseType.CONNECT_ERROR;
         }
 

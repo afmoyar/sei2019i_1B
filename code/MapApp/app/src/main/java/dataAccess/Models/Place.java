@@ -4,13 +4,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Place implements Serializable {
     double latitude;
     double longitude;
     String name;
     String description;
+    int rating;
+    String comment;
 
     @SerializedName("country_name")
     String countryName;
@@ -22,6 +23,19 @@ public class Place implements Serializable {
         this.name = name;
         this.description = description;
         this.countryName = countryName;
+        this.comment = null;
+        this.rating = 0;
+    }
+
+    public Place(double latitude, double longitude, String name, String description, String countryName, String comment, int rating) {
+
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.name = name;
+        this.description = description;
+        this.countryName = countryName;
+        this.comment = comment;
+        this.rating = rating;
     }
 
     public Place(LatLng location, String name, String description, String countryName) {
@@ -31,6 +45,35 @@ public class Place implements Serializable {
         this.name = name;
         this.description = description;
         this.countryName = countryName;
+        this.comment = null;
+        this.rating = 0;
+}
+
+    public Place(LatLng location, String name, String description, String countryName, String comment, int rating) {
+
+        this.latitude = location.latitude;
+        this.longitude = location.longitude;
+        this.name = name;
+        this.description = description;
+        this.countryName = countryName;
+        this.comment = comment;
+        this.rating = rating;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public double getLatitude() {

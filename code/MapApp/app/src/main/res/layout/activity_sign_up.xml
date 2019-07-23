@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#162055"
     tools:context="presentation.Activities.SignUpActivity">
 
     <LinearLayout
@@ -23,7 +24,9 @@
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Create a new User"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#FFEB3B"
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/textView12"
@@ -31,10 +34,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
+            android:fontFamily="cursive"
             android:text="Enter you ID:"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#009688"
-            android:textSize="24sp" />
+            android:textColor="#8BC34A"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTSignid"
@@ -45,7 +49,9 @@
             android:layout_marginBottom="20sp"
             android:ems="10"
             android:hint="User Id"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#03A9F4"
+            android:textColorHint="#F5EFF3" />
 
         <TextView
             android:id="@+id/textView8"
@@ -54,9 +60,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
+            android:fontFamily="cursive"
             android:text="Enter your name:"
-            android:textColor="#992F53"
-            android:textSize="24sp" />
+            android:textColor="#FF9800"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTSignname"
@@ -66,7 +73,9 @@
             android:layout_marginBottom="20sp"
             android:ems="10"
             android:hint="User name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#2196F3"
+            android:textColorHint="#FDFBFD" />
 
         <TextView
             android:id="@+id/textView6"
@@ -75,10 +84,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
+            android:fontFamily="cursive"
             android:text="Enter your password:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#194A9C"
-            android:textSize="24sp" />
+            android:textColor="#00BCD4"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTSignpass"
@@ -89,7 +99,9 @@
             android:layout_marginBottom="20sp"
             android:ems="10"
             android:hint="User password"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#2196F3"
+            android:textColorHint="#F5F2F7" />
 
         <Button
             android:id="@+id/btnsighupF"
@@ -98,6 +110,10 @@
             android:layout_marginLeft="20sp"
             android:layout_marginTop="15sp"
             android:layout_marginRight="20sp"
-            android:text="Create" />
+            android:background="#E91E63"
+            android:fontFamily="cursive"
+            android:text="Create"
+            android:textColor="#FCFBFB"
+            android:textSize="30sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

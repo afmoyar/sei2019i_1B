@@ -1,4 +1,4 @@
-package businessLogic.Controllers;
+package businessLogic;
 
 public enum ControlResult {
 

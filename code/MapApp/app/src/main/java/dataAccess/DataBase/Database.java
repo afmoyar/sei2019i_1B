@@ -4,37 +4,37 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.example.mapapp.BuildConfig;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mapapp.R;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import businessLogic.Controllers.AdminLoginController;
-import businessLogic.Controllers.SeePlacesController;
+import dataAccess.SignalWrappers.AdminUpdatePayload;
 
 
 public class Database {
 
     public Database() {
     }
+
     private static final String TAG = "database";
     public String insertUserPlace (final Context context, final String userId, final String latitude, final String longitude) throws InterruptedException, ExecutionException, TimeoutException {
 
@@ -45,6 +45,56 @@ public class Database {
         {
             @Override
             //HashMap with the data to insert into the database
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("id",userId);
+                params.put("latitude",latitude);
+                params.put("longitude",longitude);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public String updateUserPlace (final Context context, final String userId, final String comment, final String rating, final String place_latitude, final String place_longitude) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+        Log.d(TAG,"updateUserPlace");
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_update_user_place), future, future)
+        {
+            @Override
+            //HashMap with the data to search the row to update into the database
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("id",userId);
+                params.put("comment",comment);
+                params.put("rating",rating);
+                params.put("place_latitude",place_latitude);
+                params.put("place_longitude",place_longitude);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public String deleteUserPlace (final Context context, final String userId, final String latitude, final String longitude) throws InterruptedException, ExecutionException, TimeoutException {
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+        Log.d(TAG,"deleteUserPlace");
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_delete_user_place), future, future)
+        {
+            @Override
+            //HashMap with the data to search the row to delete in the database
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("id",userId);
@@ -85,14 +135,16 @@ public class Database {
 
     public JSONObject queryUser(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
 
-        RequestFuture<JSONObject> future = RequestFuture.newFuture();
-        JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
-        final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.ip + context.getString(R.string.URL_login),params, future, future);
+        String url = context.getString(R.string.URL_login);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonRequest);
+        return queryByIdAndPass(context, id, password, url);
+    }
 
-        return future.get(3000, TimeUnit.MILLISECONDS);
+    public JSONObject queryAdmin(final Context context, final String id, final String password) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
+
+        String url = context.getString(R.string.URL_login_admin);
+
+        return queryByIdAndPass(context, id, password, url);
     }
 
     public JSONArray queryCurrentSeasonPlaces(Context context) throws InterruptedException, ExecutionException, TimeoutException {
@@ -106,68 +158,72 @@ public class Database {
         return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
-    public void findPlaceWithId(final Context context, final String id){
+    private JSONObject queryByIdAndPass(final Context context, final String id, final String password, final String url) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
 
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JSONObject params = new JSONObject("{\"id\":" + id + ",\"password\":" + password + "}");
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_place_by_id.php?id="+id+"", new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                ArrayList<String> places = new ArrayList<String>();
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-                        places.add("[" + jsonObject.getString("latitude") + "," + jsonObject.getString("longitude") + "] " + jsonObject.getString("country_name") + ", " + jsonObject.getString("name") + ": '" + jsonObject.getString("description") + "' ");
-                    } catch (JSONException e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
+        final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST,
+                                                                BuildConfig.ip + url, params,
+                                                                     future, future);
 
-                if(places.isEmpty()){
-                    places.add("nothing to show here");
-                }
-
-                SeePlacesController.changeToSeePlacesActivity(context,places);
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        );
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonRequest);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
     }
 
-    public void  AdminloginFunction (final Context context, final String id, final String password){
+    public String updateAdminCountries(Context context, final AdminUpdatePayload payload) throws InterruptedException, ExecutionException, TimeoutException {
 
-        //StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(BuildConfig.ip+"/sei2019i_1B/get_admin_by_id_pass.php?id="+id+"&password="+password+"", new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-                        AdminLoginController.changeToWelcomeAdminActivity(context,jsonObject.getString("id"),jsonObject.getString("name"));
+        RequestFuture<String> future = RequestFuture.newFuture();
 
-                    } catch (JSONException e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
+        final Gson gson = new Gson();
+        final String json = gson.toJson(payload);
+
+        StringRequest request = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_country_selection.php", future, future) {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "name or password incorrect",Toast.LENGTH_SHORT).show();
+            public byte[] getBody() {
+
+                return json.getBytes();
             }
-        }
-        );
+
+            @Override
+            public String getBodyContentType() {
+
+                return "application/json";
+            }
+        };
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(request);
+
+        return future.get(3000, TimeUnit.MILLISECONDS);
+    }
+
+    public void updateAdmin(final Context context1, final String date12){
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.ip + "/sei2019i_1B/update_admin.php", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                    Toast.makeText(context1, "successful update", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Toast.makeText(context1, "error connecting", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("limit_date", date12);
+                    return parameters;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(context1);
+            requestQueue.add(stringRequest);
     }
 }

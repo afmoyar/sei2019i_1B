@@ -1,10 +1,10 @@
-# MapApp (formerly Sites)
+# MapApp
 
 The app to store your favourite places of the world
 
 ### Version
 
-Current version 2.0 supports:
+Current version 3.0 supports:
 
 * User Registration
 * User Log In
@@ -12,6 +12,12 @@ Current version 2.0 supports:
 * Visualization of exclusive places in the map
 * Storage of these places in your user account
 * Visualization of the places you have stored and their information
+* Making comments of your stored places
+* Rating your places
+* Visualizing the information you have stored about you places
+* Administration of the countries from which the selectable places can be choosen
+* Administration of a limit date for changing the current available countries
+* A beautful brand new user experience and interface
 
 ### Contact 
 
