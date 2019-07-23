@@ -66,7 +66,7 @@
             android:hint="                Please give us your opinion of the place"
             android:inputType="textPersonName"
             android:textColor="#F1ECED"
-            android:textColorHint="#94BDD2" />
+            android:textColorHint="#FFC107" />
 
         <Button
             android:id="@+id/saveComment"

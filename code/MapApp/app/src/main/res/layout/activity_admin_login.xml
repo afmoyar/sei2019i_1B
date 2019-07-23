@@ -50,8 +50,8 @@
             android:ems="10"
             android:hint="Admin user"
             android:inputType="textPersonName"
-            android:textColor="#F3EFEF"
-            android:textColorHint="#00BCD4" />
+            android:textColor="#2196F3"
+            android:textColorHint="#FAF7F7" />
 
         <EditText
             android:id="@+id/editTdminpass"
@@ -64,8 +64,8 @@
             android:hapticFeedbackEnabled="true"
             android:hint="Admin password"
             android:inputType="textPersonName"
-            android:textColor="#F6F2F7"
-            android:textColorHint="#00BCD4" />
+            android:textColor="#2196F3"
+            android:textColorHint="#F2F8F8" />
 
         <Button
             android:id="@+id/btnadminlogg"

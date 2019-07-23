@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#162055"
     tools:context="presentation.Activities.MainActivity">
 
     <LinearLayout
         android:id="@+id/Linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="#162055"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="-47dp">
+        tools:layout_editor_absoluteX="-131dp"
+        tools:layout_editor_absoluteY="-110dp">
 
         <TextView
             android:id="@+id/textView4"
@@ -25,7 +26,8 @@
             android:foregroundGravity="center"
             android:gravity="center"
             android:text="Map App"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+            android:textColor="#F5F2F7" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -44,7 +46,9 @@
             android:layout_marginBottom="20sp"
             android:ems="10"
             android:hint="User ID"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#2196F3"
+            android:textColorHint="#F5F3F0" />
 
         <EditText
             android:id="@+id/editTuserPass"
@@ -55,7 +59,9 @@
             android:layout_marginBottom="20sp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="#2196F3"
+            android:textColorHint="#F8F8F5" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -66,11 +72,12 @@
             android:layout_marginRight="20sp"
             android:layout_marginBottom="20sp"
             android:background="#108CC6"
-            android:fontFamily="serif"
+            android:fontFamily="cursive"
             android:hapticFeedbackEnabled="true"
             android:text="Log In"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/btnSignup"
@@ -79,10 +86,11 @@
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
             android:layout_marginBottom="20sp"
-            android:fontFamily="serif"
+            android:fontFamily="cursive"
             android:text="Sign Up"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#3F51B5" />
+            android:textColor="#3F51B5"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,12 +100,14 @@
 
             <Button
                 android:id="@+id/adminlogbtn"
-                android:layout_width="164dp"
-                android:layout_height="wrap_content"
+                android:layout_width="113dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20sp"
                 android:background="#108CC6"
-                android:text="Admin Login"
-                android:textColor="#FFFFFF" />
+                android:fontFamily="cursive"
+                android:text="Admin"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
 
         </LinearLayout>
 
