@@ -70,9 +70,10 @@
 
         <Button
             android:id="@+id/saveComment"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="165sp"
+            android:layout_marginStart="140sp"
+            android:layout_marginEnd="140sp"
             android:background="#E91E63"
             android:fontFamily="casual"
             android:gravity="center"
