@@ -14,7 +14,7 @@ import dataAccess.Models.Place;
 import presentation.Adapters.AdminListAdapter;
 import presentation.Adapters.SeasonCountriesAdapter;
 
-public class SeasonInfoForUser extends AppCompatActivity {
+public class SeasonInfoForUserActivity extends AppCompatActivity {
     private TextView DateTextView;
     private ListView seasonCountriesListView;
 

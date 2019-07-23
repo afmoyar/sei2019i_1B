@@ -1,25 +1,18 @@
 package presentation.Activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mapapp.R;
 
 
 import java.util.ArrayList;
 
-import businessLogic.Controllers.ControlResult;
 import businessLogic.Controllers.MapController;
-import businessLogic.Controllers.SeePlacesController;
-import dataAccess.Models.Place;
 import dataAccess.Models.User;
 import presentation.AsyncTasks.GetSeasonPlacesTask;
 
@@ -28,19 +21,16 @@ public class WelcomeUserActivity extends AppCompatActivity {
     private static final String TAG = "WelcomeUserActivity";
     private static final int ERROR_DIALOG_REQUEST =9001;
     private User user;
-    private String id,name;
+    private ArrayList<String> seasonCountries;
     private final String userKey = "user";
     private final String placesKey = "places";
-
-
+    private final String seasonCountriesKey = "seasonCountries";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
 
-        id = getIntent().getStringExtra("id");
-        name = getIntent().getStringExtra("name");
 
         final TextView textViewUserId = findViewById(R.id.textViewUserId);
         TextView textViewUserName = findViewById(R.id.textViewUserName);
@@ -78,7 +68,7 @@ public class WelcomeUserActivity extends AppCompatActivity {
         goToSeasonInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent i=new Intent(getApplicationContext(),SeasonInfoForUser.class);
+                 Intent i=new Intent(getApplicationContext(), SeasonInfoForUserActivity.class);
                  startActivity(i);
 
             }
