@@ -4,11 +4,8 @@ include 'connection.php';
 
 $request = json_decode(file_get_contents('php://input'), true);
 
-//$id = $request['id'];
-//$password = $request['password'];
-
-$id = "afmoyar";
-$password = "1234";
+$id = $request['id'];
+$password = $request['password'];
 
 $query = "SELECT * FROM user WHERE id = \"$id\" AND password = \"$password\"";
 
